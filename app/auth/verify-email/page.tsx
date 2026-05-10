@@ -11,7 +11,7 @@ type State = 'loading' | 'success' | 'error' | 'expired' | 'resend';
 export default function VerifyEmailPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { setAuth } = useAuthStore();
+  const store = useAuthStore();
   const token = searchParams.get('token');
 
   const [state, setState] = useState<State>(token ? 'loading' : 'resend');
@@ -25,9 +25,8 @@ export default function VerifyEmailPage() {
     api.get(`/auth/verify-email?token=${token}`)
       .then(res => {
         setState('success');
-        // Connecter automatiquement
         if (res.data.accessToken) {
-          setAuth(res.data.user, res.data.accessToken, res.data.refreshToken);
+          store.login(res.data.user?.email, '');
           setTimeout(() => router.push('/dashboard'), 2500);
         }
       })
@@ -56,7 +55,6 @@ export default function VerifyEmailPage() {
     <div className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
 
-        {/* LOADING */}
         {state === 'loading' && (
           <div className="card p-12 text-center">
             <div className="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-5">
@@ -67,7 +65,6 @@ export default function VerifyEmailPage() {
           </div>
         )}
 
-        {/* SUCCESS */}
         {state === 'success' && (
           <div className="card p-12 text-center">
             <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-5 animate-bounce">
@@ -83,7 +80,6 @@ export default function VerifyEmailPage() {
           </div>
         )}
 
-        {/* ERROR */}
         {(state === 'error' || state === 'expired') && (
           <div className="card p-10 text-center">
             <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-5">
@@ -103,7 +99,6 @@ export default function VerifyEmailPage() {
           </div>
         )}
 
-        {/* RESEND FORM */}
         {state === 'resend' && (
           <div className="card p-10">
             <div className="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-5">
