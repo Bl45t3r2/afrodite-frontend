@@ -547,7 +547,7 @@ export default function DashboardPage() {
               { icon: Heart, label: 'Favoris', value: stats?.favoritesCount ?? '—', color: 'text-pink-500 bg-pink-50' },
               { icon: MessageCircle, label: 'Messages reçus', value: stats?.messagesCount ?? '—', color: 'text-purple-500 bg-purple-50' },
               { icon: Star, label: 'Note moyenne', value: stats?.averageRating ? `${stats.averageRating.toFixed(1)}/5` : '—', color: 'text-amber-500 bg-amber-50' },
-            ].map(({ icon: Icon, label, value, color, sub }) => (
+            ].map(({ icon: Icon, label, value, color }) => (
               <div key={label} className="card p-6">
                 <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center mb-3`}>
                   <Icon size={18} />
