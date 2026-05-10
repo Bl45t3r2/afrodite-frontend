@@ -554,7 +554,7 @@ export default function DashboardPage() {
                 </div>
                 <p className="font-display text-3xl font-bold text-gray-900">{value}</p>
                 <p className="text-xs text-gray-600 font-medium mt-0.5">{label}</p>
-                {sub && <p className="text-[10px] text-gray-400 mt-0.5">{sub}</p>}
+                
               </div>
             ))}
           </div>
