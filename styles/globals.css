@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Playfair+Display:wght@600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: #ffffff;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+.font-display { font-family: var(--font-display); }
+::selection { background: rgba(220, 120, 60, 0.25); }
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-500 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-brand-400 transition-all duration-200 text-sm;
+  }
+  .btn-outline {
+    @apply border border-white/10 text-white font-medium px-5 py-2.5 rounded-xl hover:bg-white/10 hover:text-white hover:border-white/25 transition-all duration-200 text-sm opacity-60 hover:opacity-100;
+  }
+  .input {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-brand-400 transition-all;
+  }
+  .card {
+    @apply bg-[#161616] border border-white/10 rounded-2xl;
+  }
+  .badge-verified {
+    @apply text-emerald-400 text-xs font-medium px-2 py-0.5 rounded-full border border-emerald-500;
+    background: rgba(16, 185, 129, 0.1);
+  }
+  .badge-online {
+    @apply w-2.5 h-2.5 bg-emerald-400 rounded-full;
+  }
+  .badge-premium {
+    @apply text-brand-300 text-xs font-medium px-2 py-0.5 rounded-full border border-brand-500;
+    background: rgba(212, 83, 126, 0.1);
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.4s ease both; }
