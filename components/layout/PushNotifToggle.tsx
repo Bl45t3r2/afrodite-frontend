@@ -35,7 +35,7 @@ export default function PushNotifToggle() {
   return (
     <button
       onClick={handleToggle}
-      disabled={state === 'loading' || state === 'denied' || state === 'unsupported'}
+      disabled={state === 'loading' || state === 'denied'}
       title={cfg.label}
       className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium border transition-all
         ${state === 'granted' ? 'bg-brand-50 border-brand-200 text-brand-600 hover:bg-brand-100' :
