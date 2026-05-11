@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Mail, Lock, User, MapPin, Calendar, CheckCircle, Loader } from 'lucide-react';
+import { Mail, Lock, User, MapPin, Calendar, Loader } from 'lucide-react';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
 
@@ -26,7 +26,9 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      await api.post('/auth/register', { ...form, age: parseInt(form.age) });
+      const payload: any = { ...form, age: parseInt(form.age) };
+      if (!payload.phone) delete payload.phone;
+      await api.post('/auth/register', payload);
       setDone(true);
     } catch (err: any) {
       toast.error(err.response?.data?.error || 'Erreur lors de l\'inscription');
@@ -35,7 +37,6 @@ export default function RegisterPage() {
     }
   };
 
-  // Étape 2 — Email envoyé
   if (done) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center px-4">
@@ -51,7 +52,6 @@ export default function RegisterPage() {
           <p className="text-sm text-gray-400 mb-8">
             Cliquez sur le lien dans l'email pour activer votre compte. Le lien est valable 24 heures.
           </p>
-
           <div className="space-y-3">
             <div className="flex items-start gap-3 bg-amber-50 border border-amber-100 rounded-xl p-4 text-left">
               <span className="text-amber-500 mt-0.5">💡</span>
@@ -117,7 +117,7 @@ export default function RegisterPage() {
 
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1.5">
-                Numéro de téléphone <span className="text-gray-300">(optionnel — pour vous connecter)</span>
+                Numéro de téléphone <span className="text-gray-300">(optionnel)</span>
               </label>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm">📱</span>
@@ -146,30 +146,29 @@ export default function RegisterPage() {
               <p className="text-xs text-gray-400 mt-1">Minimum 8 caractères</p>
             </div>
 
-            {/* Code de parrainage */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">
-              Code de parrainage <span className="text-gray-400 font-normal">(optionnel)</span>
-            </label>
-            <div className="relative">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-lg">🎁</span>
-              <input
-                type="text"
-                value={referralCode}
-                onChange={e => setReferralCode(e.target.value.toUpperCase())}
-                placeholder="Ex: AFR3K2"
-                maxLength={10}
-                className="input pl-10 uppercase tracking-widest"
-              />
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                Code de parrainage <span className="text-gray-400 font-normal">(optionnel)</span>
+              </label>
+              <div className="relative">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-lg">🎁</span>
+                <input
+                  type="text"
+                  value={referralCode}
+                  onChange={e => setReferralCode(e.target.value.toUpperCase())}
+                  placeholder="Ex: AFR3K2"
+                  maxLength={10}
+                  className="input pl-10 uppercase tracking-widest"
+                />
+              </div>
+              {referralCode && (
+                <p className="text-xs text-emerald-600 mt-1 flex items-center gap-1">
+                  ✓ Code de parrainage appliqué
+                </p>
+              )}
             </div>
-            {referralCode && (
-              <p className="text-xs text-emerald-600 mt-1 flex items-center gap-1">
-                ✓ Code de parrainage appliqué
-              </p>
-            )}
-          </div>
 
-          <button type="submit" disabled={loading} className="btn-primary w-full py-3 flex items-center justify-center gap-2 disabled:opacity-60 mt-2">
+            <button type="submit" disabled={loading} className="btn-primary w-full py-3 flex items-center justify-center gap-2 disabled:opacity-60 mt-2">
               {loading ? <><Loader size={15} className="animate-spin" /> Création…</> : 'Créer mon compte'}
             </button>
           </form>
@@ -183,5 +182,5 @@ export default function RegisterPage() {
     </div>
   );
 }
- 
-export const dynamic = 'force-dynamic'; 
+
+export const dynamic = 'force-dynamic';
