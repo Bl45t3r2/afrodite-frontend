@@ -444,4 +444,5 @@ export default function MessagesPage() {
       />
     </div>
   );
-}
+} 
+export const dynamic = 'force-dynamic'; 

@@ -152,3 +152,5 @@ export default function VerifyEmailPage() {
     </div>
   );
 }
+ 
+export const dynamic = 'force-dynamic'; 
