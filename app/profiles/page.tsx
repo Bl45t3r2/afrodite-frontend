@@ -9,6 +9,12 @@ const CityMap = dynamic(() => import('@/components/profile/CityMap'), { ssr: fal
 
 const CITIES = ['Cotonou', 'Porto-Novo', 'Lomé', 'Abidjan', 'Dakar', 'Accra', 'Lagos', 'Douala'];
 const CATEGORIES = ['Escorte', 'Massage', 'Compagnie', 'VIP', 'Agence'];
+const GENDERS = [
+  { value: '', label: 'Tous' },
+  { value: 'FEMME', label: '👩 Femme' },
+  { value: 'HOMME', label: '👨 Homme' },
+  { value: 'MIXTE', label: '👫 Mixte' },
+];
 
 export default function ProfilesPage() {
   const [profiles, setProfiles] = useState<any[]>([]);
@@ -23,11 +29,11 @@ export default function ProfilesPage() {
   const [tagInput, setTagInput] = useState('');
 
   const [filters, setFilters] = useState({
-    search: '', city: '', category: '',
+    search: '', city: '', category: '', gender: '',
     isOnline: false, isVerified: false,
     minPrice: '', maxPrice: '',
     tags: [] as string[],
-    radius: '' as string, // km
+    radius: '' as string,
     userLat: null as number | null,
     userLng: null as number | null,
   });
@@ -40,6 +46,7 @@ export default function ProfilesPage() {
       if (filters.search) params.search = filters.search;
       if (filters.city) params.city = filters.city;
       if (filters.category) params.category = filters.category;
+      if (filters.gender) params.gender = filters.gender;
       if (filters.isOnline) params.isOnline = true;
       if (filters.isVerified) params.isVerified = true;
       if (filters.minPrice) params.minPrice = filters.minPrice;
@@ -98,12 +105,12 @@ export default function ProfilesPage() {
   };
 
   const resetFilters = () => {
-    setFilters({ search: '', city: '', category: '', isOnline: false, isVerified: false, minPrice: '', maxPrice: '', tags: [], radius: '', userLat: null, userLng: null });
+    setFilters({ search: '', city: '', category: '', gender: '', isOnline: false, isVerified: false, minPrice: '', maxPrice: '', tags: [], radius: '', userLat: null, userLng: null });
     setPage(1);
   };
 
   const activeFiltersCount = [
-    filters.search, filters.city, filters.category,
+    filters.search, filters.city, filters.category, filters.gender,
     filters.isOnline, filters.isVerified, filters.minPrice, filters.maxPrice, filters.radius
   ].filter(v => v && v !== '').length + filters.tags.length;
 
@@ -113,6 +120,23 @@ export default function ProfilesPage() {
       <div className="mb-8">
         <h1 className="font-display text-3xl font-bold text-gray-900 mb-1">Profils</h1>
         <p className="text-gray-400 text-sm">Découvrez des profils vérifiés près de chez vous</p>
+      </div>
+
+      {/* Filtres rapides genre */}
+      <div className="flex items-center gap-2 mb-4 flex-wrap">
+        {GENDERS.map(({ value, label }) => (
+          <button
+            key={value}
+            onClick={() => updateFilter('gender', value)}
+            className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
+              filters.gender === value
+                ? 'bg-brand-400 text-white border-brand-400'
+                : 'bg-white text-gray-600 border-gray-200 hover:border-brand-300 hover:text-brand-500'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       {/* Barre de recherche principale */}
@@ -172,6 +196,14 @@ export default function ProfilesPage() {
               </select>
             </div>
             <div>
+              <label className="text-xs font-medium text-gray-500 mb-2 block">Genre</label>
+              <select className="input" value={filters.gender} onChange={e => updateFilter('gender', e.target.value)}>
+                {GENDERS.map(({ value, label }) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
+              </select>
+            </div>
+            <div>
               <label className="text-xs font-medium text-gray-500 mb-2 block">Prix min (FCFA/h)</label>
               <input className="input" type="number" placeholder="0" value={filters.minPrice}
                 onChange={e => updateFilter('minPrice', e.target.value)} />
@@ -214,10 +246,7 @@ export default function ProfilesPage() {
                   <>
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-gray-500">dans un rayon de</span>
-                      <select
-                        value={filters.radius}
-                        onChange={e => { updateFilter('radius', e.target.value); }}
-                        className="input py-1.5 text-sm w-28">
+                      <select value={filters.radius} onChange={e => updateFilter('radius', e.target.value)} className="input py-1.5 text-sm w-28">
                         {['10', '25', '50', '100', '200', '500'].map(r => (
                           <option key={r} value={r}>{r} km</option>
                         ))}
@@ -233,10 +262,7 @@ export default function ProfilesPage() {
                 {!filters.userLat && filters.city && (
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-gray-400">ou autour de {filters.city} dans</span>
-                    <select
-                      value={filters.radius}
-                      onChange={e => updateFilter('radius', e.target.value)}
-                      className="input py-1.5 text-sm w-28">
+                    <select value={filters.radius} onChange={e => updateFilter('radius', e.target.value)} className="input py-1.5 text-sm w-28">
                       <option value="">Ville exacte</option>
                       {['50', '100', '200', '500'].map(r => (
                         <option key={r} value={r}>{r} km</option>
@@ -253,8 +279,6 @@ export default function ProfilesPage() {
             <label className="text-xs font-medium text-gray-500 mb-2 block flex items-center gap-1.5">
               <Tag size={12} /> Filtrer par tags
             </label>
-
-            {/* Tags sélectionnés */}
             {filters.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-3">
                 {filters.tags.map(tag => (
@@ -265,8 +289,6 @@ export default function ProfilesPage() {
                 ))}
               </div>
             )}
-
-            {/* Input tag */}
             <div className="flex gap-2 mb-3">
               <div className="relative flex-1">
                 <Tag size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -277,8 +299,6 @@ export default function ProfilesPage() {
               </div>
               <button onClick={() => addTag(tagInput)} className="btn-outline text-sm px-4">Ajouter</button>
             </div>
-
-            {/* Tags populaires dans les filtres */}
             {popularTags.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
                 <span className="text-xs text-gray-400 self-center mr-1">Suggestions :</span>
@@ -300,7 +320,7 @@ export default function ProfilesPage() {
         </div>
       )}
 
-      {/* Tags actifs (hors filtre ouvert) */}
+      {/* Tags actifs */}
       {!showFilters && filters.tags.length > 0 && (
         <div className="flex items-center gap-2 mb-4 flex-wrap">
           <span className="text-xs text-gray-400">Tags actifs :</span>
@@ -327,6 +347,7 @@ export default function ProfilesPage() {
       <p className="text-sm text-gray-500 mb-6">
         {loading ? 'Chargement...' : `${total} profil${total > 1 ? 's' : ''} trouvé${total > 1 ? 's' : ''}`}
         {filters.city && <span className="ml-2 text-brand-400 font-medium">· {filters.city}</span>}
+        {filters.gender && <span className="ml-2 text-brand-400 font-medium">· {GENDERS.find(g => g.value === filters.gender)?.label}</span>}
         {filters.tags.length > 0 && <span className="ml-2 text-brand-400 font-medium">· #{filters.tags.join(' #')}</span>}
       </p>
 
@@ -368,3 +389,5 @@ export default function ProfilesPage() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';
