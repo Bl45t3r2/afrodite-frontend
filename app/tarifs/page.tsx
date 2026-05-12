@@ -207,7 +207,7 @@ export default function PricingPage() {
         {/* Payment methods */}
         <div className="bg-[#111] border border-white/8 rounded-2xl p-8 text-center">
           <p className="text-white/40 text-xs uppercase tracking-widest font-bold mb-5">
-            Méthodes de paiement acceptées
+            Moyens de paiement acceptées
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2.5 mb-5">
             {PAYMENT_METHODS.map(m => (
