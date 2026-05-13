@@ -8,19 +8,24 @@ import toast from 'react-hot-toast';
 
 const CITIES = ['Cotonou', 'Porto-Novo', 'Lomé', 'Abidjan', 'Dakar', 'Accra', 'Lagos', 'Douala'];
 
+const GENDERS = [
+  { value: 'FEMME', label: '👩 Femme' },
+  { value: 'HOMME', label: '👨 Homme' },
+  { value: 'MIXTE', label: '👫 Mixte' },
+];
+
 export default function RegisterPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect') || '/dashboard';
   const [referralCode, setReferralCode] = useState(searchParams.get('ref') || '');
-  const [form, setForm] = useState({ email: '', password: '', displayName: '', age: '', city: '', phone: '' });
+  const [form, setForm] = useState({ email: '', password: '', displayName: '', age: '', city: '', phone: '', gender: '' });
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.email || !form.password || !form.displayName || !form.age || !form.city) {
-      toast.error('Remplissez tous les champs'); return;
+    if (!form.email || !form.password || !form.displayName || !form.age || !form.city || !form.gender) {
+      toast.error('Remplissez tous les champs obligatoires'); return;
     }
     if (parseInt(form.age) < 18) { toast.error('Vous devez avoir au moins 18 ans'); return; }
 
@@ -59,10 +64,7 @@ export default function RegisterPage() {
                 Vous ne trouvez pas l'email ? Vérifiez vos <strong>spams</strong> ou demandez un nouveau lien.
               </p>
             </div>
-            <button
-              onClick={() => router.push('/auth/verify-email')}
-              className="btn-outline w-full text-sm"
-            >
+            <button onClick={() => router.push('/auth/verify-email')} className="btn-outline w-full text-sm">
               Renvoyer le lien de confirmation
             </button>
             <Link href="/auth/login" className="block text-center text-sm text-gray-400 hover:text-gray-600">
@@ -84,8 +86,10 @@ export default function RegisterPage() {
 
         <div className="card p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
+
+            {/* Nom affiché */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Nom affiché</label>
+              <label className="block text-xs font-medium text-gray-500 mb-1.5">Nom affiché *</label>
               <div className="relative">
                 <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input className="input pl-10" placeholder="Votre prénom ou pseudo" value={form.displayName}
@@ -93,9 +97,31 @@ export default function RegisterPage() {
               </div>
             </div>
 
+            {/* Genre */}
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-2">Je suis *</label>
+              <div className="grid grid-cols-3 gap-2">
+                {GENDERS.map(({ value, label }) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setForm(f => ({ ...f, gender: value }))}
+                    className={`py-2.5 px-3 rounded-xl border-2 text-sm font-medium transition-all ${
+                      form.gender === value
+                        ? 'border-brand-400 bg-brand-50 text-brand-600'
+                        : 'border-gray-200 text-gray-500 hover:border-brand-300'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Âge + Ville */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">Âge</label>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">Âge *</label>
                 <div className="relative">
                   <Calendar size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                   <input className="input pl-10" type="number" min="18" max="99" placeholder="18" value={form.age}
@@ -103,7 +129,7 @@ export default function RegisterPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">Ville</label>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">Ville *</label>
                 <div className="relative">
                   <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                   <select className="input pl-10 appearance-none" value={form.city}
@@ -115,20 +141,21 @@ export default function RegisterPage() {
               </div>
             </div>
 
+            {/* Téléphone */}
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1.5">
-                Numéro de téléphone <span className="text-gray-300">(optionnel)</span>
+                Téléphone <span className="text-gray-300">(optionnel)</span>
               </label>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm">📱</span>
                 <input className="input pl-10" type="tel" placeholder="+229 01 23 45 67" value={form.phone}
                   onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
               </div>
-              <p className="text-xs text-gray-400 mt-1">Vous pourrez aussi vous connecter avec ce numéro</p>
             </div>
 
+            {/* Email */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Adresse email</label>
+              <label className="block text-xs font-medium text-gray-500 mb-1.5">Adresse email *</label>
               <div className="relative">
                 <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input className="input pl-10" type="email" placeholder="votre@email.com" value={form.email}
@@ -136,8 +163,9 @@ export default function RegisterPage() {
               </div>
             </div>
 
+            {/* Mot de passe */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Mot de passe</label>
+              <label className="block text-xs font-medium text-gray-500 mb-1.5">Mot de passe *</label>
               <div className="relative">
                 <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input className="input pl-10" type="password" placeholder="8 caractères minimum" value={form.password}
@@ -146,6 +174,7 @@ export default function RegisterPage() {
               <p className="text-xs text-gray-400 mt-1">Minimum 8 caractères</p>
             </div>
 
+            {/* Code parrainage */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
                 Code de parrainage <span className="text-gray-400 font-normal">(optionnel)</span>
@@ -162,9 +191,7 @@ export default function RegisterPage() {
                 />
               </div>
               {referralCode && (
-                <p className="text-xs text-emerald-600 mt-1 flex items-center gap-1">
-                  ✓ Code de parrainage appliqué
-                </p>
+                <p className="text-xs text-emerald-600 mt-1">✓ Code de parrainage appliqué</p>
               )}
             </div>
 
