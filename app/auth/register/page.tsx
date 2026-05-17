@@ -21,22 +21,51 @@ export default function RegisterPage() {
   const [form, setForm] = useState({ email: '', password: '', displayName: '', age: '', city: '', phone: '', gender: '' });
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [errorDetail, setErrorDetail] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorDetail('');
+
     if (!form.email || !form.password || !form.displayName || !form.age || !form.city || !form.gender) {
       toast.error('Remplissez tous les champs obligatoires'); return;
     }
     if (parseInt(form.age) < 18) { toast.error('Vous devez avoir au moins 18 ans'); return; }
+    if (form.password.length < 8) { toast.error('Mot de passe trop court (8 caractères minimum)'); return; }
 
     setLoading(true);
     try {
       const payload: any = { ...form, age: parseInt(form.age) };
+      if (referralCode.trim()) payload.referralCode = referralCode.trim();
       if (!payload.phone) delete payload.phone;
+
+      // Timeout de 20 secondes
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 20000);
+
       await api.post('/auth/register', payload);
+      clearTimeout(timeout);
       setDone(true);
+
     } catch (err: any) {
-      toast.error(err.response?.data?.error || 'Erreur lors de l\'inscription');
+      if (err.name === 'AbortError' || err.code === 'ECONNABORTED') {
+        toast.error('Le serveur ne répond pas. Vérifiez votre connexion et réessayez.');
+        setErrorDetail('Timeout — le serveur met trop de temps à répondre.');
+      } else if (!navigator.onLine) {
+        toast.error('Pas de connexion internet.');
+      } else {
+        const msg = err.response?.data?.error
+          || err.response?.data?.message
+          || err.message
+          || 'Erreur lors de l\'inscription';
+        toast.error(msg);
+
+        // Afficher le détail de l'erreur pour debug
+        const detail = JSON.stringify(err.response?.data || err.message || err, null, 2);
+        setErrorDetail(detail);
+        console.error('Register error status:', err.response?.status);
+        console.error('Register error data:', err.response?.data);
+      }
     } finally {
       setLoading(false);
     }
@@ -195,8 +224,15 @@ export default function RegisterPage() {
               )}
             </div>
 
+            {/* Erreur détaillée (debug) */}
+            {errorDetail && (
+              <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-700 font-mono break-all">
+                <strong>Détail erreur :</strong><br />{errorDetail}
+              </div>
+            )}
+
             <button type="submit" disabled={loading} className="btn-primary w-full py-3 flex items-center justify-center gap-2 disabled:opacity-60 mt-2">
-              {loading ? <><Loader size={15} className="animate-spin" /> Création…</> : 'Créer mon compte'}
+              {loading ? <><Loader size={15} className="animate-spin" /> Création en cours…</> : 'Créer mon compte'}
             </button>
           </form>
 
