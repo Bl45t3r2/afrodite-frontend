@@ -66,6 +66,7 @@ export default function MessagesPage() {
 
   const [conversations, setConversations] = useState<any[]>([]);
   const [activeConv, setActiveConv] = useState<string | null>(withId);
+  const [withProfile, setWithProfile] = useState<any>(null);
   const [messages, setMessages] = useState<any[]>([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -79,6 +80,7 @@ export default function MessagesPage() {
 
   useEffect(() => {
     api.get('/messages/conversations').then(res => setConversations(res.data));
+    if (withId) { api.get('/profiles/' + withId).then(res => setWithProfile(res.data)).catch(() => {}); }
     api.get('/messages/quota').then(res => setQuota(res.data)).catch(() => {});
     if (withId) {
       api.get(`/profiles/${withId}`).then(res => setWithProfile(res.data)).catch(() => {});
