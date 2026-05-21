@@ -7,4 +7,5 @@ const nextConfig = {
   images: { domains: ['res.cloudinary.com'] },
 };
 
+// build: 3
 module.exports = nextConfig;
