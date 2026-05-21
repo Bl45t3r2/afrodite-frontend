@@ -80,6 +80,9 @@ export default function MessagesPage() {
   useEffect(() => {
     api.get('/messages/conversations').then(res => setConversations(res.data));
     api.get('/messages/quota').then(res => setQuota(res.data)).catch(() => {});
+    if (withId) {
+      api.get(`/profiles/${withId}`).then(res => setWithProfile(res.data)).catch(() => {});
+    }
   }, []);
 
   useEffect(() => {
@@ -198,7 +201,7 @@ export default function MessagesPage() {
     setTimeout(() => inputRef.current?.focus(), 100);
   };
 
-  const activeProfile = conversations.find(c => c.other.id === activeConv)?.other?.profile;
+  const activeProfile = conversations.find(c => c.other.id === activeConv)?.other?.profile || (activeConv === withId ? withProfile : null);
   const filteredConvs = conversations.filter(c =>
     c.other.profile?.displayName?.toLowerCase().includes(search.toLowerCase())
   );
