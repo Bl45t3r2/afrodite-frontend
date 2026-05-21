@@ -82,7 +82,7 @@ export default function BoostPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
-      <Link href="/dashboard" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-700 mb-8 transition-colors">
+      <Link href="/dashboard" className="inline-flex items-center gap-1.5 text-sm text-white/40 hover:text-white mb-8 transition-colors">
         <ChevronLeft size={15} /> Retour au dashboard
       </Link>
 
@@ -90,8 +90,8 @@ export default function BoostPage() {
         <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-400/30">
           <Zap size={28} className="text-white" />
         </div>
-        <h1 className="font-display text-3xl font-bold text-gray-900 mb-2">Booster mon profil</h1>
-        <p className="text-gray-500 max-w-md mx-auto">Apparaissez en tête des recherches et sur la page d'accueil. Obtenez jusqu'à 10x plus de vues.</p>
+        <h1 className="font-display text-3xl font-bold text-white mb-2">Booster mon profil</h1>
+        <p className="text-white/50 max-w-md mx-auto">Apparaissez en tête des recherches et sur la page d'accueil. Obtenez jusqu'à 10x plus de vues.</p>
       </div>
 
       {/* Boost actif */}
@@ -122,12 +122,12 @@ export default function BoostPage() {
           { icon: TrendingUp, label: 'Position', value: 'Top 1', color: 'text-emerald-500 bg-emerald-50' },
           { icon: Star, label: 'Page accueil', value: 'Vedette', color: 'text-amber-500 bg-amber-50' },
         ].map(({ icon: Icon, label, value, color }) => (
-          <div key={label} className="card p-4 text-center">
+          <div key={label} className="rounded-xl bg-[#1a1a1a] border border-white/10 p-4 text-center">
             <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center mx-auto mb-2`}>
               <Icon size={18} />
             </div>
-            <p className="font-display text-xl font-bold text-gray-900">{value}</p>
-            <p className="text-xs text-gray-500">{label}</p>
+            <p className="font-display text-xl font-bold text-white">{value}</p>
+            <p className="text-xs text-white/40">{label}</p>
           </div>
         ))}
       </div>
@@ -137,7 +137,7 @@ export default function BoostPage() {
         {PLANS.map(({ plan, label, price, icon: Icon, color, bg, badge, features }) => {
           const isActive = activeBoost?.plan === plan && activeBoost?.active;
           return (
-            <div key={plan} className={`relative card p-6 border-2 ${isActive ? 'border-emerald-400 ring-2 ring-emerald-400/20' : 'border-gray-100 hover:border-brand-200'} transition-all hover:-translate-y-1 hover:shadow-lg`}>
+            <div key={plan} className={`relative rounded-2xl p-6 border-2 bg-[#1a1a1a] ${isActive ? 'border-emerald-400 ring-2 ring-emerald-400/20' : 'border-white/10 hover:border-brand-400/40'} transition-all hover:-translate-y-1 hover:shadow-lg`}>
               {badge && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-400 text-white text-xs font-bold px-3 py-1 rounded-full">{badge}</span>
               )}
@@ -149,15 +149,15 @@ export default function BoostPage() {
                 <Icon size={22} className="text-white" />
               </div>
 
-              <h3 className="font-display text-xl font-bold text-gray-900 mb-1">{label}</h3>
+              <h3 className="font-display text-xl font-bold text-white mb-1">{label}</h3>
               <div className="flex items-end gap-1 mb-5">
-                <span className="font-display text-3xl font-bold text-gray-900">{price}</span>
-                <span className="text-gray-400 text-sm mb-1">FCFA</span>
+                <span className="font-display text-3xl font-bold text-white">{price}</span>
+                <span className="text-white/40 text-sm mb-1">FCFA</span>
               </div>
 
               <ul className="space-y-2 mb-6">
                 {features.map(f => (
-                  <li key={f} className="flex items-center gap-2 text-xs text-gray-600">
+                  <li key={f} className="flex items-center gap-2 text-xs text-white/60">
                     <Check size={13} className="text-brand-400 shrink-0" />{f}
                   </li>
                 ))}
