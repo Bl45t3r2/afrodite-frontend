@@ -241,7 +241,7 @@ export default function MessagesPage() {
         </div>
       </div>
 
-      <div className="card flex overflow-hidden" style={{ height: 'calc(100dvh - 180px)', minHeight: '400px' }}>
+      <div className="flex overflow-hidden rounded-2xl border border-gray-200 bg-white" style={{ height: 'calc(100dvh - 180px)', minHeight: '400px' }}>
 
         {/* ── Sidebar conversations ── */}
         <div className={`${showSidebar ? 'flex' : 'hidden md:flex'} w-full md:w-72 border-r border-gray-100 flex-col shrink-0`}>
