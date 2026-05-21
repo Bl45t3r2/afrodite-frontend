@@ -102,7 +102,18 @@ export default function MessagesPage() {
     socket.emit('messages:read', { senderId: activeConv });
 
     const onNewMessage = (msg: any) => {
-      setMessages(prev => prev.find(m => m.id === msg.id) ? prev : [...prev, msg]);
+      setMessages(prev => {
+        // Eviter les doublons : vrai message ou message temporaire avec même contenu/sender
+        const isDuplicate = prev.find(m => 
+          m.id === msg.id || 
+          (m._temp && m.senderId === msg.senderId && m.content === msg.content)
+        );
+        if (isDuplicate) {
+          // Remplacer le message temporaire par le vrai
+          return prev.map(m => (m._temp && m.senderId === msg.senderId && m.content === msg.content) ? msg : m);
+        }
+        return [...prev, msg];
+      });
       if (msg.senderId === activeConv) {
         socket.emit('messages:read', { senderId: activeConv });
         api.patch(`/messages/${activeConv}/read`).catch(() => {});
