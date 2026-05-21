@@ -72,7 +72,7 @@ export default function MessagesPage() {
   const [search, setSearch] = useState('');
   const [sending, setSending] = useState(false);
   const [quota, setQuota] = useState<any>(null);
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(withId ? false : true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const typingTimer = useRef<any>(null);
   const inputRef = useRef<HTMLInputElement>(null);
