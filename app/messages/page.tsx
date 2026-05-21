@@ -415,7 +415,7 @@ export default function MessagesPage() {
 
               {/* Input */}
               <div className="px-4 py-3 border-t border-gray-100 bg-white flex gap-2 items-center">
-                <input ref={inputRef} className="input flex-1 bg-gray-50 text-gray-900"
+                <input ref={inputRef} className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-400 transition-all"
                   placeholder={quota?.remaining === 0 ? 'Limite atteinte pour aujourd\'hui…' : 'Écrire un message…'}
                   value={input}
                   onChange={e => handleTyping(e.target.value)}
