@@ -3,9 +3,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { Search, SlidersHorizontal, MapPin, X, Map, LayoutGrid, Tag, TrendingUp } from 'lucide-react';
 import api from '@/lib/api';
 import ProfileCard from '@/components/profile/ProfileCard';
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
 
-const CityMap = dynamic(() => import('@/components/profile/CityMap'), { ssr: false });
+const CityMap = nextDynamic(() => import('@/components/profile/CityMap'), { ssr: false });
 
 const CITIES = ['Cotonou', 'Porto-Novo', 'Lomé', 'Abidjan', 'Dakar', 'Accra', 'Lagos', 'Douala'];
 const CATEGORIES = ['Escorte', 'Massage', 'Compagnie', 'VIP', 'Agence'];
