@@ -1,7 +1,7 @@
 python3 << 'EOF'
 content = open('app/dashboard/page.tsx', encoding='utf-8').read()
 
-old_header = '''      {/* Header */}
+old_header = '''      {/* Header v2 */}
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-3">
           <div className="relative shrink-0">
@@ -27,7 +27,7 @@ old_header = '''      {/* Header */}
         </div>
       </div>'''
 
-new_header = '''      {/* Header */}
+new_header = '''      {/* Header v2 */}
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-3">
           <div className="relative shrink-0">
