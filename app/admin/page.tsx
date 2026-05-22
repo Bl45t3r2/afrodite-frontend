@@ -200,9 +200,6 @@ export default function AdminPage() {
     { id: 'reports', label: 'Signalements', badge: reports.filter((r: any) => r.status === 'PENDING').length },
     { id: 'users', label: 'Utilisateurs' },
     { id: 'partners', label: '🤝 Partenaires' },
-    { id: 'partners', label: '🤝 Partenaires' },
-    { id: 'partners', label: '🤝 Partenaires' },
-    { id: 'partners', label: '🤝 Partenaires' },
   ];
 
   if (loading) return (
