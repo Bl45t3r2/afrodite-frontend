@@ -317,7 +317,7 @@ export default function AdminPage() {
     if (!hasHydrated) return;
     if (!isAuthenticated || user?.role !== 'ADMIN') { router.push('/'); return; }
     loadAll();
-  }, [isAuthenticated]);
+  }, [hasHydrated, isAuthenticated]);
 
   const refresh = () => { setRefreshing(true); loadAll(); };
 
