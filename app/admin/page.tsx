@@ -219,6 +219,7 @@ export default function AdminPage() {
   }, []);
 
   useEffect(() => {
+    if (!hasHydrated) return;
     if (!isAuthenticated || user?.role !== 'ADMIN') { router.push('/'); return; }
     loadAll();
   }, [isAuthenticated]);
