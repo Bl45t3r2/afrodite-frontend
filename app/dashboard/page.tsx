@@ -28,6 +28,7 @@ function MiniBar({ value, max }: { value: number; max: number }) {
 }
 
 export default function DashboardPage() {
+  const hasHydrated = useHasHydrated();
   const { user, isAuthenticated } = useAuthStore();
   const router = useRouter();
   const [tab, setTab] = useState<'profile' | 'photos' | 'agenda' | 'verification' | 'referral' | 'stats' | 'subscription' | 'security'>('profile');
