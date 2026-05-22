@@ -27,6 +27,137 @@ function MiniBarChart({ data }: { data: { date: string; count: number }[] }) {
         </div>
       ))}
     </div>
+
+      {/* ── Partenaires ── */}
+      {tab === 'partners' && (
+        <div className="space-y-6">
+          {/* Formulaire création */}
+          <div className="bg-white rounded-2xl border border-gray-100 p-6">
+            <h2 className="font-semibold text-gray-900 mb-4">🤝 Créer un code partenaire</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Code (ex: PARTNER2026)</label>
+                <input
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                  placeholder="MONCODE"
+                  value={partnerForm.code}
+                  onChange={e => setPartnerForm(f => ({ ...f, code: e.target.value.toUpperCase() }))}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Email du partenaire</label>
+                <input
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                  placeholder="partenaire@email.com"
+                  value={partnerForm.email}
+                  onChange={e => setPartnerForm(f => ({ ...f, email: e.target.value }))}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Nom du partenaire</label>
+                <input
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                  placeholder="Nom affiché"
+                  value={partnerForm.displayName}
+                  onChange={e => setPartnerForm(f => ({ ...f, displayName: e.target.value }))}
+                />
+              </div>
+            </div>
+            <button
+              onClick={async () => {
+                if (!partnerForm.code || !partnerForm.email) return;
+                setPartnerLoading(true);
+                try {
+                  const res = await api.post('/referral/partner', partnerForm);
+                  alert('✅ Code créé ! Lien : ' + res.data.link);
+                  setPartnerForm({ code: '', email: '', displayName: '' });
+                  const list = await api.get('/referral/partners');
+                  setPartners(list.data);
+                } catch (err: any) {
+                  alert('Erreur : ' + (err.response?.data?.error || err.message));
+                } finally {
+                  setPartnerLoading(false);
+                }
+              }}
+              disabled={partnerLoading || !partnerForm.code || !partnerForm.email}
+              className="bg-brand-500 text-white px-6 py-2 rounded-xl text-sm font-semibold hover:bg-brand-400 disabled:opacity-50 transition-all"
+            >
+              {partnerLoading ? 'Création…' : '+ Créer le code'}
+            </button>
+          </div>
+
+          {/* Liste partenaires */}
+          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-50">
+              <h2 className="font-semibold text-gray-900">Codes partenaires actifs</h2>
+              <button
+                onClick={async () => { const r = await api.get('/referral/partners'); setPartners(r.data); }}
+                className="text-xs text-brand-400 hover:underline"
+              >
+                🔄 Actualiser
+              </button>
+            </div>
+            {partners.length === 0 ? (
+              <div className="p-8 text-center text-gray-400 text-sm">
+                Aucun code partenaire. Créez-en un ci-dessus.
+                <br />
+                <button onClick={async () => { const r = await api.get('/referral/partners'); setPartners(r.data); }}
+                  className="mt-3 text-brand-400 hover:underline text-xs">Charger la liste</button>
+              </div>
+            ) : (
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50 text-xs text-gray-500 uppercase">
+                  <tr>
+                    <th className="px-4 py-3 text-left">Partenaire</th>
+                    <th className="px-4 py-3 text-left">Code</th>
+                    <th className="px-4 py-3 text-left">Lien</th>
+                    <th className="px-4 py-3 text-center">Filleuls</th>
+                    <th className="px-4 py-3 text-center">Convertis</th>
+                    <th className="px-4 py-3 text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {partners.map((p: any) => (
+                    <tr key={p.id} className="hover:bg-gray-50">
+                      <td className="px-4 py-3">
+                        <p className="font-medium text-gray-900">{p.displayName || p.email}</p>
+                        <p className="text-xs text-gray-400">{p.email}</p>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="font-mono bg-gray-100 px-2 py-1 rounded text-xs font-bold">{p.code}</span>
+                      </td>
+                      <td className="px-4 py-3 max-w-[180px]">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-gray-400 truncate">{p.link}</span>
+                          <button onClick={() => { navigator.clipboard.writeText(p.link); alert('Lien copié !'); }}
+                            className="text-brand-400 hover:text-brand-600 shrink-0 text-xs">📋</button>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-center font-semibold text-gray-900">{p.totalReferrals}</td>
+                      <td className="px-4 py-3 text-center">
+                        <span className={`font-semibold ${p.converted > 0 ? 'text-emerald-600' : 'text-gray-400'}`}>{p.converted}</span>
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        <button
+                          onClick={async () => {
+                            if (!confirm('Supprimer ce code partenaire ?')) return;
+                            await api.delete('/referral/partner/' + p.code);
+                            setPartners(prev => prev.filter(x => x.id !== p.id));
+                          }}
+                          className="text-red-400 hover:text-red-600 text-xs font-medium"
+                        >
+                          Supprimer
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -46,6 +177,137 @@ function KpiCard({ icon: Icon, label, value, sub, color, trend }: any) {
         <div className={`flex items-center gap-0.5 text-xs font-semibold ${trend >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
           {trend >= 0 ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           {Math.abs(trend)}%
+        </div>
+      )}
+    </div>
+
+      {/* ── Partenaires ── */}
+      {tab === 'partners' && (
+        <div className="space-y-6">
+          {/* Formulaire création */}
+          <div className="bg-white rounded-2xl border border-gray-100 p-6">
+            <h2 className="font-semibold text-gray-900 mb-4">🤝 Créer un code partenaire</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Code (ex: PARTNER2026)</label>
+                <input
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                  placeholder="MONCODE"
+                  value={partnerForm.code}
+                  onChange={e => setPartnerForm(f => ({ ...f, code: e.target.value.toUpperCase() }))}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Email du partenaire</label>
+                <input
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                  placeholder="partenaire@email.com"
+                  value={partnerForm.email}
+                  onChange={e => setPartnerForm(f => ({ ...f, email: e.target.value }))}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Nom du partenaire</label>
+                <input
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                  placeholder="Nom affiché"
+                  value={partnerForm.displayName}
+                  onChange={e => setPartnerForm(f => ({ ...f, displayName: e.target.value }))}
+                />
+              </div>
+            </div>
+            <button
+              onClick={async () => {
+                if (!partnerForm.code || !partnerForm.email) return;
+                setPartnerLoading(true);
+                try {
+                  const res = await api.post('/referral/partner', partnerForm);
+                  alert('✅ Code créé ! Lien : ' + res.data.link);
+                  setPartnerForm({ code: '', email: '', displayName: '' });
+                  const list = await api.get('/referral/partners');
+                  setPartners(list.data);
+                } catch (err: any) {
+                  alert('Erreur : ' + (err.response?.data?.error || err.message));
+                } finally {
+                  setPartnerLoading(false);
+                }
+              }}
+              disabled={partnerLoading || !partnerForm.code || !partnerForm.email}
+              className="bg-brand-500 text-white px-6 py-2 rounded-xl text-sm font-semibold hover:bg-brand-400 disabled:opacity-50 transition-all"
+            >
+              {partnerLoading ? 'Création…' : '+ Créer le code'}
+            </button>
+          </div>
+
+          {/* Liste partenaires */}
+          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-50">
+              <h2 className="font-semibold text-gray-900">Codes partenaires actifs</h2>
+              <button
+                onClick={async () => { const r = await api.get('/referral/partners'); setPartners(r.data); }}
+                className="text-xs text-brand-400 hover:underline"
+              >
+                🔄 Actualiser
+              </button>
+            </div>
+            {partners.length === 0 ? (
+              <div className="p-8 text-center text-gray-400 text-sm">
+                Aucun code partenaire. Créez-en un ci-dessus.
+                <br />
+                <button onClick={async () => { const r = await api.get('/referral/partners'); setPartners(r.data); }}
+                  className="mt-3 text-brand-400 hover:underline text-xs">Charger la liste</button>
+              </div>
+            ) : (
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50 text-xs text-gray-500 uppercase">
+                  <tr>
+                    <th className="px-4 py-3 text-left">Partenaire</th>
+                    <th className="px-4 py-3 text-left">Code</th>
+                    <th className="px-4 py-3 text-left">Lien</th>
+                    <th className="px-4 py-3 text-center">Filleuls</th>
+                    <th className="px-4 py-3 text-center">Convertis</th>
+                    <th className="px-4 py-3 text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {partners.map((p: any) => (
+                    <tr key={p.id} className="hover:bg-gray-50">
+                      <td className="px-4 py-3">
+                        <p className="font-medium text-gray-900">{p.displayName || p.email}</p>
+                        <p className="text-xs text-gray-400">{p.email}</p>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="font-mono bg-gray-100 px-2 py-1 rounded text-xs font-bold">{p.code}</span>
+                      </td>
+                      <td className="px-4 py-3 max-w-[180px]">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-gray-400 truncate">{p.link}</span>
+                          <button onClick={() => { navigator.clipboard.writeText(p.link); alert('Lien copié !'); }}
+                            className="text-brand-400 hover:text-brand-600 shrink-0 text-xs">📋</button>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-center font-semibold text-gray-900">{p.totalReferrals}</td>
+                      <td className="px-4 py-3 text-center">
+                        <span className={`font-semibold ${p.converted > 0 ? 'text-emerald-600' : 'text-gray-400'}`}>{p.converted}</span>
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        <button
+                          onClick={async () => {
+                            if (!confirm('Supprimer ce code partenaire ?')) return;
+                            await api.delete('/referral/partner/' + p.code);
+                            setPartners(prev => prev.filter(x => x.id !== p.id));
+                          }}
+                          className="text-red-400 hover:text-red-600 text-xs font-medium"
+                        >
+                          Supprimer
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
         </div>
       )}
     </div>
@@ -85,6 +347,9 @@ export default function AdminPage() {
   const [pendingMedia, setPendingMedia] = useState<{ photos: any[]; videos: any[] }>({ photos: [], videos: [] });
   const [pendingVerifs, setPendingVerifs] = useState<any[]>([]);
   const [tab, setTab] = useState<string>('dashboard');
+  const [partners, setPartners] = useState<any[]>([]);
+  const [partnerForm, setPartnerForm] = useState({ code: '', email: '', displayName: '' });
+  const [partnerLoading, setPartnerLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedProfile, setSelectedProfile] = useState<any>(null);
   const [rejectNote, setRejectNote] = useState('');
@@ -186,6 +451,7 @@ export default function AdminPage() {
     { id: 'verifications', label: 'Identités', badge: pendingVerifs.length },
     { id: 'reports', label: 'Signalements', badge: reports.filter((r: any) => r.status === 'PENDING').length },
     { id: 'users', label: 'Utilisateurs' },
+    { id: 'partners', label: '🤝 Partenaires' },
   ];
 
   if (loading) return (
@@ -774,6 +1040,137 @@ export default function AdminPage() {
             </table>
             {filteredUsers.length === 0 && (
               <div className="py-12 text-center text-gray-400 text-sm">Aucun utilisateur trouvé</div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+
+      {/* ── Partenaires ── */}
+      {tab === 'partners' && (
+        <div className="space-y-6">
+          {/* Formulaire création */}
+          <div className="bg-white rounded-2xl border border-gray-100 p-6">
+            <h2 className="font-semibold text-gray-900 mb-4">🤝 Créer un code partenaire</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Code (ex: PARTNER2026)</label>
+                <input
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                  placeholder="MONCODE"
+                  value={partnerForm.code}
+                  onChange={e => setPartnerForm(f => ({ ...f, code: e.target.value.toUpperCase() }))}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Email du partenaire</label>
+                <input
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                  placeholder="partenaire@email.com"
+                  value={partnerForm.email}
+                  onChange={e => setPartnerForm(f => ({ ...f, email: e.target.value }))}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Nom du partenaire</label>
+                <input
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                  placeholder="Nom affiché"
+                  value={partnerForm.displayName}
+                  onChange={e => setPartnerForm(f => ({ ...f, displayName: e.target.value }))}
+                />
+              </div>
+            </div>
+            <button
+              onClick={async () => {
+                if (!partnerForm.code || !partnerForm.email) return;
+                setPartnerLoading(true);
+                try {
+                  const res = await api.post('/referral/partner', partnerForm);
+                  alert('✅ Code créé ! Lien : ' + res.data.link);
+                  setPartnerForm({ code: '', email: '', displayName: '' });
+                  const list = await api.get('/referral/partners');
+                  setPartners(list.data);
+                } catch (err: any) {
+                  alert('Erreur : ' + (err.response?.data?.error || err.message));
+                } finally {
+                  setPartnerLoading(false);
+                }
+              }}
+              disabled={partnerLoading || !partnerForm.code || !partnerForm.email}
+              className="bg-brand-500 text-white px-6 py-2 rounded-xl text-sm font-semibold hover:bg-brand-400 disabled:opacity-50 transition-all"
+            >
+              {partnerLoading ? 'Création…' : '+ Créer le code'}
+            </button>
+          </div>
+
+          {/* Liste partenaires */}
+          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-50">
+              <h2 className="font-semibold text-gray-900">Codes partenaires actifs</h2>
+              <button
+                onClick={async () => { const r = await api.get('/referral/partners'); setPartners(r.data); }}
+                className="text-xs text-brand-400 hover:underline"
+              >
+                🔄 Actualiser
+              </button>
+            </div>
+            {partners.length === 0 ? (
+              <div className="p-8 text-center text-gray-400 text-sm">
+                Aucun code partenaire. Créez-en un ci-dessus.
+                <br />
+                <button onClick={async () => { const r = await api.get('/referral/partners'); setPartners(r.data); }}
+                  className="mt-3 text-brand-400 hover:underline text-xs">Charger la liste</button>
+              </div>
+            ) : (
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50 text-xs text-gray-500 uppercase">
+                  <tr>
+                    <th className="px-4 py-3 text-left">Partenaire</th>
+                    <th className="px-4 py-3 text-left">Code</th>
+                    <th className="px-4 py-3 text-left">Lien</th>
+                    <th className="px-4 py-3 text-center">Filleuls</th>
+                    <th className="px-4 py-3 text-center">Convertis</th>
+                    <th className="px-4 py-3 text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {partners.map((p: any) => (
+                    <tr key={p.id} className="hover:bg-gray-50">
+                      <td className="px-4 py-3">
+                        <p className="font-medium text-gray-900">{p.displayName || p.email}</p>
+                        <p className="text-xs text-gray-400">{p.email}</p>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="font-mono bg-gray-100 px-2 py-1 rounded text-xs font-bold">{p.code}</span>
+                      </td>
+                      <td className="px-4 py-3 max-w-[180px]">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-gray-400 truncate">{p.link}</span>
+                          <button onClick={() => { navigator.clipboard.writeText(p.link); alert('Lien copié !'); }}
+                            className="text-brand-400 hover:text-brand-600 shrink-0 text-xs">📋</button>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-center font-semibold text-gray-900">{p.totalReferrals}</td>
+                      <td className="px-4 py-3 text-center">
+                        <span className={`font-semibold ${p.converted > 0 ? 'text-emerald-600' : 'text-gray-400'}`}>{p.converted}</span>
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        <button
+                          onClick={async () => {
+                            if (!confirm('Supprimer ce code partenaire ?')) return;
+                            await api.delete('/referral/partner/' + p.code);
+                            setPartners(prev => prev.filter(x => x.id !== p.id));
+                          }}
+                          className="text-red-400 hover:text-red-600 text-xs font-medium"
+                        >
+                          Supprimer
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             )}
           </div>
         </div>
