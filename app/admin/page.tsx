@@ -169,6 +169,7 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 export default function AdminPage() {
+  const hasHydrated = useHasHydrated();
   const { user, isAuthenticated } = useAuthStore();
   const router = useRouter();
 
