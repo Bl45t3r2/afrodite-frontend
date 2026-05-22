@@ -328,9 +328,9 @@ export default function AdminPage() {
       </div>
 
       {/* ── Tabs ── */}
-      <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-8 overflow-x-auto">
+      <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-8 overflow-x-auto scrollbar-none">
         {TABS.map(t => (
-          <button key={t.id} onClick={() => setTab(t.id)}
+          <button key={t.id} onClick={() => setTab(t.id)} style={{flexShrink:0}}
             className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
               tab === t.id ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
             }`}>
