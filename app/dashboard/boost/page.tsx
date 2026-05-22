@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Zap, Crown, Star, ChevronLeft, Check, Clock, TrendingUp, Eye } from 'lucide-react';
 import api from '@/lib/api';
-import useAuthStore from '@/lib/store';
+import useAuthStore, { useHasHydrated } from '@/lib/store';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 import PaymentModal from '@/components/payment/PaymentModal';
@@ -40,6 +40,7 @@ const PLANS = [
 ];
 
 export default function BoostPage() {
+  const hasHydrated = useHasHydrated();
   const { isAuthenticated } = useAuthStore();
   const router = useRouter();
   const [activeBoost, setActiveBoost] = useState<any>(null);
@@ -48,6 +49,7 @@ export default function BoostPage() {
   const [payModal, setPayModal] = useState<{ plan: string; price: string; label: string } | null>(null);
 
   useEffect(() => {
+    if (!hasHydrated) return;
     if (!isAuthenticated) { router.push('/auth/login'); return; }
     api.get('/boosts/my')
       .then(r => setActiveBoost(r.data))

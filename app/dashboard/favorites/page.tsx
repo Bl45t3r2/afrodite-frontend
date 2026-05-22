@@ -2,17 +2,19 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
-import useAuthStore from '@/lib/store';
+import useAuthStore, { useHasHydrated } from '@/lib/store';
 import ProfileCard from '@/components/profile/ProfileCard';
 import { Heart } from 'lucide-react';
 
 export default function FavoritesPage() {
+  const hasHydrated = useHasHydrated();
   const { isAuthenticated } = useAuthStore();
   const router = useRouter();
   const [favorites, setFavorites] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!hasHydrated) return;
     if (!isAuthenticated) { router.push('/auth/login'); return; }
     api.get('/profiles/favorites')
       .then(res => { setFavorites(res.data); setLoading(false); })

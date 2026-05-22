@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { User, Camera, Star, Heart, Upload, Eye, MessageCircle, TrendingUp, BarChart2, Trash2, Crown, Zap, CalendarDays, ShieldCheck, Gift, Lock, CheckCircle, AlertCircle, Percent } from 'lucide-react';
-import useAuthStore from '@/lib/store';
+import useAuthStore, { useHasHydrated } from '@/lib/store';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
@@ -45,6 +45,7 @@ export default function DashboardPage() {
   const [payModal, setPayModal] = useState<{ plan: string; price: string; label: string } | null>(null);
 
   useEffect(() => {
+    if (!hasHydrated) return;
     if (!isAuthenticated) { router.push('/auth/login'); return; }
     api.get('/auth/me').then(res => {
       setPhotos(res.data.profile?.photos || []);

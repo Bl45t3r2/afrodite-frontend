@@ -7,7 +7,7 @@ import {
   Activity, RefreshCw, ChevronUp, ChevronDown, MapPin, Crown, Wifi,
   FileText, Bell, Trash2, UserX,
 } from 'lucide-react';
-import useAuthStore from '@/lib/store';
+import useAuthStore, { useHasHydrated } from '@/lib/store';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
