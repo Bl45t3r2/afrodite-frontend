@@ -39,6 +39,7 @@ export default function DashboardPage() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadingVideo, setUploadingVideo] = useState(false);
+  const [photoProgress, setPhotoProgress] = useState(0);
   const [videoProgress, setVideoProgress] = useState(0);
 
   const [isOnline, setIsOnline] = useState(false);
@@ -94,11 +95,18 @@ export default function DashboardPage() {
     const data = new FormData();
     data.append('photo', file);
     try {
-      const res = await api.post('/upload/photo', data, { headers: { 'Content-Type': 'multipart/form-data' } });
+      setPhotoProgress(0);
+      const res = await api.post('/upload/photo', data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: (e) => {
+          const pct = Math.round((e.loaded * 100) / (e.total || 1));
+          setPhotoProgress(pct);
+        },
+      });
       setPhotos(prev => [...prev, res.data]);
       toast.success('Photo ajoutée !');
     } catch { toast.error('Erreur upload'); }
-    finally { setUploading(false); }
+    finally { setUploading(false); setPhotoProgress(0); }
   };
 
   const deletePhoto = async (photoId: string) => {
@@ -408,11 +416,26 @@ export default function DashboardPage() {
             ))}
 
             {/* Upload zone */}
-            <label className="aspect-[3/4] rounded-2xl border-2 border-dashed border-gray-200 hover:border-brand-300 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors bg-gray-50 hover:bg-brand-50/30">
+            <label className={`aspect-[3/4] rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-2 cursor-pointer transition-all overflow-hidden relative ${uploading ? 'border-brand-300 bg-brand-50/20' : 'border-gray-200 hover:border-brand-300 bg-gray-50 hover:bg-brand-50/30'}`}>
+              {/* Barre de progression */}
+              {uploading && (
+                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gray-100">
+                  <div className="h-full bg-gradient-to-r from-brand-400 to-brand-600 transition-all duration-300 rounded-full"
+                    style={{ width: `${photoProgress}%` }} />
+                </div>
+              )}
+              {uploading && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/80 backdrop-blur-sm">
+                  <div className="w-12 h-12 rounded-full border-3 border-brand-100 border-t-brand-500 animate-spin" style={{borderWidth:'3px'}} />
+                  <span className="text-brand-600 font-bold text-sm">{photoProgress}%</span>
+                  <span className="text-gray-400 text-xs">Upload en cours…</span>
+                </div>
+              )}
               <div className="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center">
-                {uploading ? <div className="w-5 h-5 border-2 border-brand-400 border-t-transparent rounded-full animate-spin" /> : <Upload size={20} className="text-brand-400" />}
+                <Upload size={20} className="text-brand-400" />
               </div>
-              <span className="text-sm font-medium text-gray-500">{uploading ? 'Upload...' : 'Ajouter une photo'}</span>
+              <span className="text-sm font-medium text-gray-500">Ajouter une photo</span>
+              <span className="text-xs text-gray-400">JPG, PNG · Max 10MB</span>
               <input type="file" accept="image/*" className="hidden" onChange={uploadPhoto} disabled={uploading} />
             </label>
           </div>
