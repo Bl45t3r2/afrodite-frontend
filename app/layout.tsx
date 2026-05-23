@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/layout/CookieBanner';
+import { ThemeProvider } from '@/lib/theme';
 
 export const metadata: Metadata = {
   title: 'Afrodite — Profils vérifiés près de chez vous',
@@ -22,7 +23,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
-      <body className="flex flex-col min-h-screen bg-white text-gray-900">
+      <ThemeProvider>
+      <body className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
@@ -38,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }
         `}} />
       </body>
+      </ThemeProvider>
     </html>
   );
 }
