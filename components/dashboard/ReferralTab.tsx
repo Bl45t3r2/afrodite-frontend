@@ -27,6 +27,9 @@ export default function ReferralTab() {
   const [stats, setStats] = useState<ReferralStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState<'code' | 'link' | null>(null);
+  const [inputCode, setInputCode] = useState('');
+  const [applyingCode, setApplyingCode] = useState(false);
+  const [codeApplied, setCodeApplied] = useState(false);
 
   useEffect(() => {
     api.get('/referral/stats')
@@ -120,6 +123,51 @@ export default function ReferralTab() {
           </button>
         </div>
       </div>
+
+      {/* Entrer un code de parrainage */}
+      {!stats.referralCode?.startsWith('AFR') && (
+        <div className="card p-5 border border-brand-100">
+          <h3 className="font-semibold text-gray-900 mb-1 flex items-center gap-2">
+            <Gift size={16} className="text-brand-400" /> Vous avez un code de parrainage ?
+          </h3>
+          <p className="text-sm text-gray-400 mb-4">Entrez le code d'un ami pour bénéficier d'avantages mutuels.</p>
+          {codeApplied ? (
+            <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
+              <Check size={16} className="text-emerald-500" />
+              <span className="text-emerald-700 text-sm font-medium">Code appliqué avec succès !</span>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Ex: SAF123"
+                value={inputCode}
+                onChange={e => setInputCode(e.target.value.toUpperCase())}
+                className="flex-1 border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30 text-gray-900 bg-white"
+              />
+              <button
+                onClick={async () => {
+                  if (!inputCode.trim()) return;
+                  setApplyingCode(true);
+                  try {
+                    await api.post('/referral/apply', { code: inputCode.trim() });
+                    setCodeApplied(true);
+                    toast.success('Code de parrainage appliqué !');
+                  } catch (err: any) {
+                    toast.error(err.response?.data?.error || 'Code invalide');
+                  } finally {
+                    setApplyingCode(false);
+                  }
+                }}
+                disabled={applyingCode || !inputCode.trim()}
+                className="bg-brand-500 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-brand-400 disabled:opacity-50 transition-all"
+              >
+                {applyingCode ? '...' : 'Appliquer'}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Statistiques */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
