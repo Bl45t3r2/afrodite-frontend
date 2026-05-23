@@ -95,10 +95,28 @@ export default function ProfileCard({ profile, variant = 'default' }: Props) {
 
         {/* Fallback avatar */}
         {!mainPhoto && !hasVideo && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-900/20 to-[#0d0d0d]">
-            <span className="font-display text-6xl font-bold text-brand-400/30">
-              {profile.displayName[0]}
-            </span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center"
+            style={{ background: `linear-gradient(135deg, ${['#1a0f2e','#0f1a2e','#1a1a0f','#2e0f1a','#0f2e1a','#1a0f0f'][profile.displayName.charCodeAt(0) % 6]}, #0d0d0d)` }}>
+            {/* Cercles décoratifs */}
+            <div className="absolute w-48 h-48 rounded-full opacity-10"
+              style={{ background: 'radial-gradient(circle, #D4537E, transparent)', top: '-20%', right: '-20%' }} />
+            <div className="absolute w-32 h-32 rounded-full opacity-10"
+              style={{ background: 'radial-gradient(circle, #D4537E, transparent)', bottom: '-10%', left: '-10%' }} />
+            {/* Avatar initiale */}
+            <div className="relative w-20 h-20 rounded-2xl flex items-center justify-center mb-3 shadow-2xl"
+              style={{ background: 'linear-gradient(135deg, rgba(212,83,126,0.4), rgba(153,53,86,0.6))', border: '1px solid rgba(212,83,126,0.3)' }}>
+              <span className="font-display text-4xl font-bold text-white/90">
+                {profile.displayName[0].toUpperCase()}
+              </span>
+            </div>
+            {/* Nom */}
+            <p className="text-white/50 text-xs font-medium px-4 text-center truncate w-full">
+              {profile.displayName}
+            </p>
+            {/* Badge pas de photo */}
+            <div className="absolute top-2.5 right-2.5 bg-black/40 backdrop-blur text-white/40 text-[9px] px-2 py-0.5 rounded-full border border-white/10">
+              Pas de photo
+            </div>
           </div>
         )}
 
