@@ -1,15 +1,16 @@
 import { MetadataRoute } from 'next';
 
+const BASE_URL = process.env.NEXT_PUBLIC_CLIENT_URL || 'https://afrodiz.com';
+
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_CLIENT_URL || 'https://afrodite.com';
   return {
     rules: [
       {
         userAgent: '*',
-        allow: ['/', '/profiles', '/profiles/*', '/contact', '/tarifs'],
-        disallow: ['/dashboard', '/admin', '/messages', '/api/*', '/auth/*'],
+        allow: ['/', '/profiles', '/profiles/', '/tarifs'],
+        disallow: ['/dashboard', '/admin', '/auth', '/messages', '/api'],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

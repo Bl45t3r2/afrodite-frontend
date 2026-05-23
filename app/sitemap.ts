@@ -1,29 +1,30 @@
 import { MetadataRoute } from 'next';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_CLIENT_URL || 'https://afrodite.com';
+const BASE_URL = process.env.NEXT_PUBLIC_CLIENT_URL || 'https://afrodiz.com';
 
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily', priority: 1 },
-    { url: `${baseUrl}/profiles`, lastModified: new Date(), changeFrequency: 'hourly', priority: 0.9 },
-    { url: `${baseUrl}/tarifs`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${baseUrl}/legal/cgu`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
-    { url: `${baseUrl}/legal/mentions`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
-    { url: `${baseUrl}/legal/confidentialite`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticPages = [
+    { url: BASE_URL, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },
+    { url: `${BASE_URL}/profiles`, lastModified: new Date(), changeFrequency: 'hourly' as const, priority: 0.9 },
+    { url: `${BASE_URL}/tarifs`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.7 },
+    { url: `${BASE_URL}/auth/register`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
+    { url: `${BASE_URL}/auth/login`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.5 },
   ];
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profiles?limit=200&status=ACTIVE`);
-    const data = await res.json();
-    const profilePages: MetadataRoute.Sitemap = (data.profiles || []).map((p: any) => ({
-      url: `${baseUrl}/profiles/${p.id}`,
-      lastModified: new Date(p.updatedAt),
-      changeFrequency: 'weekly' as const,
-      priority: p.isVerified ? 0.8 : 0.6,
-    }));
-    return [...staticPages, ...profilePages];
-  } catch {
-    return staticPages;
-  }
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profiles?limit=200&status=ACTIVE`, { next: { revalidate: 3600 } });
+    if (res.ok) {
+      const data = await res.json();
+      const profiles = data.profiles || data;
+      const profilePages = profiles.map((p: any) => ({
+        url: `${BASE_URL}/profiles/${p.id}`,
+        lastModified: new Date(p.updatedAt || p.createdAt),
+        changeFrequency: 'weekly' as const,
+        priority: p.boosts?.length > 0 ? 0.9 : 0.7,
+      }));
+      return [...staticPages, ...profilePages];
+    }
+  } catch {}
+
+  return staticPages;
 }
