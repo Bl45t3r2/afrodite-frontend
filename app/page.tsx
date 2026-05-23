@@ -27,8 +27,18 @@ function ProfileCard({ profile, size = 'md' }: { profile: any; size?: 'sm' | 'md
         {photo ? (
           <img src={photo.url} alt={profile.displayName} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-900/20 to-[#0d0d0d]">
-            <span className="text-5xl font-bold text-brand-400/30">{profile.displayName?.[0]}</span>
+          <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden"
+            style={{ background: `linear-gradient(135deg, ${['#1a0f2e','#0f1a2e','#1a1a0f','#2e0f1a','#0f2e1a','#1a0f0f'][(profile.displayName?.charCodeAt(0) || 0) % 6]} 0%, #0d0d0d 100%)` }}>
+            <div style={{ position:'absolute', width:'180px', height:'180px', borderRadius:'50%', background:'radial-gradient(circle, rgba(212,83,126,0.2), transparent)', top:'-30px', right:'-30px' }} />
+            <div style={{ position:'absolute', width:'120px', height:'120px', borderRadius:'50%', background:'radial-gradient(circle, rgba(212,83,126,0.15), transparent)', bottom:'-20px', left:'-20px' }} />
+            <div style={{ width:'72px', height:'72px', borderRadius:'16px', background:'linear-gradient(135deg, rgba(212,83,126,0.5), rgba(153,53,86,0.7))', border:'1.5px solid rgba(212,83,126,0.4)', boxShadow:'0 8px 24px rgba(212,83,126,0.3)', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'8px' }}>
+              <span style={{ fontFamily:'serif', fontSize:'32px', fontWeight:'700', color:'rgba(255,255,255,0.95)' }}>
+                {profile.displayName?.[0]?.toUpperCase()}
+              </span>
+            </div>
+            <p style={{ color:'rgba(255,255,255,0.5)', fontSize:'11px', fontWeight:'500', textAlign:'center', padding:'0 12px', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', width:'100%' }}>
+              {profile.displayName}
+            </p>
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent" />
