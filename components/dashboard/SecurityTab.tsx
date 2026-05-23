@@ -5,6 +5,7 @@ import api from '@/lib/api';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import useAuthStore from '@/lib/store';
+import { Globe, Lock as LockIcon } from 'lucide-react';
 
 function PasswordInput({ label, value, onChange, placeholder }: any) {
   const [show, setShow] = useState(false);
@@ -29,6 +30,22 @@ function PasswordInput({ label, value, onChange, placeholder }: any) {
 }
 
 export default function SecurityTab() {
+  const { user, updateUser } = useAuthStore();
+  const [isPrivate, setIsPrivate] = useState(user?.profile?.isPrivate ?? false);
+  const [savingVisibility, setSavingVisibility] = useState(false);
+
+  const toggleVisibility = async (val: boolean) => {
+    setSavingVisibility(true);
+    try {
+      await api.put('/profiles/me', { isPrivate: val });
+      setIsPrivate(val);
+      toast.success(val ? '🔒 Profil privé activé' : '🌍 Profil rendu public');
+    } catch {
+      toast.error('Erreur lors de la mise à jour');
+    } finally {
+      setSavingVisibility(false);
+    }
+  };
   const router = useRouter();
   const { logout } = useAuthStore();
 
@@ -84,6 +101,34 @@ export default function SecurityTab() {
 
   return (
     <div className="space-y-6">
+      {/* Visibilité du profil */}
+      <div className="card p-6">
+        <h3 className="font-semibold text-gray-900 mb-1 flex items-center gap-2">
+          {isPrivate ? <LockIcon size={16} className="text-brand-400" /> : <Globe size={16} className="text-brand-400" />}
+          Visibilité du profil
+        </h3>
+        <p className="text-sm text-gray-400 mb-4">
+          {isPrivate ? 'Votre profil est privé — personne ne peut le voir dans les recherches.' : 'Votre profil est public — visible par tous les visiteurs.'}
+        </p>
+        <div className="grid grid-cols-2 gap-3">
+          <button onClick={() => toggleVisibility(false)} disabled={savingVisibility}
+            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (!isPrivate ? "border-brand-400 bg-brand-50 text-brand-600" : "border-gray-200 text-gray-400 hover:border-gray-300")}>
+            <span className="text-2xl">🌍</span>
+            <div className="text-center">
+              <p className="text-sm font-semibold">Public</p>
+              <p className="text-xs opacity-70">Visible par tous</p>
+            </div>
+          </button>
+          <button onClick={() => toggleVisibility(true)} disabled={savingVisibility}
+            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (isPrivate ? "border-brand-400 bg-brand-50 text-brand-600" : "border-gray-200 text-gray-400 hover:border-gray-300")}>
+            <span className="text-2xl">🔒</span>
+            <div className="text-center">
+              <p className="text-sm font-semibold">Privé</p>
+              <p className="text-xs opacity-70">Invisible sur la plateforme</p>
+            </div>
+          </button>
+        </div>
+      </div>
 
       {/* Changer le mot de passe */}
       <div className="card p-6 space-y-4">

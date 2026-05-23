@@ -18,7 +18,7 @@ export default function RegisterPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [referralCode, setReferralCode] = useState(searchParams.get('ref') || '');
-  const [form, setForm] = useState({ email: '', password: '', displayName: '', age: '', city: '', phone: '', gender: '' });
+  const [form, setForm] = useState({ email: '', password: '', displayName: '', age: '', city: '', phone: '', gender: '', isPrivate: false });
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [errorDetail, setErrorDetail] = useState('');
@@ -230,6 +230,31 @@ export default function RegisterPage() {
                 <strong>Détail erreur :</strong><br />{errorDetail}
               </div>
             )}
+
+            {/* Visibilité du compte */}
+            <div className="space-y-3">
+              <label className="block text-sm font-medium text-white/70">Visibilité du compte</label>
+              <div className="grid grid-cols-2 gap-3">
+                <button type="button"
+                  onClick={() => setForm(f => ({ ...f, isPrivate: false }))}
+                  className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (!form.isPrivate ? "border-brand-400 bg-brand-500/15 text-white" : "border-white/10 text-white/50 hover:border-white/20")}>
+                  <span className="text-2xl">🌍</span>
+                  <div className="text-center">
+                    <p className="text-sm font-semibold">Public</p>
+                    <p className="text-xs opacity-70">Visible par tous</p>
+                  </div>
+                </button>
+                <button type="button"
+                  onClick={() => setForm(f => ({ ...f, isPrivate: true }))}
+                  className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (form.isPrivate ? "border-brand-400 bg-brand-500/15 text-white" : "border-white/10 text-white/50 hover:border-white/20")}>
+                  <span className="text-2xl">🔒</span>
+                  <div className="text-center">
+                    <p className="text-sm font-semibold">Privé</p>
+                    <p className="text-xs opacity-70">Invisible sur la plateforme</p>
+                  </div>
+                </button>
+              </div>
+            </div>
 
             <button type="submit" disabled={loading} className="btn-primary w-full py-3 flex items-center justify-center gap-2 disabled:opacity-60 mt-2">
               {loading ? <><Loader size={15} className="animate-spin" /> Création en cours…</> : 'Créer mon compte'}
