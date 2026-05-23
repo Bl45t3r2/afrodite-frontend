@@ -19,6 +19,7 @@ export default function RegisterPage() {
   const searchParams = useSearchParams();
   const [referralCode, setReferralCode] = useState(searchParams.get('ref') || '');
   const [form, setForm] = useState({ email: '', password: '', displayName: '', age: '', city: '', phone: '', gender: '', isPrivate: false });
+  const [customCity, setCustomCity] = useState(false);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [errorDetail, setErrorDetail] = useState('');
@@ -159,14 +160,30 @@ export default function RegisterPage() {
               </div>
               <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1.5">Ville *</label>
-                <div className="relative">
-                  <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                  <select className="input pl-10 appearance-none" value={form.city}
-                    onChange={e => setForm(f => ({ ...f, city: e.target.value }))}>
-                    <option value="">Choisir</option>
-                    {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
-                  </select>
-                </div>
+                {!customCity ? (
+                  <div className="relative">
+                    <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 z-10" />
+                    <select className="input pl-10 appearance-none" value={form.city}
+                      onChange={e => {
+                        if (e.target.value === '__other__') { setCustomCity(true); setForm(f => ({ ...f, city: '' })); }
+                        else setForm(f => ({ ...f, city: e.target.value }));
+                      }}>
+                      <option value="">Choisir une ville</option>
+                      {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
+                      <option value="__other__">Autre ville…</option>
+                    </select>
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input className="input pl-10 pr-20" placeholder="Saisissez votre ville" value={form.city}
+                      onChange={e => setForm(f => ({ ...f, city: e.target.value }))} autoFocus />
+                    <button type="button" onClick={() => { setCustomCity(false); setForm(f => ({ ...f, city: '' })); }}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-brand-400 hover:text-brand-300 font-medium">
+                      ← Liste
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
