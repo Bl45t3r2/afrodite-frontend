@@ -11,6 +11,7 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirect') || '/dashboard';
+  const reason = searchParams.get('reason');
   const { login } = useAuthStore();
   const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
@@ -84,7 +85,13 @@ export default function LoginPage() {
         )}
 
         {/* Unverified email alert */}
-        {unverified && (
+        {reason === 'inactivity' && (
+        <div className="flex items-center gap-3 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-sm px-4 py-3 rounded-xl mb-4">
+          <span className="text-lg">⏱️</span>
+          <span>Vous avez été déconnecté après 1 heure d&apos;inactivité.</span>
+        </div>
+      )}
+      {unverified && (
           <div className="mb-4 bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
             <div className="flex gap-3">
               <AlertCircle size={16} className="text-amber-400 shrink-0 mt-0.5" />
