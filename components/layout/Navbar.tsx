@@ -10,6 +10,8 @@ import useAuthStore from '@/lib/store';
 import useNotificationStore from '@/lib/notificationStore';
 import { useSocketNotifications } from '@/lib/useSocketNotifications';
 import clsx from 'clsx';
+import { useTheme } from '@/lib/theme';
+import { Sun, Moon } from 'lucide-react';
 
 function NotificationPanel({ onClose }: { onClose: () => void }) {
   const { notifications, unreadCount, markAllRead, markRead } = useNotificationStore();
@@ -77,6 +79,7 @@ export default function Navbar() {
   const notifRef = useRef<HTMLDivElement>(null);
 
   useSocketNotifications();
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -190,6 +193,9 @@ export default function Navbar() {
                 </span>
               </Link>
 
+              <button onClick={toggle} className="p-2 text-white/50 hover:text-white hover:bg-white/6 rounded-lg transition-all">
+                {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+              </button>
               <button onClick={handleLogout} className="p-2 text-white/30 hover:text-red-400 hover:bg-white/5 rounded-lg transition-all">
                 <LogOut size={15} />
               </button>
@@ -222,6 +228,9 @@ export default function Navbar() {
               {showNotifs && <NotificationPanel onClose={() => setShowNotifs(false)} />}
             </div>
           )}
+          <button onClick={toggle} className="p-2 text-white/60 hover:text-white transition-colors rounded-lg hover:bg-white/6">
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
           <button className="p-2 text-white/60 hover:text-white" onClick={() => setOpen(!open)}>
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
