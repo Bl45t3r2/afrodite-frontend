@@ -89,3 +89,26 @@ export function useHasHydrated() {
   useEffect(() => { setHasHydrated(true); }, []);
   return hasHydrated;
 }
+
+// ── Auto-logout après 1h d'inactivité ──
+let inactivityTimer: ReturnType<typeof setTimeout> | null = null;
+const INACTIVITY_DELAY = 60 * 60 * 1000; // 1 heure
+
+function resetInactivityTimer() {
+  if (typeof window === 'undefined') return;
+  if (inactivityTimer) clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(() => {
+    const store = useAuthStore.getState();
+    if (store.isAuthenticated) {
+      store.logout();
+      window.location.href = '/auth/login?reason=inactivity';
+    }
+  }, INACTIVITY_DELAY);
+}
+
+if (typeof window !== 'undefined') {
+  ['mousedown', 'mousemove', 'keydown', 'scroll', 'touchstart', 'click'].forEach(event => {
+    window.addEventListener(event, resetInactivityTimer, { passive: true });
+  });
+  resetInactivityTimer();
+}
