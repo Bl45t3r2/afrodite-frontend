@@ -31,7 +31,6 @@ function MiniBarChart({ data }: { data: { date: string; count: number }[] }) {
       {/* Partners */}
       {/* Partners */}
       {/* Partners */}
-      {/* Notifications broadcast */}
     </div>
   );
 }
@@ -58,7 +57,6 @@ function KpiCard({ icon: Icon, label, value, sub, color, trend }: any) {
       {/* Partners */}
       {/* Partners */}
       {/* Partners */}
-      {/* Notifications broadcast */}
     </div>
   );
 }
