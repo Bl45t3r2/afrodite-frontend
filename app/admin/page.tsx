@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState, useCallback } from 'react';
+import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { useRouter } from 'next/navigation';
 import {
   Users, LayoutGrid, Clock, MessageCircle, Check, X, Ban, ShieldCheck,
@@ -286,6 +287,48 @@ export default function AdminPage() {
             <KpiCard icon={ShieldCheck} label="Vérifications identité" value={stats.pendingVerifs}
               color="bg-indigo-500" />
           </div>
+
+          {/* KPIs revenus ce mois */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="card p-5 border-l-4 border-emerald-500">
+              <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Ce mois</p>
+              <p className="font-display text-2xl font-bold text-gray-900">{(stats.revenueThisMonth || 0).toLocaleString()}</p>
+              <p className="text-xs text-gray-400">FCFA</p>
+            </div>
+            <div className="card p-5 border-l-4 border-blue-400">
+              <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Mois dernier</p>
+              <p className="font-display text-2xl font-bold text-gray-900">{(stats.revenueLastMonth || 0).toLocaleString()}</p>
+              <p className="text-xs text-gray-400">FCFA</p>
+            </div>
+            {(stats.revenueByPlan || []).slice(0,2).map((p: any) => (
+              <div key={p.plan} className="card p-5 border-l-4 border-brand-400">
+                <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">{p.plan || 'N/A'}</p>
+                <p className="font-display text-2xl font-bold text-gray-900">{(p.amount || 0).toLocaleString()}</p>
+                <p className="text-xs text-gray-400">{p.count} paiements</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Graphique revenus 30 jours */}
+          {stats.revenuePerDay && stats.revenuePerDay.some((d: any) => d.amount > 0) && (
+            <div className="card p-6">
+              <h3 className="font-semibold text-gray-900 mb-4">Revenus — 30 derniers jours</h3>
+              <ResponsiveContainer width="100%" height={200}>
+                <AreaChart data={stats.revenuePerDay}>
+                  <defs>
+                    <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#D4537E" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#D4537E" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="date" tick={{ fontSize: 10 }} interval={6} />
+                  <YAxis tick={{ fontSize: 10 }} tickFormatter={(v) => `${(v/1000).toFixed(0)}k`} />
+                  <Tooltip formatter={(v: any) => [`${v.toLocaleString()} FCFA`, 'Revenus']} />
+                  <Area type="monotone" dataKey="amount" stroke="#D4537E" fill="url(#revenueGrad)" strokeWidth={2} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          )}
 
           {/* Graphiques + Top villes */}
           <div className="grid md:grid-cols-3 gap-6">
