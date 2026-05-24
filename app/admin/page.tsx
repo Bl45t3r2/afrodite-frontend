@@ -952,7 +952,7 @@ export default function AdminPage() {
                 </div>
                 <div>
                   <label className="text-xs text-gray-500 mb-1 block">Type</label>
-                  <select className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none"
+                  <select className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-900 bg-white focus:outline-none"
                     value={notifForm.type} onChange={e => setNotifForm(f => ({ ...f, type: e.target.value }))}>
                     <option value="SYSTEM">Système</option>
                     <option value="PROMO">Promotion</option>
@@ -962,20 +962,20 @@ export default function AdminPage() {
               </div>
               <div>
                 <label className="text-xs text-gray-500 mb-1 block">Message *</label>
-                <textarea className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30 resize-none"
+                <textarea className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-brand-400/30 resize-none"
                   rows={3} placeholder="Contenu de la notification..." value={notifForm.message}
                   onChange={e => setNotifForm(f => ({ ...f, message: e.target.value }))} />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs text-gray-500 mb-1 block">Lien (optionnel)</label>
-                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none"
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-900 bg-white focus:outline-none"
                     placeholder="Ex: /profiles ou /tarifs" value={notifForm.link}
                     onChange={e => setNotifForm(f => ({ ...f, link: e.target.value }))} />
                 </div>
                 <div>
                   <label className="text-xs text-gray-500 mb-1 block">ID utilisateur (laisser vide = tous)</label>
-                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono focus:outline-none"
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-900 bg-white font-mono focus:outline-none"
                     placeholder="cmp010... (optionnel)" value={notifForm.targetUserId}
                     onChange={e => setNotifForm(f => ({ ...f, targetUserId: e.target.value }))} />
                 </div>
