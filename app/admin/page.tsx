@@ -31,6 +31,75 @@ function MiniBarChart({ data }: { data: { date: string; count: number }[] }) {
       {/* Partners */}
       {/* Partners */}
       {/* Partners */}
+      {/* Notifications broadcast */}
+      {tab === 'notifications' && (
+        <div className="space-y-6">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6">
+            <h2 className="font-semibold text-gray-900 mb-1">🔔 Envoyer une notification</h2>
+            <p className="text-sm text-gray-400 mb-6">Envoyez une notification à tous les utilisateurs ou à un utilisateur spécifique.</p>
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">Titre *</label>
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                    placeholder="Ex: 🎉 Nouveauté sur Afrodite" value={notifForm.title}
+                    onChange={e => setNotifForm(f => ({ ...f, title: e.target.value }))} />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">Type</label>
+                  <select className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none"
+                    value={notifForm.type} onChange={e => setNotifForm(f => ({ ...f, type: e.target.value }))}>
+                    <option value="SYSTEM">Système</option>
+                    <option value="PROMO">Promotion</option>
+                    <option value="ALERT">Alerte</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Message *</label>
+                <textarea className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30 resize-none"
+                  rows={3} placeholder="Contenu de la notification..." value={notifForm.message}
+                  onChange={e => setNotifForm(f => ({ ...f, message: e.target.value }))} />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">Lien (optionnel)</label>
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none"
+                    placeholder="Ex: /profiles ou /tarifs" value={notifForm.link}
+                    onChange={e => setNotifForm(f => ({ ...f, link: e.target.value }))} />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">ID utilisateur (laisser vide = tous)</label>
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono focus:outline-none"
+                    placeholder="cmp010... (optionnel)" value={notifForm.targetUserId}
+                    onChange={e => setNotifForm(f => ({ ...f, targetUserId: e.target.value }))} />
+                </div>
+              </div>
+              <div className="flex items-center gap-3 pt-2">
+                <button onClick={async () => {
+                    if (!notifForm.title || !notifForm.message) return;
+                    if (!confirm(notifForm.targetUserId ? 'Envoyer à cet utilisateur ?' : 'Envoyer à TOUS les utilisateurs ?')) return;
+                    setSendingNotif(true);
+                    try {
+                      const res = await api.post('/notifications/broadcast', notifForm);
+                      alert('✅ Notification envoyée à ' + res.data.sent + ' utilisateur(s)');
+                      setNotifForm({ title: '', message: '', type: 'SYSTEM', targetUserId: '', link: '' });
+                    } catch (err: any) {
+                      alert('Erreur : ' + (err.response?.data?.error || err.message));
+                    } finally { setSendingNotif(false); }
+                  }}
+                  disabled={sendingNotif || !notifForm.title || !notifForm.message}
+                  className="bg-brand-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-brand-400 disabled:opacity-50 flex items-center gap-2">
+                  {sendingNotif ? '⏳ Envoi...' : notifForm.targetUserId ? '📨 Envoyer à cet utilisateur' : '📢 Envoyer à tous'}
+                </button>
+                <p className="text-xs text-gray-400">
+                  {notifForm.targetUserId ? 'Notification ciblée' : 'Diffusion générale à tous les membres'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -57,6 +126,75 @@ function KpiCard({ icon: Icon, label, value, sub, color, trend }: any) {
       {/* Partners */}
       {/* Partners */}
       {/* Partners */}
+      {/* Notifications broadcast */}
+      {tab === 'notifications' && (
+        <div className="space-y-6">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6">
+            <h2 className="font-semibold text-gray-900 mb-1">🔔 Envoyer une notification</h2>
+            <p className="text-sm text-gray-400 mb-6">Envoyez une notification à tous les utilisateurs ou à un utilisateur spécifique.</p>
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">Titre *</label>
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                    placeholder="Ex: 🎉 Nouveauté sur Afrodite" value={notifForm.title}
+                    onChange={e => setNotifForm(f => ({ ...f, title: e.target.value }))} />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">Type</label>
+                  <select className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none"
+                    value={notifForm.type} onChange={e => setNotifForm(f => ({ ...f, type: e.target.value }))}>
+                    <option value="SYSTEM">Système</option>
+                    <option value="PROMO">Promotion</option>
+                    <option value="ALERT">Alerte</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Message *</label>
+                <textarea className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30 resize-none"
+                  rows={3} placeholder="Contenu de la notification..." value={notifForm.message}
+                  onChange={e => setNotifForm(f => ({ ...f, message: e.target.value }))} />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">Lien (optionnel)</label>
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none"
+                    placeholder="Ex: /profiles ou /tarifs" value={notifForm.link}
+                    onChange={e => setNotifForm(f => ({ ...f, link: e.target.value }))} />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">ID utilisateur (laisser vide = tous)</label>
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono focus:outline-none"
+                    placeholder="cmp010... (optionnel)" value={notifForm.targetUserId}
+                    onChange={e => setNotifForm(f => ({ ...f, targetUserId: e.target.value }))} />
+                </div>
+              </div>
+              <div className="flex items-center gap-3 pt-2">
+                <button onClick={async () => {
+                    if (!notifForm.title || !notifForm.message) return;
+                    if (!confirm(notifForm.targetUserId ? 'Envoyer à cet utilisateur ?' : 'Envoyer à TOUS les utilisateurs ?')) return;
+                    setSendingNotif(true);
+                    try {
+                      const res = await api.post('/notifications/broadcast', notifForm);
+                      alert('✅ Notification envoyée à ' + res.data.sent + ' utilisateur(s)');
+                      setNotifForm({ title: '', message: '', type: 'SYSTEM', targetUserId: '', link: '' });
+                    } catch (err: any) {
+                      alert('Erreur : ' + (err.response?.data?.error || err.message));
+                    } finally { setSendingNotif(false); }
+                  }}
+                  disabled={sendingNotif || !notifForm.title || !notifForm.message}
+                  className="bg-brand-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-brand-400 disabled:opacity-50 flex items-center gap-2">
+                  {sendingNotif ? '⏳ Envoi...' : notifForm.targetUserId ? '📨 Envoyer à cet utilisateur' : '📢 Envoyer à tous'}
+                </button>
+                <p className="text-xs text-gray-400">
+                  {notifForm.targetUserId ? 'Notification ciblée' : 'Diffusion générale à tous les membres'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -94,6 +232,8 @@ export default function AdminPage() {
   const [pendingMedia, setPendingMedia] = useState<{ photos: any[]; videos: any[] }>({ photos: [], videos: [] });
   const [pendingVerifs, setPendingVerifs] = useState<any[]>([]);
   const hasHydrated = useHasHydrated();
+  const [notifForm, setNotifForm] = useState({ title: '', message: '', type: 'SYSTEM', targetUserId: '', link: '' });
+  const [sendingNotif, setSendingNotif] = useState(false);
   const [tab, setTab] = useState<string>('dashboard');
   const [partners, setPartners] = useState<any[]>([]);
   const [partnerForm, setPartnerForm] = useState({ code: '', email: '', displayName: '' });
@@ -201,6 +341,7 @@ export default function AdminPage() {
     { id: 'reports', label: 'Signalements', badge: reports.filter((r: any) => r.status === 'PENDING').length },
     { id: 'users', label: 'Utilisateurs' },
     { id: 'partners', label: '🤝 Partenaires' },
+    { id: 'notifications', label: '🔔 Notifications' },
   ];
 
   if (loading) return (
@@ -930,6 +1071,75 @@ export default function AdminPage() {
                 </tbody>
               </table>
             )}
+          </div>
+        </div>
+      )}
+      {/* Notifications broadcast */}
+      {tab === 'notifications' && (
+        <div className="space-y-6">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6">
+            <h2 className="font-semibold text-gray-900 mb-1">🔔 Envoyer une notification</h2>
+            <p className="text-sm text-gray-400 mb-6">Envoyez une notification à tous les utilisateurs ou à un utilisateur spécifique.</p>
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">Titre *</label>
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+                    placeholder="Ex: 🎉 Nouveauté sur Afrodite" value={notifForm.title}
+                    onChange={e => setNotifForm(f => ({ ...f, title: e.target.value }))} />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">Type</label>
+                  <select className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none"
+                    value={notifForm.type} onChange={e => setNotifForm(f => ({ ...f, type: e.target.value }))}>
+                    <option value="SYSTEM">Système</option>
+                    <option value="PROMO">Promotion</option>
+                    <option value="ALERT">Alerte</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-xs text-gray-500 mb-1 block">Message *</label>
+                <textarea className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30 resize-none"
+                  rows={3} placeholder="Contenu de la notification..." value={notifForm.message}
+                  onChange={e => setNotifForm(f => ({ ...f, message: e.target.value }))} />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">Lien (optionnel)</label>
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none"
+                    placeholder="Ex: /profiles ou /tarifs" value={notifForm.link}
+                    onChange={e => setNotifForm(f => ({ ...f, link: e.target.value }))} />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1 block">ID utilisateur (laisser vide = tous)</label>
+                  <input className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono focus:outline-none"
+                    placeholder="cmp010... (optionnel)" value={notifForm.targetUserId}
+                    onChange={e => setNotifForm(f => ({ ...f, targetUserId: e.target.value }))} />
+                </div>
+              </div>
+              <div className="flex items-center gap-3 pt-2">
+                <button onClick={async () => {
+                    if (!notifForm.title || !notifForm.message) return;
+                    if (!confirm(notifForm.targetUserId ? 'Envoyer à cet utilisateur ?' : 'Envoyer à TOUS les utilisateurs ?')) return;
+                    setSendingNotif(true);
+                    try {
+                      const res = await api.post('/notifications/broadcast', notifForm);
+                      alert('✅ Notification envoyée à ' + res.data.sent + ' utilisateur(s)');
+                      setNotifForm({ title: '', message: '', type: 'SYSTEM', targetUserId: '', link: '' });
+                    } catch (err: any) {
+                      alert('Erreur : ' + (err.response?.data?.error || err.message));
+                    } finally { setSendingNotif(false); }
+                  }}
+                  disabled={sendingNotif || !notifForm.title || !notifForm.message}
+                  className="bg-brand-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-brand-400 disabled:opacity-50 flex items-center gap-2">
+                  {sendingNotif ? '⏳ Envoi...' : notifForm.targetUserId ? '📨 Envoyer à cet utilisateur' : '📢 Envoyer à tous'}
+                </button>
+                <p className="text-xs text-gray-400">
+                  {notifForm.targetUserId ? 'Notification ciblée' : 'Diffusion générale à tous les membres'}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}
