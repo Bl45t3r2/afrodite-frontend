@@ -515,12 +515,19 @@ export default function AdminPage() {
                   </div>
                 </div>
 
+                {/* Infos complètes */}
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   {[
                     ['Ville', selectedProfile.city],
-                    ['Âge', `${selectedProfile.age} ans`],
+                    ['Pays', selectedProfile.country || '—'],
+                    ['Âge', selectedProfile.age ? `${selectedProfile.age} ans` : '—'],
+                    ['Genre', selectedProfile.gender || '—'],
                     ['Tarif', selectedProfile.pricePerHour ? `${selectedProfile.pricePerHour} FCFA/h` : '—'],
+                    ['Téléphone', selectedProfile.phone || '—'],
                     ['Catégories', selectedProfile.categories?.join(', ') || '—'],
+                    ['Tags', selectedProfile.tags?.join(', ') || '—'],
+                    ['Inscrit le', selectedProfile.createdAt ? new Date(selectedProfile.createdAt).toLocaleDateString('fr-FR') : '—'],
+                    ['Vues', selectedProfile.viewCount || 0],
                   ].map(([k, v]) => (
                     <div key={k} className="bg-gray-50 rounded-xl p-3">
                       <p className="text-gray-400 text-xs mb-0.5">{k}</p>
@@ -529,21 +536,45 @@ export default function AdminPage() {
                   ))}
                 </div>
 
-                {selectedProfile.bio && (
-                  <div className="bg-gray-50 rounded-xl p-3 text-sm text-gray-600 leading-relaxed max-h-24 overflow-y-auto">
-                    {selectedProfile.bio}
+                {/* Profil privé */}
+                {selectedProfile.isPrivate && (
+                  <div className="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-xs text-amber-700 font-medium">
+                    🔒 Profil privé
                   </div>
                 )}
 
-                {selectedProfile.photos?.length > 0 && (
-                  <div className="grid grid-cols-3 gap-1.5">
-                    {selectedProfile.photos.slice(0, 6).map((p: any) => (
-                      <div key={p.id} className="aspect-square rounded-xl overflow-hidden bg-gray-100">
-                        <Image src={p.url} alt="" width={80} height={80} className="w-full h-full object-cover" />
-                      </div>
-                    ))}
+                {/* Bio */}
+                {selectedProfile.bio && (
+                  <div>
+                    <p className="text-xs text-gray-400 mb-1 font-medium">Bio</p>
+                    <div className="bg-gray-50 rounded-xl p-3 text-sm text-gray-600 leading-relaxed max-h-32 overflow-y-auto">
+                      {selectedProfile.bio}
+                    </div>
                   </div>
                 )}
+
+                {/* Toutes les photos */}
+                {selectedProfile.photos?.length > 0 && (
+                  <div>
+                    <p className="text-xs text-gray-400 mb-2 font-medium">Photos ({selectedProfile.photos.length})</p>
+                    <div className="grid grid-cols-3 gap-1.5">
+                      {selectedProfile.photos.map((p: any) => (
+                        <a key={p.id} href={p.url} target="_blank" rel="noreferrer"
+                          className="aspect-square rounded-xl overflow-hidden bg-gray-100 block hover:opacity-80 transition-opacity relative">
+                          <Image src={p.url} alt="" width={120} height={120} className="w-full h-full object-cover" />
+                          {p.isMain && <span className="absolute top-1 left-1 bg-brand-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold">MAIN</span>}
+                          {p.isPrivate && <span className="absolute top-1 right-1 bg-black/60 text-white text-[8px] px-1.5 py-0.5 rounded-full">🔒</span>}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Lien profil public */}
+                <a href={`/profiles/${selectedProfile.id}`} target="_blank" rel="noreferrer"
+                  className="flex items-center justify-center gap-2 border border-brand-200 text-brand-500 text-sm font-medium py-2 rounded-xl hover:bg-brand-50 transition-colors">
+                  👁 Voir le profil public
+                </a>
 
                 <div className="grid grid-cols-2 gap-2">
                   <button onClick={() => moderate(selectedProfile.id, 'approve')}
