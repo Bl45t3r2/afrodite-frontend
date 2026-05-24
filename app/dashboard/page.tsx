@@ -207,7 +207,7 @@ export default function DashboardPage() {
           </div>
           <div className="flex-1 min-w-0">
             <h1 className="font-display text-lg font-bold text-gray-900 truncate">{user?.profile?.displayName || "Mon espace"}</h1>
-            <p className="text-xs text-gray-400 truncate">{user?.email}</p>
+            <p className="text-xs text-white/50 truncate">{user?.email}</p>
           </div>
           <PushNotifToggle />
         </div>
