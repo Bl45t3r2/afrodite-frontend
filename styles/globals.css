@@ -59,6 +59,10 @@ body {
 ::selection { background: rgba(212,83,126,0.25); }
 
 /* Light mode overrides */
+.light input, .light textarea, .light select {
+  color: #1a1a1a !important;
+  background: #ffffff !important;
+}
 .light body { background: var(--bg-primary); color: var(--text-primary); }
 .light nav { background: var(--nav-bg) !important; border-color: var(--nav-border) !important; }
 .light footer { background: #1a0f1e !important; }
