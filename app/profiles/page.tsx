@@ -31,7 +31,7 @@ export default function ProfilesPage() {
   const [filters, setFilters] = useState({
     search: '', city: '', category: '', gender: '',
     isOnline: false, isVerified: false,
-    minPrice: '', maxPrice: '',
+    minPrice: '', maxPrice: '', minRating: '',
     tags: [] as string[],
     radius: '' as string,
     userLat: null as number | null,
@@ -51,6 +51,7 @@ export default function ProfilesPage() {
       if (filters.isVerified) params.isVerified = true;
       if (filters.minPrice) params.minPrice = filters.minPrice;
       if (filters.maxPrice) params.maxPrice = filters.maxPrice;
+      if (filters.minRating) params.minRating = filters.minRating;
       if (filters.tags.length > 0) params.tags = filters.tags.join(',');
       if (filters.radius) params.radius = filters.radius;
       if (filters.userLat) params.lat = filters.userLat;
@@ -105,13 +106,13 @@ export default function ProfilesPage() {
   };
 
   const resetFilters = () => {
-    setFilters({ search: '', city: '', category: '', gender: '', isOnline: false, isVerified: false, minPrice: '', maxPrice: '', tags: [], radius: '', userLat: null, userLng: null });
+    setFilters({ search: '', city: '', category: '', gender: '', isOnline: false, isVerified: false, minPrice: '', maxPrice: '', minRating: '', tags: [], radius: '', userLat: null, userLng: null });
     setPage(1);
   };
 
   const activeFiltersCount = [
     filters.search, filters.city, filters.category, filters.gender,
-    filters.isOnline, filters.isVerified, filters.minPrice, filters.maxPrice, filters.radius
+    filters.isOnline, filters.isVerified, filters.minPrice, filters.maxPrice, filters.minRating, filters.radius
   ].filter(v => v && v !== '').length + filters.tags.length;
 
   return (
@@ -212,6 +213,15 @@ export default function ProfilesPage() {
               <label className="text-xs font-medium text-gray-500 mb-2 block">Prix max (FCFA/h)</label>
               <input className="input" type="number" placeholder="50000" value={filters.maxPrice}
                 onChange={e => updateFilter('maxPrice', e.target.value)} />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-gray-500 mb-2 block">Note minimum ⭐</label>
+              <select className="input" value={filters.minRating} onChange={e => updateFilter('minRating', e.target.value)}>
+                <option value="">Toutes les notes</option>
+                <option value="3">⭐⭐⭐ 3+</option>
+                <option value="4">⭐⭐⭐⭐ 4+</option>
+                <option value="4.5">⭐⭐⭐⭐⭐ 4.5+</option>
+              </select>
             </div>
             <div className="flex flex-col justify-end gap-2">
               <label className="flex items-center gap-2 text-sm cursor-pointer">
