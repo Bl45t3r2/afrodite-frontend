@@ -800,6 +800,11 @@ export default function AdminPage() {
                     <td className="px-4 py-3">
                       <p className="font-medium text-gray-900">{u.profile?.displayName || '—'}</p>
                       <p className="text-gray-400 text-xs">{u.email}</p>
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <span className="font-mono text-[10px] text-gray-300 truncate max-w-[120px]">{u.id}</span>
+                        <button onClick={() => { navigator.clipboard.writeText(u.id); alert('ID copié !'); }}
+                          className="text-gray-300 hover:text-brand-400 text-[10px] shrink-0">📋</button>
+                      </div>
                     </td>
                     <td className="px-4 py-3"><StatusBadge status={u.role} /></td>
                     <td className="px-4 py-3"><StatusBadge status={u.profile?.status || 'PENDING'} /></td>
