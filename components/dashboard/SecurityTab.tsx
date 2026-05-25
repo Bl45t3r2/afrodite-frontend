@@ -30,8 +30,15 @@ function PasswordInput({ label, value, onChange, placeholder }: any) {
 }
 
 export default function SecurityTab() {
-  const { user, updateUser } = useAuthStore();
-  const [isPrivate, setIsPrivate] = useState(user?.profile?.isPrivate ?? false);
+  const { user } = useAuthStore();
+  const [isPrivate, setIsPrivate] = useState(false);
+  const [loadingPrivacy, setLoadingPrivacy] = useState(true);
+
+  useEffect(() => {
+    api.get('/profiles/me').then(res => {
+      setIsPrivate(res.data.profile?.isPrivate ?? false);
+    }).catch(() => {}).finally(() => setLoadingPrivacy(false));
+  }, []);
   const [savingVisibility, setSavingVisibility] = useState(false);
 
   const toggleVisibility = async (val: boolean) => {
