@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Lock, Trash2, Eye, EyeOff, ShieldAlert, LogOut } from 'lucide-react';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
