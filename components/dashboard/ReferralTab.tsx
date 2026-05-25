@@ -127,10 +127,10 @@ export default function ReferralTab() {
       {/* Entrer un code de parrainage */}
       {!stats.referralCode?.startsWith('AFR') && (
         <div className="card p-5 border border-brand-100">
-          <h3 className="font-semibold text-gray-900 mb-1 flex items-center gap-2">
+          <h3 className="font-semibold mb-1 flex items-center gap-2" style={{color:"var(--text-primary)"}}>
             <Gift size={16} className="text-brand-400" /> Vous avez un code de parrainage ?
           </h3>
-          <p className="text-sm text-gray-400 mb-4">Entrez le code d'un ami pour bénéficier d'avantages mutuels.</p>
+          <p className="text-sm mb-4" style={{color:"var(--text-muted)"}}>Entrez le code d'un ami pour bénéficier d'avantages mutuels.</p>
           {codeApplied ? (
             <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
               <Check size={16} className="text-emerald-500" />

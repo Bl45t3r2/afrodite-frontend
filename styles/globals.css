@@ -59,6 +59,10 @@ body {
 ::selection { background: rgba(212,83,126,0.25); }
 
 /* Light mode overrides */
+/* Footer garde toujours son thème sombre */
+.light footer, .light footer * {
+  color: inherit !important;
+}
 .light input, .light textarea, .light select {
   color: #1a1a1a !important;
   background: #ffffff !important;
