@@ -120,6 +120,13 @@ body {
   }
 }
 /* updated */
+/* Dashboard text toujours visible */
+.t-text-primary { color: var(--text-primary) !important; }
+[class*="card"] .font-display,
+[class*="card"] h1, [class*="card"] h2, [class*="card"] h3, [class*="card"] h4,
+[class*="card"] p, [class*="card"] span.font-semibold {
+  color: var(--text-primary);
+}
 /* Fix textes invisibles sur fonds sombres en mode clair */
 .light [class*="bg-\[#0"] .text-gray-900,
 .light [class*="bg-\[#1"] .text-gray-900,
