@@ -35,7 +35,7 @@ export default function SecurityTab() {
   const [loadingPrivacy, setLoadingPrivacy] = useState(true);
 
   useEffect(() => {
-    api.get('/profiles/me').then(res => {
+    api.get('/auth/me').then(res => {
       setIsPrivate(res.data.profile?.isPrivate ?? false);
     }).catch(() => {}).finally(() => setLoadingPrivacy(false));
   }, []);
