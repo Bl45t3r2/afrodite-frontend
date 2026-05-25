@@ -182,7 +182,7 @@ export default function ReferralTab() {
               <s.icon size={18} />
             </div>
             <div>
-              <p className="font-display text-xl font-bold text-gray-900">{s.value}</p>
+              <p className="font-display text-xl font-bold" style={{color:"var(--text-primary)"}}>{s.value}</p>
               <p className="text-xs text-gray-400">{s.label}</p>
             </div>
           </div>
