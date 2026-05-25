@@ -60,9 +60,9 @@ body {
 
 /* Light mode overrides */
 /* Footer garde toujours son thème sombre */
-.light footer, .light footer * {
-  color: inherit !important;
-}
+.light footer { background: #0d0810 !important; }
+.light footer, .light footer p, .light footer span, .light footer a, .light footer h4 { color: rgba(255,255,255,0.7) !important; }
+.light footer a:hover { color: #ffffff !important; }
 .light input, .light textarea, .light select {
   color: #1a1a1a !important;
   background: #ffffff !important;
