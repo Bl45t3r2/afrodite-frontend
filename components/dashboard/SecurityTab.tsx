@@ -11,7 +11,7 @@ function PasswordInput({ label, value, onChange, placeholder }: any) {
   const [show, setShow] = useState(false);
   return (
     <div>
-      <label className="block text-xs font-medium text-gray-500 mb-1.5">{label}</label>
+      <label className="block text-xs font-medium text-white/50 mb-1.5">{label}</label>
       <div className="relative">
         <input
           type={show ? 'text' : 'password'}
@@ -21,7 +21,7 @@ function PasswordInput({ label, value, onChange, placeholder }: any) {
           className="input pr-10"
         />
         <button type="button" onClick={() => setShow(s => !s)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/60">
           {show ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
       </div>
@@ -110,16 +110,16 @@ export default function SecurityTab() {
     <div className="space-y-6">
       {/* Visibilité du profil */}
       <div className="card p-6">
-        <h3 className="font-semibold text-gray-900 mb-1 flex items-center gap-2">
+        <h3 className="font-semibold text-white mb-1 flex items-center gap-2">
           {isPrivate ? <LockIcon size={16} className="text-brand-400" /> : <Globe size={16} className="text-brand-400" />}
           Visibilité du profil
         </h3>
-        <p className="text-sm text-gray-400 mb-4">
+        <p className="text-sm text-white/40 mb-4">
           {isPrivate ? 'Votre profil est privé — personne ne peut le voir dans les recherches.' : 'Votre profil est public — visible par tous les visiteurs.'}
         </p>
         <div className="grid grid-cols-2 gap-3">
           <button onClick={() => toggleVisibility(false)} disabled={savingVisibility}
-            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (!isPrivate ? "border-brand-400 bg-brand-50 text-brand-600" : "border-gray-200 text-gray-400 hover:border-gray-300")}>
+            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (!isPrivate ? "border-brand-400 bg-brand-50 text-brand-600" : "border-gray-200 text-white/40 hover:border-gray-300")}>
             <span className="text-2xl">🌍</span>
             <div className="text-center">
               <p className="text-sm font-semibold">Public</p>
@@ -127,7 +127,7 @@ export default function SecurityTab() {
             </div>
           </button>
           <button onClick={() => toggleVisibility(true)} disabled={savingVisibility}
-            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (isPrivate ? "border-brand-400 bg-brand-50 text-brand-600" : "border-gray-200 text-gray-400 hover:border-gray-300")}>
+            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (isPrivate ? "border-brand-400 bg-brand-50 text-brand-600" : "border-gray-200 text-white/40 hover:border-gray-300")}>
             <span className="text-2xl">🔒</span>
             <div className="text-center">
               <p className="text-sm font-semibold">Privé</p>
@@ -141,7 +141,7 @@ export default function SecurityTab() {
       <div className="card p-6 space-y-4">
         <div className="flex items-center gap-2 mb-2">
           <Lock size={18} className="text-brand-400" />
-          <h3 className="font-semibold text-gray-900">Changer le mot de passe</h3>
+          <h3 className="font-semibold text-white">Changer le mot de passe</h3>
         </div>
 
         <PasswordInput label="Mot de passe actuel" value={current} onChange={setCurrent} placeholder="••••••••" />
@@ -176,18 +176,18 @@ export default function SecurityTab() {
       <div className="card p-6">
         <div className="flex items-center gap-2 mb-4">
           <ShieldAlert size={18} className="text-brand-400" />
-          <h3 className="font-semibold text-gray-900">Sécurité du compte</h3>
+          <h3 className="font-semibold text-white">Sécurité du compte</h3>
         </div>
         <div className="space-y-3">
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
             <div>
-              <p className="text-sm font-medium text-gray-900">Session actuelle</p>
-              <p className="text-xs text-gray-400">Connecté depuis ce navigateur</p>
+              <p className="text-sm font-medium text-white">Session actuelle</p>
+              <p className="text-xs text-white/40">Connecté depuis ce navigateur</p>
             </div>
             <span className="text-xs bg-emerald-50 text-emerald-600 font-medium px-2.5 py-1 rounded-full">Active</span>
           </div>
           <button onClick={() => { logout(); router.push('/auth/login'); }}
-            className="w-full flex items-center justify-center gap-2 text-sm text-gray-600 border border-gray-200 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+            className="w-full flex items-center justify-center gap-2 text-sm text-white/60 border border-gray-200 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
             <LogOut size={15} /> Se déconnecter
           </button>
         </div>

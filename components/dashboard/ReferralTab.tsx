@@ -94,9 +94,9 @@ export default function ReferralTab() {
 
         {/* Lien de parrainage */}
         <div className="p-4 border-b border-gray-50">
-          <p className="text-xs font-medium text-gray-500 mb-2">Lien de parrainage</p>
+          <p className="text-xs font-medium text-white/50 mb-2">Lien de parrainage</p>
           <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2">
-            <p className="text-xs text-gray-600 flex-1 truncate font-mono">{stats.referralLink}</p>
+            <p className="text-xs text-white/60 flex-1 truncate font-mono">{stats.referralLink}</p>
             <button
               onClick={() => copy('link')}
               className="w-7 h-7 bg-brand-100 hover:bg-brand-200 text-brand-600 rounded-lg flex items-center justify-center transition-all shrink-0"
@@ -143,7 +143,7 @@ export default function ReferralTab() {
                 placeholder="Ex: SAF123"
                 value={inputCode}
                 onChange={e => setInputCode(e.target.value.toUpperCase())}
-                className="flex-1 border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30 text-gray-900 bg-white"
+                className="flex-1 border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30 text-white bg-white"
               />
               <button
                 onClick={async () => {
@@ -183,7 +183,7 @@ export default function ReferralTab() {
             </div>
             <div>
               <p className="font-display text-xl font-bold" style={{color:"var(--text-primary)"}}>{s.value}</p>
-              <p className="text-xs text-gray-400">{s.label}</p>
+              <p className="text-xs text-white/40">{s.label}</p>
             </div>
           </div>
         ))}
@@ -191,7 +191,7 @@ export default function ReferralTab() {
 
       {/* Comment ça marche */}
       <div className="card p-6">
-        <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+        <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
           <Zap size={16} className="text-brand-400" /> Comment ça marche
         </h3>
         <div className="space-y-3">
@@ -204,7 +204,7 @@ export default function ReferralTab() {
               <div className={`w-7 h-7 ${item.color} text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>
                 {item.step}
               </div>
-              <p className="text-sm text-gray-600">{item.text}</p>
+              <p className="text-sm text-white/60">{item.text}</p>
             </div>
           ))}
         </div>
@@ -213,7 +213,7 @@ export default function ReferralTab() {
       {/* Liste des filleuls */}
       {stats.referrals.length > 0 && (
         <div className="card p-6">
-          <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
             <Users size={16} className="text-brand-400" /> Mes filleuls ({stats.referrals.length})
           </h3>
           <div className="space-y-3">
@@ -229,8 +229,8 @@ export default function ReferralTab() {
                       </div>
                   }
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">{r.profile?.displayName || 'Utilisateur'}</p>
-                    <p className="text-xs text-gray-400">{r.profile?.city} · Inscrit le {new Date(r.createdAt).toLocaleDateString('fr-FR')}</p>
+                    <p className="text-sm font-medium text-white truncate">{r.profile?.displayName || 'Utilisateur'}</p>
+                    <p className="text-xs text-white/40">{r.profile?.city} · Inscrit le {new Date(r.createdAt).toLocaleDateString('fr-FR')}</p>
                   </div>
                   <span className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${
                     hasSubscription ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
@@ -247,7 +247,7 @@ export default function ReferralTab() {
       {/* Récompenses */}
       {stats.rewards.length > 0 && (
         <div className="card p-6">
-          <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
             <Gift size={16} className="text-brand-400" /> Mes récompenses
           </h3>
           <div className="space-y-3">
@@ -259,8 +259,8 @@ export default function ReferralTab() {
                   {r.status === 'APPLIED' ? <Check size={16} className="text-emerald-500" /> : <Clock size={16} className="text-amber-500" />}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900">{REWARD_LABELS[r.type] || r.type}</p>
-                  <p className="text-xs text-gray-400">{r.description}</p>
+                  <p className="text-sm font-medium text-white">{REWARD_LABELS[r.type] || r.type}</p>
+                  <p className="text-xs text-white/40">{r.description}</p>
                 </div>
                 <span className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${
                   r.status === 'APPLIED' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
@@ -279,8 +279,8 @@ export default function ReferralTab() {
           <div className="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-4">
             <Users size={28} className="text-brand-300" />
           </div>
-          <p className="font-semibold text-gray-600 mb-1">Pas encore de filleuls</p>
-          <p className="text-sm text-gray-400">Partagez votre code ci-dessus pour commencer à parrainer.</p>
+          <p className="font-semibold text-white/60 mb-1">Pas encore de filleuls</p>
+          <p className="text-sm text-white/40">Partagez votre code ci-dessus pour commencer à parrainer.</p>
         </div>
       )}
     </div>

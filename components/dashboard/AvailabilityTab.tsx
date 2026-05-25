@@ -108,18 +108,18 @@ export default function AvailabilityTab() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Calendar size={18} className="text-brand-400" />
-              <h2 className="font-semibold text-gray-900">Mes disponibilités</h2>
+              <h2 className="font-semibold text-white">Mes disponibilités</h2>
             </div>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-white/40">
               Définissez vos horaires pour que les visiteurs sachent quand vous contacter.
               <span className="ml-2 text-brand-400 font-medium">{activeCount} jour{activeCount > 1 ? 's' : ''} actif{activeCount > 1 ? 's' : ''}</span>
             </p>
           </div>
           <div className="flex gap-2 shrink-0">
-            <button onClick={() => toggleAll(true)} className="text-xs text-gray-500 hover:text-brand-500 border border-gray-200 hover:border-brand-300 px-3 py-1.5 rounded-lg transition-all">
+            <button onClick={() => toggleAll(true)} className="text-xs text-white/50 hover:text-brand-500 border border-gray-200 hover:border-brand-300 px-3 py-1.5 rounded-lg transition-all">
               Tout activer
             </button>
-            <button onClick={() => toggleAll(false)} className="text-xs text-gray-500 hover:text-red-500 border border-gray-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-all">
+            <button onClick={() => toggleAll(false)} className="text-xs text-white/50 hover:text-red-500 border border-gray-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-all">
               Tout désactiver
             </button>
           </div>
@@ -132,7 +132,7 @@ export default function AvailabilityTab() {
             return (
               <div key={d.id} className="flex-1 text-center">
                 <div className={`h-1.5 rounded-full mb-1 transition-colors ${slot?.isActive ? 'bg-brand-400' : 'bg-gray-200'}`} />
-                <span className="text-[10px] text-gray-400">{d.short}</span>
+                <span className="text-[10px] text-white/40">{d.short}</span>
               </div>
             );
           })}
@@ -157,7 +157,7 @@ export default function AvailabilityTab() {
                     ? <ToggleRight size={22} className="text-brand-400 transition-transform group-hover:scale-110" />
                     : <ToggleLeft size={22} className="text-gray-300 transition-transform group-hover:scale-110" />
                   }
-                  <span className={`text-sm font-medium transition-colors ${slot.isActive ? 'text-gray-900' : 'text-gray-400'} ${isWeekend ? 'text-brand-500' : ''}`}>
+                  <span className={`text-sm font-medium transition-colors ${slot.isActive ? 'text-white' : 'text-white/40'} ${isWeekend ? 'text-brand-500' : ''}`}>
                     {day.label}
                   </span>
                 </button>
@@ -166,7 +166,7 @@ export default function AvailabilityTab() {
               {/* Horaires */}
               {slot.isActive ? (
                 <div className="flex items-center gap-2 flex-1 flex-wrap">
-                  <Clock size={14} className="text-gray-400 shrink-0" />
+                  <Clock size={14} className="text-white/40 shrink-0" />
                   <select
                     value={slot.startTime}
                     onChange={e => updateSlot(day.id, 'startTime', e.target.value)}
@@ -176,7 +176,7 @@ export default function AvailabilityTab() {
                       <option key={t} value={t}>{t}</option>
                     ))}
                   </select>
-                  <span className="text-gray-400 text-sm">→</span>
+                  <span className="text-white/40 text-sm">→</span>
                   <select
                     value={slot.endTime}
                     onChange={e => updateSlot(day.id, 'endTime', e.target.value)}
@@ -188,7 +188,7 @@ export default function AvailabilityTab() {
                   </select>
                   <button
                     onClick={() => applyToAll(day.id)}
-                    className="text-xs text-gray-400 hover:text-brand-500 ml-1 transition-colors whitespace-nowrap"
+                    className="text-xs text-white/40 hover:text-brand-500 ml-1 transition-colors whitespace-nowrap"
                     title="Appliquer ces horaires à tous les jours"
                   >
                     Copier sur tous
@@ -212,7 +212,7 @@ export default function AvailabilityTab() {
         {saving ? 'Sauvegarde…' : 'Sauvegarder mon agenda'}
       </button>
 
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-xs text-white/40 text-center">
         Vos disponibilités sont affichées publiquement sur votre profil.
       </p>
     </div>

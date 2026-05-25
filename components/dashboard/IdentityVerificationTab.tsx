@@ -17,7 +17,7 @@ function FileDropzone({ label, icon: Icon, file, onChange, accept = 'image/*' }:
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <div>
-      <p className="text-xs font-medium text-gray-500 mb-2">{label}</p>
+      <p className="text-xs font-medium text-white/50 mb-2">{label}</p>
       <label
         className={`relative flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed cursor-pointer transition-all p-5 text-center
           ${file ? 'border-brand-400 bg-brand-50' : 'border-gray-200 hover:border-brand-300 bg-gray-50 hover:bg-brand-50/30'}`}
@@ -34,10 +34,10 @@ function FileDropzone({ label, icon: Icon, file, onChange, accept = 'image/*' }:
         ) : (
           <>
             <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
-              <Icon size={22} className="text-gray-400" />
+              <Icon size={22} className="text-white/40" />
             </div>
-            <p className="text-sm text-gray-500">Cliquez pour sélectionner</p>
-            <p className="text-xs text-gray-400">JPG, PNG · Max 10MB</p>
+            <p className="text-sm text-white/50">Cliquez pour sélectionner</p>
+            <p className="text-xs text-white/40">JPG, PNG · Max 10MB</p>
           </>
         )}
         <input ref={inputRef} type="file" accept={accept} className="hidden"
@@ -106,8 +106,8 @@ export default function IdentityVerificationTab() {
       <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4">
         <ShieldCheck size={36} className="text-emerald-500" />
       </div>
-      <h2 className="font-display text-2xl font-bold text-gray-900 mb-2">Identité vérifiée ✅</h2>
-      <p className="text-gray-500 mb-4">Votre badge <strong>"Vérifié"</strong> est actif sur votre profil.</p>
+      <h2 className="font-display text-2xl font-bold text-white mb-2">Identité vérifiée ✅</h2>
+      <p className="text-white/50 mb-4">Votre badge <strong>"Vérifié"</strong> est actif sur votre profil.</p>
       <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-600 border border-emerald-100 px-4 py-2 rounded-xl text-sm font-medium">
         <CheckCircle size={16} /> Profil certifié — Afrodite
       </div>
@@ -120,9 +120,9 @@ export default function IdentityVerificationTab() {
       <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
         <Clock size={36} className="text-amber-500" />
       </div>
-      <h2 className="font-display text-xl font-bold text-gray-900 mb-2">Documents en cours d'examen</h2>
-      <p className="text-gray-500 mb-2">Notre équipe examine vos documents. Délai habituel : <strong>24–48h</strong>.</p>
-      <p className="text-sm text-gray-400">Vous recevrez une notification dès que la vérification sera terminée.</p>
+      <h2 className="font-display text-xl font-bold text-white mb-2">Documents en cours d'examen</h2>
+      <p className="text-white/50 mb-2">Notre équipe examine vos documents. Délai habituel : <strong>24–48h</strong>.</p>
+      <p className="text-sm text-white/40">Vous recevrez une notification dès que la vérification sera terminée.</p>
       <div className="mt-6 bg-amber-50 border border-amber-100 rounded-2xl p-4 text-left">
         <p className="text-xs font-semibold text-amber-700 mb-1">Document envoyé</p>
         <p className="text-sm text-amber-600">{DOC_TYPES.find(d => d.value === verif?.docType)?.label || verif?.docType}</p>
@@ -140,8 +140,8 @@ export default function IdentityVerificationTab() {
             <ShieldCheck size={26} className="text-white" />
           </div>
           <div>
-            <h2 className="font-semibold text-gray-900 text-lg mb-1">Vérification d'identité</h2>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <h2 className="font-semibold text-white text-lg mb-1">Vérification d'identité</h2>
+            <p className="text-sm text-white/50 leading-relaxed">
               Obtenez le badge <strong className="text-emerald-600">✓ Vérifié</strong> en prouvant votre identité.
               Vos documents sont stockés de façon sécurisée et ne sont jamais partagés publiquement.
             </p>
@@ -170,8 +170,8 @@ export default function IdentityVerificationTab() {
             <div className="w-8 h-8 bg-brand-50 text-brand-500 rounded-full flex items-center justify-center text-sm font-bold mx-auto mb-2">
               {step.num}
             </div>
-            <p className="text-xs font-semibold text-gray-700">{step.title}</p>
-            <p className="text-[11px] text-gray-400 mt-0.5">{step.desc}</p>
+            <p className="text-xs font-semibold text-white/70">{step.title}</p>
+            <p className="text-[11px] text-white/40 mt-0.5">{step.desc}</p>
           </div>
         ))}
       </div>
@@ -180,12 +180,12 @@ export default function IdentityVerificationTab() {
       <div className="card p-6 space-y-5">
         {/* Type de document */}
         <div>
-          <label className="text-xs font-medium text-gray-500 mb-2 block">Type de document</label>
+          <label className="text-xs font-medium text-white/50 mb-2 block">Type de document</label>
           <div className="relative">
             <select value={docType} onChange={e => setDocType(e.target.value as DocType)} className="input appearance-none pr-8">
               {DOC_TYPES.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
             </select>
-            <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+            <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
           </div>
         </div>
 

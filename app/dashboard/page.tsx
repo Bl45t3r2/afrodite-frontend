@@ -212,7 +212,7 @@ export default function DashboardPage() {
           <PushNotifToggle />
         </div>
         <div className="flex gap-2">
-          <button onClick={toggleOnline} className={"flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border-2 font-medium text-sm transition-all " + (isOnline ? "bg-green-50 border-green-200 text-green-700" : "bg-gray-50 border-gray-200 text-gray-500")}>
+          <button onClick={toggleOnline} className={"flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border-2 font-medium text-sm transition-all " + (isOnline ? "bg-green-50 border-green-200 text-green-700" : "bg-gray-50 border-gray-200 text-white/50")}>
             <span className={"w-2.5 h-2.5 rounded-full " + (isOnline ? "bg-green-400 animate-pulse" : "bg-gray-300")} />
             {isOnline ? "Disponible" : "Indisponible"}
           </button>
@@ -242,11 +242,11 @@ export default function DashboardPage() {
               <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-brand-500">{pct}%</span>
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-inherit mb-1">Complétez votre profil — {pct}%</p>
+              <p className="text-sm font-semibold text-white mb-1">Complétez votre profil — {pct}%</p>
               <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                 <div className="h-full bg-brand-400 rounded-full transition-all duration-700" style={{ width: `${pct}%` }} />
               </div>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-white/40 mt-1">
                 {!form.bio && 'Ajoutez une bio · '}
                 {!photos.length && 'Uploadez une photo · '}
                 {!form.categories?.length && 'Choisissez une catégorie · '}
@@ -262,7 +262,7 @@ export default function DashboardPage() {
       <div className="flex gap-1 bg-gray-100 rounded-2xl p-1.5 mb-8 overflow-x-auto">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button key={id} onClick={() => setTab(id as any)}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === id ? 'bg-white text-inherit shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === id ? 'bg-white text-white shadow-sm' : 'text-white/50 hover:text-white/70'}`}>
             <Icon size={15} />
             <span className="hidden sm:inline">{label}</span>
           </button>
@@ -293,7 +293,7 @@ export default function DashboardPage() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-semibold" style={{color:"var(--text-primary)"}} className2=" text-lg truncate">{form.displayName || 'Votre nom'}</p>
-              <p className="text-sm text-gray-400">{form.city || 'Ville'}{form.age ? ` · ${form.age} ans` : ''}</p>
+              <p className="text-sm text-white/40">{form.city || 'Ville'}{form.age ? ` · ${form.age} ans` : ''}</p>
               {form.pricePerHour && <p className="text-sm text-brand-400 font-medium mt-1">{Number(form.pricePerHour).toLocaleString()} FCFA/h</p>}
               <div className="flex flex-wrap gap-1 mt-2">
                 {form.categories?.slice(0, 3).map((c: string) => (
@@ -310,32 +310,32 @@ export default function DashboardPage() {
           <div className="card p-6 space-y-5">
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Nom affiché</label>
+              <label className="block text-xs font-medium text-white/50 mb-1.5">Nom affiché</label>
               <input className="input" value={form.displayName || ''} onChange={e => setForm((f: any) => ({ ...f, displayName: e.target.value }))} />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Âge</label>
+              <label className="block text-xs font-medium text-white/50 mb-1.5">Âge</label>
               <input className="input" type="number" value={form.age || ''} onChange={e => setForm((f: any) => ({ ...f, age: e.target.value }))} />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Ville</label>
+              <label className="block text-xs font-medium text-white/50 mb-1.5">Ville</label>
               <input className="input" value={form.city || ''} onChange={e => setForm((f: any) => ({ ...f, city: e.target.value }))} />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Prix / heure (FCFA)</label>
+              <label className="block text-xs font-medium text-white/50 mb-1.5">Prix / heure (FCFA)</label>
               <input className="input" type="number" value={form.pricePerHour || ''} onChange={e => setForm((f: any) => ({ ...f, pricePerHour: e.target.value }))} />
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1.5">Bio</label>
+            <label className="block text-xs font-medium text-white/50 mb-1.5">Bio</label>
             <textarea className="input resize-none" rows={4} value={form.bio || ''} onChange={e => setForm((f: any) => ({ ...f, bio: e.target.value }))} placeholder="Décrivez-vous en quelques mots..." />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-2">Catégories</label>
+            <label className="block text-xs font-medium text-white/50 mb-2">Catégories</label>
             <div className="flex flex-wrap gap-2">
               {CATEGORIES.map(cat => (
                 <button key={cat} onClick={() => toggleCategory(cat)}
-                  className={`px-3 py-1.5 rounded-xl text-sm font-medium border transition-all ${form.categories?.includes(cat) ? 'bg-brand-400 text-white border-brand-400' : 'bg-white text-gray-600 border-gray-200 hover:border-brand-300'}`}>
+                  className={`px-3 py-1.5 rounded-xl text-sm font-medium border transition-all ${form.categories?.includes(cat) ? 'bg-brand-400 text-white border-brand-400' : 'bg-white text-white/60 border-gray-200 hover:border-brand-300'}`}>
                   {cat}
                 </button>
               ))}
@@ -344,7 +344,7 @@ export default function DashboardPage() {
 
           {/* Tags */}
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-2">
+            <label className="block text-xs font-medium text-white/50 mb-2">
               Tags <span className="text-gray-300 font-normal">({form.tags?.length || 0}/10) — aident les visiteurs à vous trouver</span>
             </label>
 
@@ -376,10 +376,10 @@ export default function DashboardPage() {
 
             {/* Tags suggérés */}
             <div className="flex flex-wrap gap-1.5">
-              <span className="text-xs text-gray-400 self-center mr-1">Suggestions :</span>
+              <span className="text-xs text-white/40 self-center mr-1">Suggestions :</span>
               {SUGGESTED_TAGS.filter(t => !form.tags?.includes(t)).slice(0, 8).map(tag => (
                 <button key={tag} onClick={() => addTag(tag)}
-                  className="text-xs text-gray-500 bg-gray-50 hover:bg-brand-50 hover:text-brand-600 border border-gray-200 hover:border-brand-200 px-2.5 py-1 rounded-full transition-all">
+                  className="text-xs text-white/50 bg-gray-50 hover:bg-brand-50 hover:text-brand-600 border border-gray-200 hover:border-brand-200 px-2.5 py-1 rounded-full transition-all">
                   +{tag}
                 </button>
               ))}
@@ -404,7 +404,7 @@ export default function DashboardPage() {
                 )}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                   {!photo.isMain && (
-                    <button onClick={() => setMainPhoto(photo.id)} className="bg-white text-inherit text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-brand-50">
+                    <button onClick={() => setMainPhoto(photo.id)} className="bg-white text-white text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-brand-50">
                       Définir principale
                     </button>
                   )}
@@ -428,25 +428,25 @@ export default function DashboardPage() {
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/80 backdrop-blur-sm">
                   <div className="w-12 h-12 rounded-full border-3 border-brand-100 border-t-brand-500 animate-spin" style={{borderWidth:'3px'}} />
                   <span className="text-brand-600 font-bold text-sm">{photoProgress}%</span>
-                  <span className="text-gray-400 text-xs">Upload en cours…</span>
+                  <span className="text-white/40 text-xs">Upload en cours…</span>
                 </div>
               )}
               <div className="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center">
                 <Upload size={20} className="text-brand-400" />
               </div>
-              <span className="text-sm font-medium text-gray-500">Ajouter une photo</span>
-              <span className="text-xs text-gray-400">JPG, PNG · Max 10MB</span>
+              <span className="text-sm font-medium text-white/50">Ajouter une photo</span>
+              <span className="text-xs text-white/40">JPG, PNG · Max 10MB</span>
               <input type="file" accept="image/*" className="hidden" onChange={uploadPhoto} disabled={uploading} />
             </label>
           </div>
-          <p className="text-xs text-gray-400 text-center">Formats acceptés : JPG, PNG, WebP · Max 10MB par photo</p>
+          <p className="text-xs text-white/40 text-center">Formats acceptés : JPG, PNG, WebP · Max 10MB par photo</p>
 
           {/* ── VIDÉOS ── */}
           <div className="mt-8">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="font-semibold" style={{color:"var(--text-primary)"}} className2="">Mes vidéos</h3>
-                <p className="text-xs text-gray-400">{videos.length}/5 vidéos · Max 100MB par vidéo · MP4, MOV, AVI</p>
+                <p className="text-xs text-white/40">{videos.length}/5 vidéos · Max 100MB par vidéo · MP4, MOV, AVI</p>
               </div>
             </div>
 
@@ -457,7 +457,7 @@ export default function DashboardPage() {
                     <img src={video.thumbnailUrl} alt="" className="w-full h-full object-cover opacity-80" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <svg className="w-12 h-12 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-12 h-12 text-white/60" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z"/>
                       </svg>
                     </div>
@@ -529,8 +529,8 @@ export default function DashboardPage() {
                         </svg>
                       </div>
                       <div className="text-center">
-                        <p className="text-sm font-medium text-gray-600">Ajouter une vidéo</p>
-                        <p className="text-xs text-gray-400 mt-0.5">MP4, MOV, AVI · Max 100MB</p>
+                        <p className="text-sm font-medium text-white/60">Ajouter une vidéo</p>
+                        <p className="text-xs text-white/40 mt-0.5">MP4, MOV, AVI · Max 100MB</p>
                       </div>
                     </>
                   )}
@@ -573,8 +573,8 @@ export default function DashboardPage() {
                   <Icon size={18} />
                 </div>
                 <p className="font-display text-3xl font-bold" style={{color:"var(--text-primary)"}}>{value}</p>
-                <p className="text-xs text-gray-600 font-medium mt-0.5">{label}</p>
-                {sub && <p className="text-[10px] text-gray-400 mt-0.5">{sub}</p>}
+                <p className="text-xs text-white/60 font-medium mt-0.5">{label}</p>
+                {sub && <p className="text-[10px] text-white/40 mt-0.5">{sub}</p>}
               </div>
             ))}
           </div>
@@ -591,14 +591,14 @@ export default function DashboardPage() {
                   const pct = maxViews > 0 ? (d.views / maxViews) * 100 : 0;
                   return (
                     <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                      <span className="text-xs text-gray-400">{d.views}</span>
+                      <span className="text-xs text-white/40">{d.views}</span>
                       <div className="w-full bg-gray-100 rounded-lg relative" style={{ height: '80px' }}>
                         <div
                           className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-600 to-brand-400 rounded-lg transition-all duration-500"
                           style={{ height: `${Math.max(pct, 5)}%` }}
                         />
                       </div>
-                      <span className="text-xs text-gray-400 capitalize">{d.day}</span>
+                      <span className="text-xs text-white/40 capitalize">{d.day}</span>
                     </div>
                   );
                 })}
@@ -613,20 +613,20 @@ export default function DashboardPage() {
             <div className="flex items-center gap-2 mb-4">
               <Star size={18} className="text-amber-400" />
               <h3 className="font-semibold" style={{color:"var(--text-primary)"}} className2="">Avis reçus</h3>
-              <span className="ml-auto text-sm text-gray-400">{stats?.reviewsCount ?? 0} avis</span>
+              <span className="ml-auto text-sm text-white/40">{stats?.reviewsCount ?? 0} avis</span>
             </div>
             {stats?.reviewsCount === 0 ? (
-              <p className="text-sm text-gray-400 text-center py-6">Aucun avis pour l'instant. Partagez votre profil pour en recevoir !</p>
+              <p className="text-sm text-white/40 text-center py-6">Aucun avis pour l'instant. Partagez votre profil pour en recevoir !</p>
             ) : (
               <div className="flex items-center gap-4">
-                <span className="font-display text-5xl font-bold text-inherit">{stats?.averageRating?.toFixed(1)}</span>
+                <span className="font-display text-5xl font-bold text-white">{stats?.averageRating?.toFixed(1)}</span>
                 <div>
                   <div className="flex gap-1 mb-1">
                     {[1,2,3,4,5].map(s => (
                       <Star key={s} size={16} className={s <= Math.round(stats?.averageRating || 0) ? 'text-amber-400 fill-amber-400' : 'text-gray-200'} />
                     ))}
                   </div>
-                  <p className="text-sm text-gray-400">sur {stats?.reviewsCount} avis</p>
+                  <p className="text-sm text-white/40">sur {stats?.reviewsCount} avis</p>
                 </div>
               </div>
             )}
@@ -645,12 +645,12 @@ export default function DashboardPage() {
             ].map(p => (
               <div key={p.plan} className="border-2 border-gray-100 rounded-2xl p-6 hover:border-brand-300 transition-all hover:shadow-md text-left">
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-bold text-inherit text-lg">{p.label}</h4>
-                  <span className="font-display text-xl font-bold text-brand-400">{p.price}<span className="text-sm font-normal text-gray-400">{p.period}</span></span>
+                  <h4 className="font-bold text-white text-lg">{p.label}</h4>
+                  <span className="font-display text-xl font-bold text-brand-400">{p.price}<span className="text-sm font-normal text-white/40">{p.period}</span></span>
                 </div>
                 <ul className="space-y-2 mb-5">
                   {p.features.map(f => (
-                    <li key={f} className="text-sm text-gray-500 flex items-center gap-2">
+                    <li key={f} className="text-sm text-white/50 flex items-center gap-2">
                       <span className="w-4 h-4 bg-brand-50 rounded-full flex items-center justify-center text-brand-400 text-xs">✓</span>{f}
                     </li>
                   ))}
@@ -672,8 +672,8 @@ export default function DashboardPage() {
                 {payments.map((p: any) => (
                   <div key={p.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
                     <div>
-                      <p className="text-sm font-medium text-inherit">{p.plan?.toUpperCase()} — {p.purpose === 'SUBSCRIPTION' ? 'Abonnement' : 'Boost'}</p>
-                      <p className="text-xs text-gray-400">{new Date(p.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} · {p.provider}</p>
+                      <p className="text-sm font-medium text-white">{p.plan?.toUpperCase()} — {p.purpose === 'SUBSCRIPTION' ? 'Abonnement' : 'Boost'}</p>
+                      <p className="text-xs text-white/40">{new Date(p.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} · {p.provider}</p>
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="font-semibold" style={{color:"var(--text-primary)"}} className2=" text-sm">{(p.amount || 0).toLocaleString()} FCFA</span>
