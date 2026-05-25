@@ -262,7 +262,7 @@ export default function DashboardPage() {
       <div className="flex gap-1 bg-gray-100 rounded-2xl p-1.5 mb-8 overflow-x-auto">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button key={id} onClick={() => setTab(id as any)}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === id ? 'bg-white text-gray-900 shadow-sm' : 'text-white/50 hover:text-white/70'}`}>
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === id ? 'bg-brand-500 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}>
             <Icon size={15} />
             <span className="hidden sm:inline">{label}</span>
           </button>
