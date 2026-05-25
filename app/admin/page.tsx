@@ -529,16 +529,16 @@ export default function AdminPage() {
                     ['Inscrit le', selectedProfile.createdAt ? new Date(selectedProfile.createdAt).toLocaleDateString('fr-FR') : '—'],
                     ['Vues', selectedProfile.viewCount || 0],
                   ].map(([k, v]) => (
-                    <div key={k} className="bg-gray-50 rounded-xl p-3">
-                      <p className="text-gray-400 text-xs mb-0.5">{k}</p>
-                      <p className="font-medium text-gray-900 truncate">{v}</p>
+                    <div key={k} className="bg-white/5 border border-white/10 rounded-xl p-3">
+                      <p className="text-white/40 text-xs mb-0.5">{k}</p>
+                      <p className="font-medium text-white truncate">{v}</p>
                     </div>
                   ))}
                 </div>
 
                 {/* Profil privé */}
                 {selectedProfile.isPrivate && (
-                  <div className="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-xs text-amber-700 font-medium">
+                  <div className="bg-amber-500/20 border border-amber-500/30 rounded-xl px-3 py-2 text-xs text-amber-300 font-medium">
                     🔒 Profil privé
                   </div>
                 )}
@@ -547,7 +547,7 @@ export default function AdminPage() {
                 {selectedProfile.bio && (
                   <div>
                     <p className="text-xs text-gray-400 mb-1 font-medium">Bio</p>
-                    <div className="bg-gray-50 rounded-xl p-3 text-sm text-gray-600 leading-relaxed max-h-32 overflow-y-auto">
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-white/70 leading-relaxed max-h-32 overflow-y-auto">
                       {selectedProfile.bio}
                     </div>
                   </div>
