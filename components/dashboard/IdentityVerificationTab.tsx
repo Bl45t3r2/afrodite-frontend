@@ -20,7 +20,7 @@ function FileDropzone({ label, icon: Icon, file, onChange, accept = 'image/*' }:
       <p className="text-xs font-medium text-white/50 mb-2">{label}</p>
       <label
         className={`relative flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed cursor-pointer transition-all p-5 text-center
-          ${file ? 'border-brand-400 bg-brand-50' : 'border-gray-200 hover:border-brand-300 bg-gray-50 hover:bg-brand-50/30'}`}
+          ${file ? 'border-brand-400 bg-brand-50' : 'border-white/10 hover:border-brand-300 bg-white/5 hover:bg-brand-50/30'}`}
       >
         {file ? (
           <>
@@ -206,9 +206,9 @@ export default function IdentityVerificationTab() {
         />
 
         {/* Consignes */}
-        <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
-          <p className="text-xs font-semibold text-blue-700 mb-2">📋 Consignes importantes</p>
-          <ul className="text-xs text-blue-600 space-y-1">
+        <div className="bg-blue-900/20 border border-blue-100 rounded-xl p-4">
+          <p className="text-xs font-semibold text-blue-300 mb-2">📋 Consignes importantes</p>
+          <ul className="text-xs text-blue-400 space-y-1">
             <li>• Le document doit être valide et non expiré</li>
             <li>• Toutes les informations doivent être clairement lisibles</li>
             <li>• Le selfie doit montrer votre visage et le document simultanément</li>
