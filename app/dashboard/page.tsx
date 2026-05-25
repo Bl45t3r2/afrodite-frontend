@@ -242,7 +242,7 @@ export default function DashboardPage() {
               <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-brand-500">{pct}%</span>
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-gray-900 mb-1">Complétez votre profil — {pct}%</p>
+              <p className="text-sm font-semibold text-[var(--text-primary)] mb-1">Complétez votre profil — {pct}%</p>
               <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                 <div className="h-full bg-brand-400 rounded-full transition-all duration-700" style={{ width: `${pct}%` }} />
               </div>
@@ -262,7 +262,7 @@ export default function DashboardPage() {
       <div className="flex gap-1 bg-gray-100 rounded-2xl p-1.5 mb-8 overflow-x-auto">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button key={id} onClick={() => setTab(id as any)}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === id ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === id ? 'bg-white text-[var(--text-primary)] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
             <Icon size={15} />
             <span className="hidden sm:inline">{label}</span>
           </button>
@@ -292,7 +292,7 @@ export default function DashboardPage() {
               </label>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-semibold text-gray-900 text-lg truncate">{form.displayName || 'Votre nom'}</p>
+              <p className="font-semibold text-[var(--text-primary)] text-lg truncate">{form.displayName || 'Votre nom'}</p>
               <p className="text-sm text-gray-400">{form.city || 'Ville'}{form.age ? ` · ${form.age} ans` : ''}</p>
               {form.pricePerHour && <p className="text-sm text-brand-400 font-medium mt-1">{Number(form.pricePerHour).toLocaleString()} FCFA/h</p>}
               <div className="flex flex-wrap gap-1 mt-2">
@@ -404,7 +404,7 @@ export default function DashboardPage() {
                 )}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                   {!photo.isMain && (
-                    <button onClick={() => setMainPhoto(photo.id)} className="bg-white text-gray-900 text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-brand-50">
+                    <button onClick={() => setMainPhoto(photo.id)} className="bg-white text-[var(--text-primary)] text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-brand-50">
                       Définir principale
                     </button>
                   )}
@@ -445,7 +445,7 @@ export default function DashboardPage() {
           <div className="mt-8">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="font-semibold text-gray-900">Mes vidéos</h3>
+                <h3 className="font-semibold text-[var(--text-primary)]">Mes vidéos</h3>
                 <p className="text-xs text-gray-400">{videos.length}/5 vidéos · Max 100MB par vidéo · MP4, MOV, AVI</p>
               </div>
             </div>
@@ -572,7 +572,7 @@ export default function DashboardPage() {
                 <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center mb-3`}>
                   <Icon size={18} />
                 </div>
-                <p className="font-display text-3xl font-bold text-gray-900">{value}</p>
+                <p className="font-display text-3xl font-bold text-[var(--text-primary)]">{value}</p>
                 <p className="text-xs text-gray-600 font-medium mt-0.5">{label}</p>
                 {sub && <p className="text-[10px] text-gray-400 mt-0.5">{sub}</p>}
               </div>
@@ -583,7 +583,7 @@ export default function DashboardPage() {
           <div className="card p-6">
             <div className="flex items-center gap-2 mb-6">
               <TrendingUp size={18} className="text-brand-400" />
-              <h3 className="font-semibold text-gray-900">Vues — 7 derniers jours</h3>
+              <h3 className="font-semibold text-[var(--text-primary)]">Vues — 7 derniers jours</h3>
             </div>
             {stats?.viewsPerDay ? (
               <div className="flex items-end gap-2 h-32">
@@ -612,14 +612,14 @@ export default function DashboardPage() {
           <div className="card p-6">
             <div className="flex items-center gap-2 mb-4">
               <Star size={18} className="text-amber-400" />
-              <h3 className="font-semibold text-gray-900">Avis reçus</h3>
+              <h3 className="font-semibold text-[var(--text-primary)]">Avis reçus</h3>
               <span className="ml-auto text-sm text-gray-400">{stats?.reviewsCount ?? 0} avis</span>
             </div>
             {stats?.reviewsCount === 0 ? (
               <p className="text-sm text-gray-400 text-center py-6">Aucun avis pour l'instant. Partagez votre profil pour en recevoir !</p>
             ) : (
               <div className="flex items-center gap-4">
-                <span className="font-display text-5xl font-bold text-gray-900">{stats?.averageRating?.toFixed(1)}</span>
+                <span className="font-display text-5xl font-bold text-[var(--text-primary)]">{stats?.averageRating?.toFixed(1)}</span>
                 <div>
                   <div className="flex gap-1 mb-1">
                     {[1,2,3,4,5].map(s => (
@@ -645,7 +645,7 @@ export default function DashboardPage() {
             ].map(p => (
               <div key={p.plan} className="border-2 border-gray-100 rounded-2xl p-6 hover:border-brand-300 transition-all hover:shadow-md text-left">
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-bold text-gray-900 text-lg">{p.label}</h4>
+                  <h4 className="font-bold text-[var(--text-primary)] text-lg">{p.label}</h4>
                   <span className="font-display text-xl font-bold text-brand-400">{p.price}<span className="text-sm font-normal text-gray-400">{p.period}</span></span>
                 </div>
                 <ul className="space-y-2 mb-5">
@@ -667,16 +667,16 @@ export default function DashboardPage() {
           {/* Historique paiements */}
           {payments.length > 0 && (
             <div className="card p-6">
-              <h3 className="font-semibold text-gray-900 mb-4">Historique des paiements</h3>
+              <h3 className="font-semibold text-[var(--text-primary)] mb-4">Historique des paiements</h3>
               <div className="space-y-3">
                 {payments.map((p: any) => (
                   <div key={p.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{p.plan?.toUpperCase()} — {p.purpose === 'SUBSCRIPTION' ? 'Abonnement' : 'Boost'}</p>
+                      <p className="text-sm font-medium text-[var(--text-primary)]">{p.plan?.toUpperCase()} — {p.purpose === 'SUBSCRIPTION' ? 'Abonnement' : 'Boost'}</p>
                       <p className="text-xs text-gray-400">{new Date(p.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} · {p.provider}</p>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="font-semibold text-gray-900 text-sm">{(p.amount || 0).toLocaleString()} FCFA</span>
+                      <span className="font-semibold text-[var(--text-primary)] text-sm">{(p.amount || 0).toLocaleString()} FCFA</span>
                       <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
                         p.status === 'COMPLETED' ? 'bg-emerald-50 text-emerald-600' :
                         p.status === 'PENDING' ? 'bg-amber-50 text-amber-600' :
