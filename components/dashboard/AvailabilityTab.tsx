@@ -116,10 +116,10 @@ export default function AvailabilityTab() {
             </p>
           </div>
           <div className="flex gap-2 shrink-0">
-            <button onClick={() => toggleAll(true)} className="text-xs text-white/50 hover:text-brand-500 border border-gray-200 hover:border-brand-300 px-3 py-1.5 rounded-lg transition-all">
+            <button onClick={() => toggleAll(true)} className="text-xs text-white/50 hover:text-brand-500 border border-white/10 hover:border-brand-300 px-3 py-1.5 rounded-lg transition-all">
               Tout activer
             </button>
-            <button onClick={() => toggleAll(false)} className="text-xs text-white/50 hover:text-red-500 border border-gray-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-all">
+            <button onClick={() => toggleAll(false)} className="text-xs text-white/50 hover:text-red-500 border border-white/10 hover:border-red-200 px-3 py-1.5 rounded-lg transition-all">
               Tout désactiver
             </button>
           </div>
@@ -146,7 +146,7 @@ export default function AvailabilityTab() {
           const isWeekend = day.id === 0 || day.id === 6;
 
           return (
-            <div key={day.id} className={`p-4 flex items-center gap-4 transition-colors ${slot.isActive ? 'bg-white' : 'bg-gray-50'}`}>
+            <div key={day.id} className={`p-4 flex items-center gap-4 transition-colors ${slot.isActive ? 'bg-white/5' : 'bg-gray-50'}`}>
               {/* Toggle + Jour */}
               <div className="w-28 shrink-0">
                 <button
