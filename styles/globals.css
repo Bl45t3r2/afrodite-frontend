@@ -120,6 +120,15 @@ body {
   }
 }
 /* updated */
+/* Force dark colorScheme on all selects */
+select {
+  color-scheme: dark;
+}
+.light select {
+  color-scheme: light;
+  background: #ffffff;
+  color: #1a1a1a;
+}
 /* Sections sombres gardent leurs couleurs en mode clair */
 .light .hero-dark { background: #0a0a0a !important; }
 .light .hero-dark .text-white,
