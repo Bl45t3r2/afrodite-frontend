@@ -846,7 +846,7 @@ export default function AdminPage() {
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         <select value={u.role}
-                          onChange={async e => {
+                          onChange={async e = style={{colorScheme:"dark"}}> {
                             await api.patch(`/admin/users/${u.id}/role`, { role: e.target.value });
                             setUsers(prev => prev.map(x => x.id === u.id ? { ...x, role: e.target.value } : x));
                             toast.success('Rôle mis à jour');
@@ -989,7 +989,7 @@ export default function AdminPage() {
                 <div>
                   <label className="text-xs text-white/50 mb-1 block">Type</label>
                   <select className="w-full border border-white/10 rounded-xl px-3 py-2 text-sm text-white bg-white/10 focus:outline-none"
-                    value={notifForm.type} onChange={e => setNotifForm(f => ({ ...f, type: e.target.value }))}>
+                    value={notifForm.type} onChange={e = style={{colorScheme:"dark"}}> setNotifForm(f => ({ ...f, type: e.target.value }))}>
                     <option value="SYSTEM">Système</option>
                     <option value="PROMO">Promotion</option>
                     <option value="ALERT">Alerte</option>
