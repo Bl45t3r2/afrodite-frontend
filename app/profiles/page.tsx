@@ -132,7 +132,7 @@ export default function ProfilesPage() {
             className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
               filters.gender === value
                 ? 'bg-brand-400 text-white border-brand-400'
-                : 'bg-white text-white/60 border-white/10 hover:border-brand-300 hover:text-brand-500'
+                : 'bg-white/5 text-white/60 border-white/10 hover:border-brand-300 hover:text-brand-500'
             }`}
           >
             {label}
@@ -243,7 +243,7 @@ export default function ProfilesPage() {
                 <button
                   onClick={locateMe}
                   disabled={geoLoading}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border transition-all ${filters.userLat ? 'bg-brand-50 border-brand-300 text-brand-600' : 'bg-white border-white/10 text-white/60 hover:border-brand-300'}`}>
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border transition-all ${filters.userLat ? 'bg-brand-500/20 border-brand-400 text-brand-300' : 'bg-white/5 border-white/10 text-white/60 hover:border-brand-300'}`}>
                   {geoLoading ? (
                     <span className="w-4 h-4 border-2 border-brand-400 border-t-transparent rounded-full animate-spin" />
                   ) : (

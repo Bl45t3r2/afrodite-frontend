@@ -23,7 +23,7 @@ function MessageTime({ date }: { date: string }) {
 function TypingIndicator() {
   return (
     <div className="flex justify-start mb-1">
-      <div className="bg-white border border-white/5 shadow-sm rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
+      <div className="bg-white/5 border border-white/5 shadow-sm rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 1, 2].map(i => (
           <span key={i} className="w-2 h-2 bg-gray-300 rounded-full animate-bounce"
             style={{ animationDelay: `${i * 0.18}s`, animationDuration: '0.7s' }} />
@@ -241,7 +241,7 @@ export default function MessagesPage() {
         </div>
       </div>
 
-      <div className="flex overflow-hidden rounded-2xl border border-white/10 bg-white" style={{ height: 'calc(100dvh - 180px)', minHeight: '400px' }}>
+      <div className="flex overflow-hidden rounded-2xl border border-white/10 bg-[#111]" style={{ height: 'calc(100dvh - 180px)', minHeight: '400px' }}>
 
         {/* ── Sidebar conversations ── */}
         <div className={`${showSidebar ? 'flex' : 'hidden md:flex'} w-full md:w-72 border-r border-white/5 flex-col shrink-0`}>
@@ -302,7 +302,7 @@ export default function MessagesPage() {
           {activeConv ? (
             <>
               {/* Header */}
-              <div className="px-4 py-3 border-b border-white/5 flex items-center gap-3 bg-white">
+              <div className="px-4 py-3 border-b border-white/5 flex items-center gap-3 bg-[#111]">
                 <button className="md:hidden text-white/40 hover:text-white/60 mr-1" onClick={() => setShowSidebar(true)}>
                   <X size={20} />
                 </button>
@@ -350,7 +350,7 @@ export default function MessagesPage() {
                     return (
                       <div key={item.id} className="flex items-center gap-3 my-3">
                         <div className="flex-1 h-px bg-white/20/70" />
-                        <span className="text-xs text-white/40 bg-white px-3 py-1 rounded-full border border-white/5 font-medium">{label}</span>
+                        <span className="text-xs text-white/40 bg-white/10 px-3 py-1 rounded-full border border-white/5 font-medium">{label}</span>
                         <div className="flex-1 h-px bg-white/20/70" />
                       </div>
                     );
@@ -365,7 +365,7 @@ export default function MessagesPage() {
                       <div className={`max-w-xs lg:max-w-md ${isTemp ? 'opacity-70' : ''}`}>
                         <div className={`px-4 py-2.5 rounded-2xl text-sm shadow-sm ${isMe
                           ? 'bg-brand-400 text-white rounded-br-none'
-                          : 'bg-white text-white/80 rounded-bl-none border border-white/5'}`}>
+                          : 'bg-white/10 text-white/80 rounded-bl-none border border-white/5'}`}>
                           <p className="leading-relaxed break-words">{item.content}</p>
                         </div>
                         <div className={`flex items-center gap-1 mt-0.5 px-1 ${isMe ? 'justify-end' : 'justify-start'}`}>
@@ -414,7 +414,7 @@ export default function MessagesPage() {
               )}
 
               {/* Input */}
-              <div className="px-4 py-3 border-t border-white/5 bg-white flex gap-2 items-center">
+              <div className="px-4 py-3 border-t border-white/5 bg-[#111] flex gap-2 items-center">
                 <input ref={inputRef} className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-brand-400 transition-all"
                   placeholder={quota?.remaining === 0 ? 'Limite atteinte pour aujourd\'hui…' : 'Écrire un message…'}
                   value={input}
@@ -431,7 +431,7 @@ export default function MessagesPage() {
             </>
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center text-white/40 bg-[#f8f6f9]">
-              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
+              <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-4 shadow-sm">
                 <MessageCircle size={36} className="text-brand-300" />
               </div>
               <p className="font-semibold text-white/60 mb-1">Vos messages</p>

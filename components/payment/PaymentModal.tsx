@@ -58,7 +58,7 @@ export default function PaymentModal({ isOpen, onClose, plan, purpose, price, la
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+      <div className="bg-[#1a1a1a] rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
 
         {/* Header */}
         <div className="bg-gradient-to-br from-brand-500 to-purple-600 p-6 text-white">

@@ -249,7 +249,7 @@ export default function AdminPage() {
         {TABS.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
             className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
-              tab === t.id ? 'bg-white text-white shadow-sm' : 'text-white/50 hover:text-white/70'
+              tab === t.id ? 'bg-brand-500 text-white shadow-sm' : 'text-white/50 hover:text-white/70'
             }`}>
             {t.label}
             {t.badge ? (
@@ -851,7 +851,7 @@ export default function AdminPage() {
                             setUsers(prev => prev.map(x => x.id === u.id ? { ...x, role: e.target.value } : x));
                             toast.success('Rôle mis à jour');
                           }}
-                          className="text-xs border border-white/10 rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-brand-400/30">
+                          className="text-xs border border-white/10 rounded-lg px-2 py-1.5 bg-white/10 focus:outline-none text-white focus:ring-2 focus:ring-brand-400/30">
                           <option value="USER">USER</option>
                           <option value="PREMIUM">PREMIUM</option>
                           <option value="ADMIN">ADMIN</option>
@@ -880,7 +880,7 @@ export default function AdminPage() {
       {/* Partners */}
       {tab === 'partners' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl border border-white/5 p-6">
+          <div className="bg-white/5 rounded-2xl border border-white/10 p-6">
             <h2 className="font-semibold text-white mb-4">🤝 Créer un code partenaire</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
               <div>
@@ -920,7 +920,7 @@ export default function AdminPage() {
               {partnerLoading ? 'Création...' : '+ Créer le code'}
             </button>
           </div>
-          <div className="bg-white rounded-2xl border border-white/5 overflow-hidden">
+          <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-50">
               <h2 className="font-semibold text-white">Codes partenaires</h2>
               <button onClick={async () => { const r = await api.get('/referral/partners'); setPartners(r.data); }}
@@ -975,7 +975,7 @@ export default function AdminPage() {
       {/* Notifications broadcast */}
       {tab === 'notifications' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl border border-white/5 p-6">
+          <div className="bg-white/5 rounded-2xl border border-white/10 p-6">
             <h2 className="font-semibold text-white mb-1">🔔 Envoyer une notification</h2>
             <p className="text-sm text-white/40 mb-6">Envoyez une notification à tous les utilisateurs ou à un utilisateur spécifique.</p>
             <div className="space-y-4">
@@ -988,7 +988,7 @@ export default function AdminPage() {
                 </div>
                 <div>
                   <label className="text-xs text-white/50 mb-1 block">Type</label>
-                  <select className="w-full border border-white/10 rounded-xl px-3 py-2 text-sm text-white bg-white focus:outline-none"
+                  <select className="w-full border border-white/10 rounded-xl px-3 py-2 text-sm text-white bg-white/10 focus:outline-none"
                     value={notifForm.type} onChange={e => setNotifForm(f => ({ ...f, type: e.target.value }))}>
                     <option value="SYSTEM">Système</option>
                     <option value="PROMO">Promotion</option>
@@ -998,14 +998,14 @@ export default function AdminPage() {
               </div>
               <div>
                 <label className="text-xs text-white/50 mb-1 block">Message *</label>
-                <textarea className="w-full border border-white/10 rounded-xl px-3 py-2 text-sm text-white bg-white focus:outline-none focus:ring-2 focus:ring-brand-400/30 resize-none"
+                <textarea className="w-full border border-white/10 rounded-xl px-3 py-2 text-sm text-white bg-white/10 focus:outline-none focus:ring-2 focus:ring-brand-400/30 resize-none"
                   rows={3} placeholder="Contenu de la notification..." value={notifForm.message}
                   onChange={e => setNotifForm(f => ({ ...f, message: e.target.value }))} />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs text-white/50 mb-1 block">Lien (optionnel)</label>
-                  <input className="w-full border border-white/10 rounded-xl px-3 py-2 text-sm text-white bg-white focus:outline-none"
+                  <input className="w-full border border-white/10 rounded-xl px-3 py-2 text-sm text-white bg-white/10 focus:outline-none"
                     placeholder="Ex: /profiles ou /tarifs" value={notifForm.link}
                     onChange={e => setNotifForm(f => ({ ...f, link: e.target.value }))} />
                 </div>

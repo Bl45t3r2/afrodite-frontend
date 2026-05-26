@@ -97,7 +97,7 @@ export default function NotificationBell() {
 
       {/* Panneau */}
       {open && (
-        <div className="absolute right-0 top-10 w-80 bg-white border border-white/5 rounded-2xl shadow-xl z-50 overflow-hidden">
+        <div className="absolute right-0 top-10 w-80 bg-[#1a1a1a] border border-white/10 rounded-2xl shadow-xl z-50 overflow-hidden">
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
             <h3 className="font-semibold text-white text-sm">Notifications</h3>

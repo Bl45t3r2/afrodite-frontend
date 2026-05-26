@@ -25,7 +25,7 @@ export default function CookieBanner() {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-50 animate-in slide-in-from-bottom-4 duration-300">
-      <div className="bg-white border border-white/10 rounded-2xl shadow-xl p-5">
+      <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl shadow-xl p-5">
         <div className="flex items-start gap-3 mb-4">
           <div className="w-9 h-9 bg-brand-50 rounded-xl flex items-center justify-center shrink-0 mt-0.5">
             <Cookie size={18} className="text-brand-400" />
