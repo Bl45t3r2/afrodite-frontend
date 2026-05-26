@@ -185,7 +185,7 @@ export default function HomePage() {
                 className="w-full bg-white/10 border border-white/15 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-brand-500/60 transition-all" />
             </div>
             <select value={city} onChange={e => setCity(e.target.value)}
-              className="bg-white/6 border border-white/12 rounded-xl px-4 py-3.5 text-sm text-white/60 focus:outline-none focus:border-brand-500/60 transition-all hidden sm:block">
+              className="bg-white/10 border border-white/15 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-brand-500/60 transition-all hidden sm:block" style={{colorScheme:"dark"}}>
               <option value="">Toutes les villes</option>
               {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
