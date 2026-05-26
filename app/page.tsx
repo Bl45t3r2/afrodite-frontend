@@ -184,11 +184,14 @@ export default function HomePage() {
                 placeholder="Rechercher un profil, une ville…"
                 className="w-full bg-white/10 border border-white/15 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-brand-500/60 transition-all" />
             </div>
-            <select value={city} onChange={e => setCity(e.target.value)}
-              className="bg-white/10 border border-white/15 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-brand-500/60 transition-all hidden sm:block" style={{colorScheme:"dark"}}>
-              <option value="">Toutes les villes</option>
-              {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
+            <div className="relative hidden sm:block">
+              <select value={city} onChange={e => setCity(e.target.value)}
+                className="appearance-none bg-white/10 border border-white/15 rounded-xl px-4 py-3.5 pr-8 text-sm text-white focus:outline-none focus:border-brand-500/60 transition-all"
+                style={{colorScheme:"dark", backgroundColor:"#1a1a1a"}}>
+                <option value="" style={{background:"#1a1a1a", color:"white"}}>Toutes les villes</option>
+                {CITIES.map(c => <option key={c} value={c} style={{background:"#1a1a1a", color:"white"}}>{c}</option>)}
+              </select>
+            </div>
             <button type="submit" className="bg-brand-500 hover:bg-brand-400 text-white text-sm font-semibold px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-brand-500/30 shrink-0">
               Rechercher
             </button>
