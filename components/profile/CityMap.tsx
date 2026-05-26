@@ -110,7 +110,7 @@ export default function CityMap({ profiles, selectedCity, onCityClick }: Props) 
   }, [profiles, selectedCity]);
 
   return (
-    <div className="relative rounded-2xl overflow-hidden border border-gray-100 shadow-sm" style={{ height: '320px' }}>
+    <div className="relative rounded-2xl overflow-hidden border border-white/5 shadow-sm" style={{ height: '320px' }}>
       <div ref={mapRef} style={{ height: '100%', width: '100%' }} />
       {selectedCity && (
         <div className="absolute top-3 left-3 z-[1000] bg-white/90 backdrop-blur text-xs font-semibold text-brand-600 px-3 py-1.5 rounded-full border border-brand-200 shadow-sm">

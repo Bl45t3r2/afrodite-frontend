@@ -151,7 +151,7 @@ export default function ProfileCard({ profile, variant = 'default' }: Props) {
             </span>
           )}
           {profile.isVerified && (
-            <span className="flex items-center gap-1 bg-emerald-500 text-white text-[9px] font-bold px-2 py-1 rounded-full shadow-md">
+            <span className="flex items-center gap-1 bg-emerald-900/200 text-white text-[9px] font-bold px-2 py-1 rounded-full shadow-md">
               <Shield size={8} /> Vérifié
             </span>
           )}

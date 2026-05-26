@@ -212,7 +212,7 @@ export default function DashboardPage() {
           <PushNotifToggle />
         </div>
         <div className="flex gap-2">
-          <button onClick={toggleOnline} className={"flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border-2 font-medium text-sm transition-all " + (isOnline ? "bg-green-50 border-green-200 text-green-700" : "bg-gray-50 border-gray-200 text-white/50")}>
+          <button onClick={toggleOnline} className={"flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border-2 font-medium text-sm transition-all " + (isOnline ? "bg-green-50 border-green-200 text-green-700" : "bg-white/5 border-white/10 text-white/50")}>
             <span className={"w-2.5 h-2.5 rounded-full " + (isOnline ? "bg-green-400 animate-pulse" : "bg-gray-300")} />
             {isOnline ? "Disponible" : "Indisponible"}
           </button>
@@ -259,10 +259,10 @@ export default function DashboardPage() {
       })()}
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-gray-100 rounded-2xl p-1.5 mb-8 overflow-x-auto">
+      <div className="flex gap-1 bg-white/10 rounded-2xl p-1.5 mb-8 overflow-x-auto">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button key={id} onClick={() => setTab(id as any)}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === id ? 'bg-brand-500 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}>
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === id ? 'bg-brand-500 text-white shadow-sm' : 'text-white/60 hover:text-white'}`}>
             <Icon size={15} />
             <span className="hidden sm:inline">{label}</span>
           </button>
@@ -345,7 +345,7 @@ export default function DashboardPage() {
           {/* Tags */}
           <div>
             <label className="block text-xs font-medium text-white/50 mb-2">
-              Tags <span className="text-gray-300 font-normal">({form.tags?.length || 0}/10) — aident les visiteurs à vous trouver</span>
+              Tags <span className="text-white/30 font-normal">({form.tags?.length || 0}/10) — aident les visiteurs à vous trouver</span>
             </label>
 
             {/* Tags actuels */}
@@ -397,7 +397,7 @@ export default function DashboardPage() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {photos.map(photo => (
-              <div key={photo.id} className="relative group aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100">
+              <div key={photo.id} className="relative group aspect-[3/4] rounded-2xl overflow-hidden bg-white/10">
                 <Image src={photo.url} alt="" fill className="object-cover" />
                 {photo.isMain && (
                   <span className="absolute top-2 left-2 bg-brand-400 text-white text-xs font-bold px-2 py-0.5 rounded-full">Principale</span>
@@ -408,7 +408,7 @@ export default function DashboardPage() {
                       Définir principale
                     </button>
                   )}
-                  <button onClick={() => deletePhoto(photo.id)} className="bg-red-500 text-white p-1.5 rounded-lg hover:bg-red-600">
+                  <button onClick={() => deletePhoto(photo.id)} className="bg-red-900/200 text-white p-1.5 rounded-lg hover:bg-red-600">
                     <Trash2 size={14} />
                   </button>
                 </div>
@@ -416,10 +416,10 @@ export default function DashboardPage() {
             ))}
 
             {/* Upload zone */}
-            <label className={`aspect-[3/4] rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-2 cursor-pointer transition-all overflow-hidden relative ${uploading ? 'border-brand-300 bg-brand-50/20' : 'border-gray-200 hover:border-brand-300 bg-gray-50 hover:bg-brand-50/30'}`}>
+            <label className={`aspect-[3/4] rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-2 cursor-pointer transition-all overflow-hidden relative ${uploading ? 'border-brand-300 bg-brand-50/20' : 'border-white/10 hover:border-brand-300 bg-white/5 hover:bg-brand-50/30'}`}>
               {/* Barre de progression */}
               {uploading && (
-                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gray-100">
+                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/10">
                   <div className="h-full bg-gradient-to-r from-brand-400 to-brand-600 transition-all duration-300 rounded-full"
                     style={{ width: `${photoProgress}%` }} />
                 </div>
@@ -497,7 +497,7 @@ export default function DashboardPage() {
                     )}
                     <button
                       onClick={() => deleteVideo(video.id)}
-                      className="bg-red-500 text-white px-4 py-1.5 rounded-xl text-xs font-medium hover:bg-red-600 flex items-center gap-1.5"
+                      className="bg-red-900/200 text-white px-4 py-1.5 rounded-xl text-xs font-medium hover:bg-red-600 flex items-center gap-1.5"
                     >
                       <Trash2 size={12} /> Supprimer
                     </button>
@@ -511,7 +511,7 @@ export default function DashboardPage() {
                   {uploadingVideo ? (
                     <>
                       <div className="w-full px-8">
-                        <div className="bg-gray-200 rounded-full h-2 overflow-hidden">
+                        <div className="bg-white/20 rounded-full h-2 overflow-hidden">
                           <div
                             className="h-full bg-brand-400 rounded-full transition-all duration-300"
                             style={{ width: `${videoProgress}%` }}
@@ -563,10 +563,10 @@ export default function DashboardPage() {
           {/* KPIs */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { icon: Eye, label: 'Vues totales', value: stats?.totalViews ?? '—', color: 'text-blue-500 bg-blue-50' },
+              { icon: Eye, label: 'Vues totales', value: stats?.totalViews ?? '—', color: 'text-blue-500 bg-blue-900/20' },
               { icon: Heart, label: 'Favoris', value: stats?.favoritesCount ?? '—', color: 'text-pink-500 bg-pink-50' },
-              { icon: MessageCircle, label: 'Messages reçus', value: stats?.messagesCount ?? '—', color: 'text-purple-500 bg-purple-50' },
-              { icon: Star, label: 'Note moyenne', value: stats?.averageRating ? `${stats.averageRating.toFixed(1)}/5` : '—', color: 'text-amber-500 bg-amber-50' },
+              { icon: MessageCircle, label: 'Messages reçus', value: stats?.messagesCount ?? '—', color: 'text-purple-500 bg-purple-900/20' },
+              { icon: Star, label: 'Note moyenne', value: stats?.averageRating ? `${stats.averageRating.toFixed(1)}/5` : '—', color: 'text-amber-500 bg-amber-900/20' },
             ].map(({ icon: Icon, label, value, color, sub }) => (
               <div key={label} className="card p-6">
                 <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center mb-3`}>
@@ -604,7 +604,7 @@ export default function DashboardPage() {
                 })}
               </div>
             ) : (
-              <div className="h-32 flex items-center justify-center text-gray-300 text-sm">Chargement...</div>
+              <div className="h-32 flex items-center justify-center text-white/30 text-sm">Chargement...</div>
             )}
           </div>
 
@@ -643,7 +643,7 @@ export default function DashboardPage() {
               { plan: 'premium', label: 'Premium', price: '9 990 FCFA', period: '/mois', features: ['Messages illimités', 'Profil en avant', 'Badge vérifié', 'Stats détaillées'] },
               { plan: 'vip', label: 'VIP', price: '24 990 FCFA', period: '/mois', features: ['Priorité maximale', 'Badge VIP doré', 'Support dédié', 'Boost mensuel offert'] },
             ].map(p => (
-              <div key={p.plan} className="border-2 border-gray-100 rounded-2xl p-6 hover:border-brand-300 transition-all hover:shadow-md text-left">
+              <div key={p.plan} className="border-2 border-white/5 rounded-2xl p-6 hover:border-brand-300 transition-all hover:shadow-md text-left">
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="font-bold text-white text-lg">{p.label}</h4>
                   <span className="font-display text-xl font-bold text-brand-400">{p.price}<span className="text-sm font-normal text-white/40">{p.period}</span></span>
@@ -678,9 +678,9 @@ export default function DashboardPage() {
                     <div className="flex items-center gap-3">
                       <span className="font-semibold" style={{color:"var(--text-primary)"}} className2=" text-sm">{(p.amount || 0).toLocaleString()} FCFA</span>
                       <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
-                        p.status === 'COMPLETED' ? 'bg-emerald-50 text-emerald-600' :
-                        p.status === 'PENDING' ? 'bg-amber-50 text-amber-600' :
-                        'bg-red-50 text-red-500'
+                        p.status === 'COMPLETED' ? 'bg-emerald-900/20 text-emerald-600' :
+                        p.status === 'PENDING' ? 'bg-amber-900/20 text-amber-600' :
+                        'bg-red-900/20 text-red-500'
                       }`}>
                         {p.status === 'COMPLETED' ? '✓ Payé' : p.status === 'PENDING' ? 'En attente' : 'Échoué'}
                       </span>

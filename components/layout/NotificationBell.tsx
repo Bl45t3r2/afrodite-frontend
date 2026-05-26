@@ -7,10 +7,10 @@ import { getSocket } from '@/lib/useSocketNotifications';
 import useAuthStore from '@/lib/store';
 
 const TYPE_ICON: Record<string, any> = {
-  MESSAGE:  { icon: MessageCircle, color: 'text-blue-500 bg-blue-50' },
-  REVIEW:   { icon: Star,          color: 'text-amber-500 bg-amber-50' },
+  MESSAGE:  { icon: MessageCircle, color: 'text-blue-500 bg-blue-900/20' },
+  REVIEW:   { icon: Star,          color: 'text-amber-500 bg-amber-900/20' },
   FAVORITE: { icon: Heart,         color: 'text-pink-500 bg-pink-50' },
-  SYSTEM:   { icon: Info,          color: 'text-gray-500 bg-gray-100' },
+  SYSTEM:   { icon: Info,          color: 'text-white/50 bg-white/10' },
 };
 
 function timeAgo(date: string) {
@@ -85,7 +85,7 @@ export default function NotificationBell() {
       {/* Cloche */}
       <button
         onClick={() => setOpen(v => !v)}
-        className="relative p-2 text-gray-500 hover:text-gray-800 transition-colors"
+        className="relative p-2 text-white/50 hover:text-white/80 transition-colors"
       >
         <Bell size={20} />
         {unread > 0 && (
@@ -97,17 +97,17 @@ export default function NotificationBell() {
 
       {/* Panneau */}
       {open && (
-        <div className="absolute right-0 top-10 w-80 bg-white border border-gray-100 rounded-2xl shadow-xl z-50 overflow-hidden">
+        <div className="absolute right-0 top-10 w-80 bg-white border border-white/5 rounded-2xl shadow-xl z-50 overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-            <h3 className="font-semibold text-gray-900 text-sm">Notifications</h3>
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
+            <h3 className="font-semibold text-white text-sm">Notifications</h3>
             <div className="flex items-center gap-2">
               {unread > 0 && (
                 <button onClick={markAllRead} className="text-xs text-brand-400 hover:text-brand-600 font-medium flex items-center gap-1">
                   <Check size={12} /> Tout lire
                 </button>
               )}
-              <button onClick={() => setOpen(false)} className="text-gray-300 hover:text-gray-500">
+              <button onClick={() => setOpen(false)} className="text-white/30 hover:text-white/50">
                 <X size={15} />
               </button>
             </div>
@@ -118,7 +118,7 @@ export default function NotificationBell() {
             {notifs.length === 0 ? (
               <div className="text-center py-10">
                 <Bell size={28} className="text-gray-200 mx-auto mb-2" />
-                <p className="text-sm text-gray-400">Aucune notification</p>
+                <p className="text-sm text-white/40">Aucune notification</p>
               </div>
             ) : notifs.map(notif => {
               const cfg = TYPE_ICON[notif.type] || TYPE_ICON.SYSTEM;
@@ -127,17 +127,17 @@ export default function NotificationBell() {
                 <button
                   key={notif.id}
                   onClick={() => handleClick(notif)}
-                  className={`w-full text-left flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors ${!notif.read ? 'bg-brand-50/30' : ''}`}
+                  className={`w-full text-left flex items-start gap-3 px-4 py-3 hover:bg-white/5 transition-colors ${!notif.read ? 'bg-brand-50/30' : ''}`}
                 >
                   <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 ${cfg.color}`}>
                     <Icon size={16} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-sm ${!notif.read ? 'font-semibold text-gray-900' : 'font-medium text-gray-700'}`}>
+                    <p className={`text-sm ${!notif.read ? 'font-semibold text-white' : 'font-medium text-white/70'}`}>
                       {notif.title}
                     </p>
-                    <p className="text-xs text-gray-500 mt-0.5 truncate">{notif.body}</p>
-                    <p className="text-xs text-gray-300 mt-1">{timeAgo(notif.createdAt)}</p>
+                    <p className="text-xs text-white/50 mt-0.5 truncate">{notif.body}</p>
+                    <p className="text-xs text-white/30 mt-1">{timeAgo(notif.createdAt)}</p>
                   </div>
                   {!notif.read && (
                     <span className="w-2 h-2 bg-brand-400 rounded-full shrink-0 mt-2" />

@@ -44,7 +44,7 @@ function ProfileCard({ profile, size = 'md' }: { profile: any; size?: 'sm' | 'md
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent" />
         <div className="absolute top-2.5 left-2.5 flex flex-col gap-1">
           {isBoosted && <span className="flex items-center gap-1 bg-brand-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow-md uppercase tracking-wide"><Flame size={7} /> VIP</span>}
-          {isVerified && <span className="flex items-center gap-1 bg-emerald-500/90 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md"><Shield size={7} /> Vérifié</span>}
+          {isVerified && <span className="flex items-center gap-1 bg-emerald-900/200/90 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md"><Shield size={7} /> Vérifié</span>}
         </div>
         {isOnline && (
           <div className="absolute top-2.5 right-2.5">
@@ -151,7 +151,7 @@ export default function HomePage() {
         {/* Glow effects */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-brand-500/6 blur-[140px] rounded-full" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[300px] bg-purple-500/4 blur-[100px] rounded-full" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[300px] bg-purple-900/200/4 blur-[100px] rounded-full" />
           <div className="absolute top-1/2 left-0 w-[200px] h-[400px] bg-brand-400/3 blur-[80px] rounded-full" />
         </div>
 

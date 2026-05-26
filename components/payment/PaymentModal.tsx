@@ -80,30 +80,30 @@ export default function PaymentModal({ isOpen, onClose, plan, purpose, price, la
 
           {/* Choix de la méthode */}
           <div>
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Mode de paiement</p>
+            <p className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-3">Mode de paiement</p>
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => setMethod('mobile')}
                 className={`flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all ${
-                  method === 'mobile' ? 'border-brand-400 bg-brand-50' : 'border-gray-100 hover:border-gray-200'
+                  method === 'mobile' ? 'border-brand-400 bg-brand-50' : 'border-white/5 hover:border-white/10'
                 }`}>
-                <Phone size={22} className={method === 'mobile' ? 'text-brand-500' : 'text-gray-400'} />
-                <span className={`text-sm font-medium ${method === 'mobile' ? 'text-brand-600' : 'text-gray-500'}`}>
+                <Phone size={22} className={method === 'mobile' ? 'text-brand-500' : 'text-white/40'} />
+                <span className={`text-sm font-medium ${method === 'mobile' ? 'text-brand-600' : 'text-white/50'}`}>
                   Mobile Money
                 </span>
-                <span className="text-[10px] text-gray-400">MTN · Wave · Orange</span>
+                <span className="text-[10px] text-white/40">MTN · Wave · Orange</span>
               </button>
 
               <button
                 onClick={() => setMethod('card')}
                 className={`flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all ${
-                  method === 'card' ? 'border-brand-400 bg-brand-50' : 'border-gray-100 hover:border-gray-200'
+                  method === 'card' ? 'border-brand-400 bg-brand-50' : 'border-white/5 hover:border-white/10'
                 }`}>
-                <CreditCard size={22} className={method === 'card' ? 'text-brand-500' : 'text-gray-400'} />
-                <span className={`text-sm font-medium ${method === 'card' ? 'text-brand-600' : 'text-gray-500'}`}>
+                <CreditCard size={22} className={method === 'card' ? 'text-brand-500' : 'text-white/40'} />
+                <span className={`text-sm font-medium ${method === 'card' ? 'text-brand-600' : 'text-white/50'}`}>
                   Carte bancaire
                 </span>
-                <span className="text-[10px] text-gray-400">Visa · Mastercard</span>
+                <span className="text-[10px] text-white/40">Visa · Mastercard</span>
               </button>
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function PaymentModal({ isOpen, onClose, plan, purpose, price, la
           {method === 'mobile' && (
             <div className="space-y-3">
               <div>
-                <label className="text-xs font-medium text-gray-500 mb-1.5 block">Opérateur</label>
+                <label className="text-xs font-medium text-white/50 mb-1.5 block">Opérateur</label>
                 <div className="relative">
                   <select
                     value={operator}
@@ -123,14 +123,14 @@ export default function PaymentModal({ isOpen, onClose, plan, purpose, price, la
                       <option key={op.value} value={op.value}>{op.label}</option>
                     ))}
                   </select>
-                  <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                  <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-medium text-gray-500 mb-1.5 block">Numéro de téléphone</label>
+                <label className="text-xs font-medium text-white/50 mb-1.5 block">Numéro de téléphone</label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm">📱</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-sm">📱</span>
                   <input
                     type="tel"
                     value={phone}
@@ -139,15 +139,15 @@ export default function PaymentModal({ isOpen, onClose, plan, purpose, price, la
                     className="input pl-10"
                   />
                 </div>
-                <p className="text-xs text-gray-400 mt-1">Vous recevrez une demande de confirmation sur ce numéro</p>
+                <p className="text-xs text-white/40 mt-1">Vous recevrez une demande de confirmation sur ce numéro</p>
               </div>
             </div>
           )}
 
           {/* Info carte bancaire */}
           {method === 'card' && (
-            <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
-              <p className="text-sm text-blue-700 font-medium mb-1">💳 Paiement via Stripe</p>
+            <div className="bg-blue-900/20 border border-blue-500/20 rounded-xl p-4">
+              <p className="text-sm text-blue-400 font-medium mb-1">💳 Paiement via Stripe</p>
               <p className="text-xs text-blue-600">
                 Vous serez redirigé vers la page de paiement sécurisée Stripe. Vos données bancaires ne transitent jamais par nos serveurs.
               </p>
@@ -167,7 +167,7 @@ export default function PaymentModal({ isOpen, onClose, plan, purpose, price, la
           </button>
 
           {/* Sécurité */}
-          <div className="flex items-center justify-center gap-4 text-xs text-gray-400">
+          <div className="flex items-center justify-center gap-4 text-xs text-white/40">
             <span>🔒 Paiement chiffré SSL</span>
             <span>·</span>
             <span>Sans engagement</span>

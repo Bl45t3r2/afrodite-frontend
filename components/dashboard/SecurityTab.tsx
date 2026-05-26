@@ -151,7 +151,7 @@ export default function SecurityTab() {
           <div>
             <div className="flex gap-1 mb-1">
               {[1,2,3,4].map(i => (
-                <div key={i} className={`flex-1 h-1.5 rounded-full transition-colors ${i <= s ? strengthColor[s] : 'bg-gray-100'}`} />
+                <div key={i} className={`flex-1 h-1.5 rounded-full transition-colors ${i <= s ? strengthColor[s] : 'bg-white/10'}`} />
               ))}
             </div>
             <p className={`text-xs font-medium ${s <= 1 ? 'text-red-500' : s === 2 ? 'text-amber-500' : s === 3 ? 'text-blue-500' : 'text-emerald-500'}`}>
@@ -207,7 +207,7 @@ export default function SecurityTab() {
               Cette action est irréversible. Toutes vos données seront définitivement supprimées : profil, photos, messages, avis.
             </p>
             <button onClick={() => setDeleteConfirm(true)}
-              className="text-sm text-red-400 border border-red-200 hover:bg-red-100 px-4 py-2 rounded-xl transition-colors font-medium">
+              className="text-sm text-red-400 border border-red-500/30 hover:bg-red-100 px-4 py-2 rounded-xl transition-colors font-medium">
               Supprimer mon compte
             </button>
           </div>

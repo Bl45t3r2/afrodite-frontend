@@ -94,7 +94,7 @@ export default function AvailabilityTab() {
     return (
       <div className="card p-8 space-y-4 animate-pulse">
         {[...Array(7)].map((_, i) => (
-          <div key={i} className="h-16 bg-gray-100 rounded-xl" />
+          <div key={i} className="h-16 bg-white/10 rounded-xl" />
         ))}
       </div>
     );
@@ -119,7 +119,7 @@ export default function AvailabilityTab() {
             <button onClick={() => toggleAll(true)} className="text-xs text-white/50 hover:text-brand-500 border border-white/10 hover:border-brand-300 px-3 py-1.5 rounded-lg transition-all">
               Tout activer
             </button>
-            <button onClick={() => toggleAll(false)} className="text-xs text-white/50 hover:text-red-500 border border-white/10 hover:border-red-200 px-3 py-1.5 rounded-lg transition-all">
+            <button onClick={() => toggleAll(false)} className="text-xs text-white/50 hover:text-red-500 border border-white/10 hover:border-red-500/30 px-3 py-1.5 rounded-lg transition-all">
               Tout désactiver
             </button>
           </div>
@@ -131,7 +131,7 @@ export default function AvailabilityTab() {
             const slot = slots.find(s => s.dayOfWeek === d.id);
             return (
               <div key={d.id} className="flex-1 text-center">
-                <div className={`h-1.5 rounded-full mb-1 transition-colors ${slot?.isActive ? 'bg-brand-400' : 'bg-gray-200'}`} />
+                <div className={`h-1.5 rounded-full mb-1 transition-colors ${slot?.isActive ? 'bg-brand-400' : 'bg-white/20'}`} />
                 <span className="text-[10px] text-white/40">{d.short}</span>
               </div>
             );
@@ -146,7 +146,7 @@ export default function AvailabilityTab() {
           const isWeekend = day.id === 0 || day.id === 6;
 
           return (
-            <div key={day.id} className={`p-4 flex items-center gap-4 transition-colors ${slot.isActive ? 'bg-white/5' : 'bg-gray-50'}`}>
+            <div key={day.id} className={`p-4 flex items-center gap-4 transition-colors ${slot.isActive ? 'bg-white/5' : 'bg-white/5'}`}>
               {/* Toggle + Jour */}
               <div className="w-28 shrink-0">
                 <button
@@ -155,7 +155,7 @@ export default function AvailabilityTab() {
                 >
                   {slot.isActive
                     ? <ToggleRight size={22} className="text-brand-400 transition-transform group-hover:scale-110" />
-                    : <ToggleLeft size={22} className="text-gray-300 transition-transform group-hover:scale-110" />
+                    : <ToggleLeft size={22} className="text-white/30 transition-transform group-hover:scale-110" />
                   }
                   <span className={`text-sm font-medium transition-colors ${slot.isActive ? 'text-white' : 'text-white/40'} ${isWeekend ? 'text-brand-500' : ''}`}>
                     {day.label}
@@ -195,7 +195,7 @@ export default function AvailabilityTab() {
                   </button>
                 </div>
               ) : (
-                <span className="text-sm text-gray-300 italic flex-1">Indisponible</span>
+                <span className="text-sm text-white/30 italic flex-1">Indisponible</span>
               )}
             </div>
           );

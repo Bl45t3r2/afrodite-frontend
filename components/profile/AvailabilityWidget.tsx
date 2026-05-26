@@ -49,8 +49,8 @@ export default function AvailabilityWidget({ profileId }: { profileId: string })
 
   if (loading) return (
     <div className="animate-pulse space-y-2">
-      <div className="h-10 bg-gray-100 rounded-xl" />
-      <div className="h-20 bg-gray-100 rounded-xl" />
+      <div className="h-10 bg-white/10 rounded-xl" />
+      <div className="h-20 bg-white/10 rounded-xl" />
     </div>
   );
 
@@ -65,8 +65,8 @@ export default function AvailabilityWidget({ profileId }: { profileId: string })
       {/* Badge dispo en temps réel */}
       <div className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border text-sm font-medium ${
         available
-          ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
-          : 'bg-gray-50 border-gray-200 text-gray-500'
+          ? 'bg-emerald-900/20 border-emerald-200 text-emerald-400'
+          : 'bg-white/5 border-white/10 text-white/50'
       }`}>
         <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${available ? 'bg-emerald-400 animate-pulse' : 'bg-gray-300'}`} />
         <Clock size={14} className="shrink-0" />
@@ -74,10 +74,10 @@ export default function AvailabilityWidget({ profileId }: { profileId: string })
       </div>
 
       {/* Grille hebdomadaire */}
-      <div className="bg-gray-50 rounded-2xl p-4">
+      <div className="bg-white/5 rounded-2xl p-4">
         <div className="flex items-center gap-1.5 mb-3">
           <CalendarCheck size={14} className="text-brand-400" />
-          <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Agenda de la semaine</span>
+          <span className="text-xs font-semibold text-white/60 uppercase tracking-wide">Agenda de la semaine</span>
         </div>
 
         <div className="space-y-1.5">
@@ -89,14 +89,14 @@ export default function AvailabilityWidget({ profileId }: { profileId: string })
             return (
               <div key={day.id} className={`flex items-center gap-3 py-1.5 px-2 rounded-lg transition-colors ${isToday ? 'bg-brand-50 border border-brand-100' : ''}`}>
                 {/* Jour */}
-                <span className={`text-xs font-semibold w-8 shrink-0 ${isToday ? 'text-brand-500' : 'text-gray-400'}`}>
+                <span className={`text-xs font-semibold w-8 shrink-0 ${isToday ? 'text-brand-500' : 'text-white/40'}`}>
                   {day.short}{isToday && <span className="ml-0.5">•</span>}
                 </span>
 
                 {/* Barre ou indisponible */}
                 {isActive ? (
                   <div className="flex-1 flex items-center gap-2">
-                    <div className="flex-1 bg-gray-200 rounded-full h-1.5 relative overflow-hidden">
+                    <div className="flex-1 bg-white/20 rounded-full h-1.5 relative overflow-hidden">
                       {(() => {
                         const startPct = (parseInt(slot.startTime.split(':')[0]) * 60 + parseInt(slot.startTime.split(':')[1])) / (24 * 60) * 100;
                         const endPct = (parseInt(slot.endTime.split(':')[0]) * 60 + parseInt(slot.endTime.split(':')[1])) / (24 * 60) * 100;
@@ -108,12 +108,12 @@ export default function AvailabilityWidget({ profileId }: { profileId: string })
                         );
                       })()}
                     </div>
-                    <span className={`text-xs font-mono shrink-0 ${isToday ? 'text-brand-600 font-semibold' : 'text-gray-500'}`}>
+                    <span className={`text-xs font-mono shrink-0 ${isToday ? 'text-brand-600 font-semibold' : 'text-white/50'}`}>
                       {slot.startTime}–{slot.endTime}
                     </span>
                   </div>
                 ) : (
-                  <span className="text-xs text-gray-300 italic flex-1">Indisponible</span>
+                  <span className="text-xs text-white/30 italic flex-1">Indisponible</span>
                 )}
               </div>
             );

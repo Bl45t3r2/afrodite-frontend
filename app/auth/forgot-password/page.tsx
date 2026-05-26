@@ -29,7 +29,7 @@ export default function ForgotPasswordPage() {
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
 
-        <Link href="/auth/login" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-700 mb-8 transition-colors">
+        <Link href="/auth/login" className="inline-flex items-center gap-1.5 text-sm text-white/40 hover:text-white/70 mb-8 transition-colors">
           <ChevronLeft size={15} /> Retour à la connexion
         </Link>
 
@@ -39,15 +39,15 @@ export default function ForgotPasswordPage() {
 
         {sent ? (
           <div className="card p-10 text-center">
-            <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-5">
+            <div className="w-16 h-16 bg-emerald-900/20 rounded-full flex items-center justify-center mx-auto mb-5">
               <CheckCircle size={30} className="text-emerald-500" />
             </div>
-            <h1 className="font-display text-2xl font-bold text-gray-900 mb-3">Email envoyé !</h1>
-            <p className="text-gray-500 text-sm leading-relaxed mb-2">
-              Si un compte existe pour <span className="font-semibold text-gray-700">{email}</span>,
+            <h1 className="font-display text-2xl font-bold text-white mb-3">Email envoyé !</h1>
+            <p className="text-white/50 text-sm leading-relaxed mb-2">
+              Si un compte existe pour <span className="font-semibold text-white/70">{email}</span>,
               vous recevrez un lien de réinitialisation dans quelques instants.
             </p>
-            <p className="text-xs text-gray-400 mb-8">
+            <p className="text-xs text-white/40 mb-8">
               Le lien est valable <strong>1 heure</strong>. Vérifiez aussi vos spams.
             </p>
             <div className="space-y-3">
@@ -67,18 +67,18 @@ export default function ForgotPasswordPage() {
             <div className="w-12 h-12 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-5">
               <Mail size={22} className="text-brand-400" />
             </div>
-            <h1 className="font-display text-2xl font-bold text-gray-900 text-center mb-2">
+            <h1 className="font-display text-2xl font-bold text-white text-center mb-2">
               Mot de passe oublié ?
             </h1>
-            <p className="text-gray-500 text-sm text-center mb-6">
+            <p className="text-white/50 text-sm text-center mb-6">
               Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">Adresse email</label>
+                <label className="block text-xs font-medium text-white/50 mb-1.5">Adresse email</label>
                 <div className="relative">
-                  <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
                   <input
                     type="email"
                     className="input pl-10"
@@ -103,7 +103,7 @@ export default function ForgotPasswordPage() {
               </button>
             </form>
 
-            <p className="text-center text-sm text-gray-400 mt-6">
+            <p className="text-center text-sm text-white/40 mt-6">
               Vous vous souvenez ?{' '}
               <Link href="/auth/login" className="text-brand-400 font-medium hover:underline">
                 Se connecter

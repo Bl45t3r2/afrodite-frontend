@@ -27,7 +27,7 @@ function FileDropzone({ label, icon: Icon, file, onChange, accept = 'image/*' }:
             <img src={URL.createObjectURL(file)} alt="" className="w-full h-32 object-cover rounded-xl" />
             <p className="text-xs text-brand-500 font-medium">{file.name}</p>
             <button type="button" onClick={e => { e.preventDefault(); onChange(null); }}
-              className="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600">
+              className="absolute top-2 right-2 w-6 h-6 bg-red-900/200 text-white rounded-full flex items-center justify-center hover:bg-red-600">
               <X size={12} />
             </button>
           </>
@@ -95,20 +95,20 @@ export default function IdentityVerificationTab() {
 
   if (loading) return (
     <div className="card p-8 animate-pulse space-y-4">
-      <div className="h-20 bg-gray-100 rounded-2xl" />
-      <div className="h-40 bg-gray-100 rounded-2xl" />
+      <div className="h-20 bg-white/10 rounded-2xl" />
+      <div className="h-40 bg-white/10 rounded-2xl" />
     </div>
   );
 
   // ── Déjà approuvé ──
   if (status === 'APPROVED') return (
     <div className="card p-8 text-center">
-      <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="w-20 h-20 bg-emerald-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
         <ShieldCheck size={36} className="text-emerald-500" />
       </div>
       <h2 className="font-display text-2xl font-bold text-white mb-2">Identité vérifiée ✅</h2>
       <p className="text-white/50 mb-4">Votre badge <strong>"Vérifié"</strong> est actif sur votre profil.</p>
-      <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-600 border border-emerald-100 px-4 py-2 rounded-xl text-sm font-medium">
+      <div className="inline-flex items-center gap-2 bg-emerald-900/20 text-emerald-600 border border-emerald-500/20 px-4 py-2 rounded-xl text-sm font-medium">
         <CheckCircle size={16} /> Profil certifié — Afrodite
       </div>
     </div>
@@ -117,14 +117,14 @@ export default function IdentityVerificationTab() {
   // ── En attente ──
   if (status === 'PENDING') return (
     <div className="card p-8 text-center">
-      <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="w-20 h-20 bg-amber-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
         <Clock size={36} className="text-amber-500" />
       </div>
       <h2 className="font-display text-xl font-bold text-white mb-2">Documents en cours d'examen</h2>
       <p className="text-white/50 mb-2">Notre équipe examine vos documents. Délai habituel : <strong>24–48h</strong>.</p>
       <p className="text-sm text-white/40">Vous recevrez une notification dès que la vérification sera terminée.</p>
-      <div className="mt-6 bg-amber-50 border border-amber-100 rounded-2xl p-4 text-left">
-        <p className="text-xs font-semibold text-amber-700 mb-1">Document envoyé</p>
+      <div className="mt-6 bg-amber-900/20 border border-amber-500/20 rounded-2xl p-4 text-left">
+        <p className="text-xs font-semibold text-amber-400 mb-1">Document envoyé</p>
         <p className="text-sm text-amber-600">{DOC_TYPES.find(d => d.value === verif?.docType)?.label || verif?.docType}</p>
         <p className="text-xs text-amber-500 mt-1">Soumis le {new Date(verif?.submittedAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
       </div>
@@ -149,10 +149,10 @@ export default function IdentityVerificationTab() {
         </div>
 
         {status === 'REJECTED' && (
-          <div className="mt-4 bg-red-50 border border-red-200 rounded-xl p-4 flex gap-3">
+          <div className="mt-4 bg-red-900/20 border border-red-500/30 rounded-xl p-4 flex gap-3">
             <AlertCircle size={18} className="text-red-500 shrink-0 mt-0.5" />
             <div>
-              <p className="text-sm font-semibold text-red-700">Vérification refusée</p>
+              <p className="text-sm font-semibold text-red-400">Vérification refusée</p>
               <p className="text-sm text-red-600 mt-0.5">{verif?.note || 'Vos documents n\'ont pas pu être validés. Veuillez réessayer.'}</p>
             </div>
           </div>
@@ -206,7 +206,7 @@ export default function IdentityVerificationTab() {
         />
 
         {/* Consignes */}
-        <div className="bg-blue-900/20 border border-blue-100 rounded-xl p-4">
+        <div className="bg-blue-900/20 border border-blue-500/20 rounded-xl p-4">
           <p className="text-xs font-semibold text-blue-300 mb-2">📋 Consignes importantes</p>
           <ul className="text-xs text-blue-400 space-y-1">
             <li>• Le document doit être valide et non expiré</li>

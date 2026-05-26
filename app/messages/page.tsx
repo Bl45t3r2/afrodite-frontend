@@ -23,7 +23,7 @@ function MessageTime({ date }: { date: string }) {
 function TypingIndicator() {
   return (
     <div className="flex justify-start mb-1">
-      <div className="bg-white border border-gray-100 shadow-sm rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
+      <div className="bg-white border border-white/5 shadow-sm rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 1, 2].map(i => (
           <span key={i} className="w-2 h-2 bg-gray-300 rounded-full animate-bounce"
             style={{ animationDelay: `${i * 0.18}s`, animationDuration: '0.7s' }} />
@@ -234,28 +234,28 @@ export default function MessagesPage() {
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <h1 className="font-display text-2xl font-bold text-gray-900">Messages</h1>
+          <h1 className="font-display text-2xl font-bold text-white">Messages</h1>
           {totalUnread > 0 && (
             <span className="bg-brand-400 text-white text-xs font-bold px-2 py-0.5 rounded-full">{totalUnread}</span>
           )}
         </div>
       </div>
 
-      <div className="flex overflow-hidden rounded-2xl border border-gray-200 bg-white" style={{ height: 'calc(100dvh - 180px)', minHeight: '400px' }}>
+      <div className="flex overflow-hidden rounded-2xl border border-white/10 bg-white" style={{ height: 'calc(100dvh - 180px)', minHeight: '400px' }}>
 
         {/* ── Sidebar conversations ── */}
-        <div className={`${showSidebar ? 'flex' : 'hidden md:flex'} w-full md:w-72 border-r border-gray-100 flex-col shrink-0`}>
-          <div className="p-3 border-b border-gray-100">
+        <div className={`${showSidebar ? 'flex' : 'hidden md:flex'} w-full md:w-72 border-r border-white/5 flex-col shrink-0`}>
+          <div className="p-3 border-b border-white/5">
             <div className="relative">
-              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input className="w-full bg-gray-50 border border-gray-100 rounded-xl pl-8 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
+              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+              <input className="w-full bg-white/5 border border-white/5 rounded-xl pl-8 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30"
                 placeholder="Rechercher..." value={search} onChange={e => setSearch(e.target.value)} />
             </div>
           </div>
 
           <div className="flex-1 overflow-y-auto">
             {filteredConvs.length === 0 ? (
-              <div className="p-6 text-center text-sm text-gray-400">
+              <div className="p-6 text-center text-sm text-white/40">
                 <MessageCircle size={32} className="mx-auto mb-2 opacity-30" />
                 Aucune conversation
               </div>
@@ -264,23 +264,23 @@ export default function MessagesPage() {
               const isUnread = conv.unread > 0;
               return (
                 <button key={conv.other.id} onClick={() => selectConversation(conv.other.id)}
-                  className={`w-full flex items-center gap-3 p-3.5 hover:bg-gray-50 transition-colors text-left border-b border-gray-50 ${isActive ? 'bg-brand-50 border-l-2 border-l-brand-400' : ''}`}>
+                  className={`w-full flex items-center gap-3 p-3.5 hover:bg-white/5 transition-colors text-left border-b border-gray-50 ${isActive ? 'bg-brand-50 border-l-2 border-l-brand-400' : ''}`}>
                   <Avatar profile={conv.other.profile} size={11} showOnline />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between mb-0.5">
-                      <p className={`text-sm truncate ${isUnread ? 'font-bold text-gray-900' : 'font-medium text-gray-700'}`}>
+                      <p className={`text-sm truncate ${isUnread ? 'font-bold text-white' : 'font-medium text-white/70'}`}>
                         {conv.other.profile?.displayName || 'Utilisateur'}
                       </p>
-                      <span className="text-xs text-gray-300 shrink-0 ml-1">
+                      <span className="text-xs text-white/30 shrink-0 ml-1">
                         {format(new Date(conv.lastMessage.createdAt), 'HH:mm')}
                       </span>
                     </div>
                     <div className="flex items-center justify-between gap-1">
-                      <p className={`text-xs truncate flex items-center gap-1 ${isUnread ? 'text-gray-800 font-medium' : 'text-gray-400'}`}>
+                      <p className={`text-xs truncate flex items-center gap-1 ${isUnread ? 'text-white/80 font-medium' : 'text-white/40'}`}>
                         {conv.lastMessage.senderId === user?.id && (
                           conv.lastMessage.isRead
                             ? <CheckCheck size={11} className="text-brand-400 shrink-0" />
-                            : <Check size={11} className="text-gray-300 shrink-0" />
+                            : <Check size={11} className="text-white/30 shrink-0" />
                         )}
                         {conv.lastMessage.content}
                       </p>
@@ -302,13 +302,13 @@ export default function MessagesPage() {
           {activeConv ? (
             <>
               {/* Header */}
-              <div className="px-4 py-3 border-b border-gray-100 flex items-center gap-3 bg-white">
-                <button className="md:hidden text-gray-400 hover:text-gray-600 mr-1" onClick={() => setShowSidebar(true)}>
+              <div className="px-4 py-3 border-b border-white/5 flex items-center gap-3 bg-white">
+                <button className="md:hidden text-white/40 hover:text-white/60 mr-1" onClick={() => setShowSidebar(true)}>
                   <X size={20} />
                 </button>
                 <Avatar profile={activeProfile} size={10} showOnline />
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-sm text-gray-900 truncate">{activeProfile?.displayName || 'Utilisateur'}</p>
+                  <p className="font-semibold text-sm text-white truncate">{activeProfile?.displayName || 'Utilisateur'}</p>
                   <p className="text-xs">
                     {isTyping ? (
                       <span className="text-brand-400 font-medium italic animate-pulse">✍️ en train d'écrire…</span>
@@ -317,7 +317,7 @@ export default function MessagesPage() {
                         <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full inline-block" /> En ligne
                       </span>
                     ) : (
-                      <span className="text-gray-400">Hors ligne</span>
+                      <span className="text-white/40">Hors ligne</span>
                     )}
                   </p>
                 </div>
@@ -325,13 +325,13 @@ export default function MessagesPage() {
                   <button
                     onClick={() => { setRemoteProfile(activeProfile); startCall(activeConv!, activeProfile, 'audio'); }}
                     title="Appel audio"
-                    className="w-8 h-8 rounded-xl bg-gray-100 hover:bg-brand-50 hover:text-brand-500 text-gray-500 flex items-center justify-center transition-all">
+                    className="w-8 h-8 rounded-xl bg-white/10 hover:bg-brand-50 hover:text-brand-500 text-white/50 flex items-center justify-center transition-all">
                     <Phone size={15} />
                   </button>
                   <button
                     onClick={() => { setRemoteProfile(activeProfile); startCall(activeConv!, activeProfile, 'video'); }}
                     title="Appel vidéo"
-                    className="w-8 h-8 rounded-xl bg-gray-100 hover:bg-brand-50 hover:text-brand-500 text-gray-500 flex items-center justify-center transition-all">
+                    className="w-8 h-8 rounded-xl bg-white/10 hover:bg-brand-50 hover:text-brand-500 text-white/50 flex items-center justify-center transition-all">
                     <Video size={15} />
                   </button>
                   <Link href={`/profiles/${activeConv}`}
@@ -349,9 +349,9 @@ export default function MessagesPage() {
                     const label = isToday(d) ? 'Aujourd\'hui' : isYesterday(d) ? 'Hier' : format(d, 'dd MMMM yyyy', { locale: fr });
                     return (
                       <div key={item.id} className="flex items-center gap-3 my-3">
-                        <div className="flex-1 h-px bg-gray-200/70" />
-                        <span className="text-xs text-gray-400 bg-white px-3 py-1 rounded-full border border-gray-100 font-medium">{label}</span>
-                        <div className="flex-1 h-px bg-gray-200/70" />
+                        <div className="flex-1 h-px bg-white/20/70" />
+                        <span className="text-xs text-white/40 bg-white px-3 py-1 rounded-full border border-white/5 font-medium">{label}</span>
+                        <div className="flex-1 h-px bg-white/20/70" />
                       </div>
                     );
                   }
@@ -365,16 +365,16 @@ export default function MessagesPage() {
                       <div className={`max-w-xs lg:max-w-md ${isTemp ? 'opacity-70' : ''}`}>
                         <div className={`px-4 py-2.5 rounded-2xl text-sm shadow-sm ${isMe
                           ? 'bg-brand-400 text-white rounded-br-none'
-                          : 'bg-white text-gray-800 rounded-bl-none border border-gray-100'}`}>
+                          : 'bg-white text-white/80 rounded-bl-none border border-white/5'}`}>
                           <p className="leading-relaxed break-words">{item.content}</p>
                         </div>
                         <div className={`flex items-center gap-1 mt-0.5 px-1 ${isMe ? 'justify-end' : 'justify-start'}`}>
-                          <span className="text-[10px] text-gray-400"><MessageTime date={item.createdAt} /></span>
+                          <span className="text-[10px] text-white/40"><MessageTime date={item.createdAt} /></span>
                           {isMe && (
                             <span title={item.isRead ? 'Lu' : 'Envoyé'}>
                               {item.isRead
                                 ? <CheckCheck size={12} className="text-brand-400" />
-                                : <Check size={12} className="text-gray-300" />
+                                : <Check size={12} className="text-white/30" />
                               }
                             </span>
                           )}
@@ -390,9 +390,9 @@ export default function MessagesPage() {
 
               {/* Quota */}
               {quota && !quota.unlimited && (
-                <div className={`px-4 py-2 border-t ${quota.remaining === 0 ? 'bg-red-50 border-red-100' : 'bg-amber-50 border-amber-100'}`}>
+                <div className={`px-4 py-2 border-t ${quota.remaining === 0 ? 'bg-red-900/20 border-red-500/20' : 'bg-amber-900/20 border-amber-500/20'}`}>
                   <div className="flex items-center justify-between text-xs mb-1.5">
-                    <span className={quota.remaining === 0 ? 'text-red-600 font-medium' : 'text-amber-700'}>
+                    <span className={quota.remaining === 0 ? 'text-red-600 font-medium' : 'text-amber-400'}>
                       {quota.remaining === 0
                         ? '🚫 Limite atteinte — revenez demain ou passez Premium'
                         : `💬 ${quota.remaining} message${quota.remaining > 1 ? 's' : ''} restant${quota.remaining > 1 ? 's' : ''} aujourd'hui`
@@ -414,8 +414,8 @@ export default function MessagesPage() {
               )}
 
               {/* Input */}
-              <div className="px-4 py-3 border-t border-gray-100 bg-white flex gap-2 items-center">
-                <input ref={inputRef} className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-400 transition-all"
+              <div className="px-4 py-3 border-t border-white/5 bg-white flex gap-2 items-center">
+                <input ref={inputRef} className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-brand-400 transition-all"
                   placeholder={quota?.remaining === 0 ? 'Limite atteinte pour aujourd\'hui…' : 'Écrire un message…'}
                   value={input}
                   onChange={e => handleTyping(e.target.value)}
@@ -430,11 +430,11 @@ export default function MessagesPage() {
               </div>
             </>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center text-gray-400 bg-[#f8f6f9]">
+            <div className="flex-1 flex flex-col items-center justify-center text-white/40 bg-[#f8f6f9]">
               <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
                 <MessageCircle size={36} className="text-brand-300" />
               </div>
-              <p className="font-semibold text-gray-600 mb-1">Vos messages</p>
+              <p className="font-semibold text-white/60 mb-1">Vos messages</p>
               <p className="text-sm text-center max-w-xs">Sélectionnez une conversation ou envoyez un message depuis un profil.</p>
             </div>
           )}

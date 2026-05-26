@@ -23,18 +23,18 @@ export default function FavoritesPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="font-display text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
+      <h1 className="font-display text-2xl font-bold text-white mb-8 flex items-center gap-2">
         <Heart size={22} className="text-brand-400" fill="currentColor" /> Mes favoris
       </h1>
 
       {loading ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {Array.from({ length: 4 }).map((_, i) => <div key={i} className="card aspect-[3/4] animate-pulse bg-gray-100" />)}
+          {Array.from({ length: 4 }).map((_, i) => <div key={i} className="card aspect-[3/4] animate-pulse bg-white/10" />)}
         </div>
       ) : favorites.length === 0 ? (
         <div className="text-center py-24">
           <Heart size={48} className="mx-auto mb-4 text-gray-200" fill="currentColor" />
-          <p className="text-gray-500 mb-4">Vous n'avez pas encore de favoris.</p>
+          <p className="text-white/50 mb-4">Vous n'avez pas encore de favoris.</p>
           <button onClick={() => router.push('/profiles')} className="btn-primary">Parcourir les profils</button>
         </div>
       ) : (

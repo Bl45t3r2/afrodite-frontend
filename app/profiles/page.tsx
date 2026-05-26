@@ -119,8 +119,8 @@ export default function ProfilesPage() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="font-display text-3xl font-bold text-gray-900 mb-1">Profils</h1>
-        <p className="text-gray-400 text-sm">Découvrez des profils vérifiés près de chez vous</p>
+        <h1 className="font-display text-3xl font-bold text-white mb-1">Profils</h1>
+        <p className="text-white/40 text-sm">Découvrez des profils vérifiés près de chez vous</p>
       </div>
 
       {/* Filtres rapides genre */}
@@ -132,7 +132,7 @@ export default function ProfilesPage() {
             className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
               filters.gender === value
                 ? 'bg-brand-400 text-white border-brand-400'
-                : 'bg-white text-gray-600 border-gray-200 hover:border-brand-300 hover:text-brand-500'
+                : 'bg-white text-white/60 border-white/10 hover:border-brand-300 hover:text-brand-500'
             }`}
           >
             {label}
@@ -143,12 +143,12 @@ export default function ProfilesPage() {
       {/* Barre de recherche principale */}
       <div className="flex flex-col md:flex-row gap-3 mb-4">
         <div className="relative flex-1">
-          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
           <input className="input pl-10" placeholder="Rechercher un profil..."
             value={filters.search} onChange={e => updateFilter('search', e.target.value)} />
         </div>
         <div className="relative">
-          <MapPin size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+          <MapPin size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
           <select className="input pl-9 pr-8 w-full md:w-48 appearance-none" value={filters.city}
             onChange={e => updateFilter('city', e.target.value)}>
             <option value="">Toutes les villes</option>
@@ -163,7 +163,7 @@ export default function ProfilesPage() {
           )}
         </button>
         <button onClick={() => setShowMap(!showMap)}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${showMap ? 'bg-brand-400 text-white border-brand-400' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${showMap ? 'bg-brand-400 text-white border-brand-400' : 'border-white/10 text-white/60 hover:bg-white/5'}`}>
           {showMap ? <LayoutGrid size={16} /> : <Map size={16} />}
           {showMap ? 'Liste' : 'Carte'}
         </button>
@@ -172,14 +172,14 @@ export default function ProfilesPage() {
       {/* Tags populaires */}
       {popularTags.length > 0 && filters.tags.length === 0 && (
         <div className="flex items-center gap-2 mb-4 flex-wrap">
-          <div className="flex items-center gap-1.5 text-xs text-gray-400 shrink-0">
+          <div className="flex items-center gap-1.5 text-xs text-white/40 shrink-0">
             <TrendingUp size={13} /> Populaires :
           </div>
           {popularTags.slice(0, 10).map(({ tag, count }) => (
             <button key={tag} onClick={() => addTag(tag)}
-              className="flex items-center gap-1 text-xs bg-gray-50 hover:bg-brand-50 text-gray-600 hover:text-brand-600 border border-gray-200 hover:border-brand-200 px-3 py-1.5 rounded-full transition-all">
+              className="flex items-center gap-1 text-xs bg-white/5 hover:bg-brand-50 text-white/60 hover:text-brand-600 border border-white/10 hover:border-brand-200 px-3 py-1.5 rounded-full transition-all">
               #{tag}
-              <span className="text-gray-300 text-[10px]">{count}</span>
+              <span className="text-white/30 text-[10px]">{count}</span>
             </button>
           ))}
         </div>
@@ -190,14 +190,14 @@ export default function ProfilesPage() {
         <div className="card p-6 mb-6 space-y-5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
-              <label className="text-xs font-medium text-gray-500 mb-2 block">Catégorie</label>
+              <label className="text-xs font-medium text-white/50 mb-2 block">Catégorie</label>
               <select className="input" value={filters.category} onChange={e => updateFilter('category', e.target.value)}>
                 <option value="">Toutes</option>
                 {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 mb-2 block">Genre</label>
+              <label className="text-xs font-medium text-white/50 mb-2 block">Genre</label>
               <select className="input" value={filters.gender} onChange={e => updateFilter('gender', e.target.value)}>
                 {GENDERS.map(({ value, label }) => (
                   <option key={value} value={value}>{label}</option>
@@ -205,17 +205,17 @@ export default function ProfilesPage() {
               </select>
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 mb-2 block">Prix min (FCFA/h)</label>
+              <label className="text-xs font-medium text-white/50 mb-2 block">Prix min (FCFA/h)</label>
               <input className="input" type="number" placeholder="0" value={filters.minPrice}
                 onChange={e => updateFilter('minPrice', e.target.value)} />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 mb-2 block">Prix max (FCFA/h)</label>
+              <label className="text-xs font-medium text-white/50 mb-2 block">Prix max (FCFA/h)</label>
               <input className="input" type="number" placeholder="50000" value={filters.maxPrice}
                 onChange={e => updateFilter('maxPrice', e.target.value)} />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 mb-2 block">Note minimum ⭐</label>
+              <label className="text-xs font-medium text-white/50 mb-2 block">Note minimum ⭐</label>
               <select className="input" value={filters.minRating} onChange={e => updateFilter('minRating', e.target.value)}>
                 <option value="">Toutes les notes</option>
                 <option value="3">⭐⭐⭐ 3+</option>
@@ -235,19 +235,19 @@ export default function ProfilesPage() {
             </div>
 
             {/* Rayon géographique */}
-            <div className="col-span-2 md:col-span-4 border-t border-gray-100 pt-4">
-              <label className="text-xs font-medium text-gray-500 mb-3 block flex items-center gap-1.5">
+            <div className="col-span-2 md:col-span-4 border-t border-white/5 pt-4">
+              <label className="text-xs font-medium text-white/50 mb-3 block flex items-center gap-1.5">
                 <MapPin size={12} className="text-brand-400" /> Recherche géographique
               </label>
               <div className="flex flex-wrap items-center gap-3">
                 <button
                   onClick={locateMe}
                   disabled={geoLoading}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border transition-all ${filters.userLat ? 'bg-brand-50 border-brand-300 text-brand-600' : 'bg-white border-gray-200 text-gray-600 hover:border-brand-300'}`}>
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border transition-all ${filters.userLat ? 'bg-brand-50 border-brand-300 text-brand-600' : 'bg-white border-white/10 text-white/60 hover:border-brand-300'}`}>
                   {geoLoading ? (
                     <span className="w-4 h-4 border-2 border-brand-400 border-t-transparent rounded-full animate-spin" />
                   ) : (
-                    <MapPin size={15} className={filters.userLat ? 'text-brand-400' : 'text-gray-400'} />
+                    <MapPin size={15} className={filters.userLat ? 'text-brand-400' : 'text-white/40'} />
                   )}
                   {filters.userLat ? 'Position détectée ✓' : 'Utiliser ma position'}
                 </button>
@@ -255,7 +255,7 @@ export default function ProfilesPage() {
                 {filters.userLat && (
                   <>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-gray-500">dans un rayon de</span>
+                      <span className="text-sm text-white/50">dans un rayon de</span>
                       <select value={filters.radius} onChange={e => updateFilter('radius', e.target.value)} className="input py-1.5 text-sm w-28">
                         {['10', '25', '50', '100', '200', '500'].map(r => (
                           <option key={r} value={r}>{r} km</option>
@@ -271,7 +271,7 @@ export default function ProfilesPage() {
 
                 {!filters.userLat && filters.city && (
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-400">ou autour de {filters.city} dans</span>
+                    <span className="text-sm text-white/40">ou autour de {filters.city} dans</span>
                     <select value={filters.radius} onChange={e => updateFilter('radius', e.target.value)} className="input py-1.5 text-sm w-28">
                       <option value="">Ville exacte</option>
                       {['50', '100', '200', '500'].map(r => (
@@ -286,7 +286,7 @@ export default function ProfilesPage() {
 
           {/* Recherche par tags */}
           <div>
-            <label className="text-xs font-medium text-gray-500 mb-2 block flex items-center gap-1.5">
+            <label className="text-xs font-medium text-white/50 mb-2 block flex items-center gap-1.5">
               <Tag size={12} /> Filtrer par tags
             </label>
             {filters.tags.length > 0 && (
@@ -301,7 +301,7 @@ export default function ProfilesPage() {
             )}
             <div className="flex gap-2 mb-3">
               <div className="relative flex-1">
-                <Tag size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Tag size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
                 <input className="input pl-9 text-sm" placeholder="Ex: massage, vip, discret..."
                   value={tagInput}
                   onChange={e => setTagInput(e.target.value)}
@@ -311,10 +311,10 @@ export default function ProfilesPage() {
             </div>
             {popularTags.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
-                <span className="text-xs text-gray-400 self-center mr-1">Suggestions :</span>
+                <span className="text-xs text-white/40 self-center mr-1">Suggestions :</span>
                 {popularTags.filter(({ tag }) => !filters.tags.includes(tag)).slice(0, 12).map(({ tag }) => (
                   <button key={tag} onClick={() => addTag(tag)}
-                    className="text-xs text-gray-500 bg-gray-50 hover:bg-brand-50 hover:text-brand-600 border border-gray-200 hover:border-brand-200 px-2.5 py-1 rounded-full transition-all">
+                    className="text-xs text-white/50 bg-white/5 hover:bg-brand-50 hover:text-brand-600 border border-white/10 hover:border-brand-200 px-2.5 py-1 rounded-full transition-all">
                     +{tag}
                   </button>
                 ))}
@@ -333,7 +333,7 @@ export default function ProfilesPage() {
       {/* Tags actifs */}
       {!showFilters && filters.tags.length > 0 && (
         <div className="flex items-center gap-2 mb-4 flex-wrap">
-          <span className="text-xs text-gray-400">Tags actifs :</span>
+          <span className="text-xs text-white/40">Tags actifs :</span>
           {filters.tags.map(tag => (
             <span key={tag} className="flex items-center gap-1 bg-brand-400 text-white text-xs font-medium px-3 py-1.5 rounded-full">
               #{tag}
@@ -349,12 +349,12 @@ export default function ProfilesPage() {
         <div className="mb-8">
           <CityMap profiles={allProfiles} selectedCity={filters.city}
             onCityClick={(city) => { updateFilter('city', city); setShowMap(false); }} />
-          <p className="text-xs text-gray-400 text-center mt-2">Cliquez sur une ville pour filtrer</p>
+          <p className="text-xs text-white/40 text-center mt-2">Cliquez sur une ville pour filtrer</p>
         </div>
       )}
 
       {/* Résultats */}
-      <p className="text-sm text-gray-500 mb-6">
+      <p className="text-sm text-white/50 mb-6">
         {loading ? 'Chargement...' : `${total} profil${total > 1 ? 's' : ''} trouvé${total > 1 ? 's' : ''}`}
         {filters.city && <span className="ml-2 text-brand-400 font-medium">· {filters.city}</span>}
         {filters.gender && <span className="ml-2 text-brand-400 font-medium">· {GENDERS.find(g => g.value === filters.gender)?.label}</span>}
@@ -365,13 +365,13 @@ export default function ProfilesPage() {
       {loading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="card aspect-[3/4] animate-pulse bg-gray-100 rounded-2xl" />
+            <div key={i} className="card aspect-[3/4] animate-pulse bg-white/10 rounded-2xl" />
           ))}
         </div>
       ) : profiles.length === 0 ? (
         <div className="text-center py-24">
           <p className="text-2xl mb-2">😕</p>
-          <p className="text-gray-500">Aucun profil trouvé avec ces critères.</p>
+          <p className="text-white/50">Aucun profil trouvé avec ces critères.</p>
           <button onClick={resetFilters} className="btn-primary mt-4">Effacer les filtres</button>
         </div>
       ) : (

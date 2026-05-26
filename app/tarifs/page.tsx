@@ -72,7 +72,7 @@ const PLANS = [
     cta: 'Choisir VIP',
     plan: 'vip',
     accentColor: 'border-amber-500/30',
-    badgeBg: 'bg-amber-500',
+    badgeBg: 'bg-amber-900/200',
   },
 ];
 
@@ -193,7 +193,7 @@ export default function PricingPage() {
                     plan.highlight
                       ? 'bg-brand-500 hover:bg-brand-400 text-white shadow-md shadow-brand-500/25 hover:shadow-brand-500/40'
                       : plan.name === 'VIP'
-                      ? 'bg-amber-500/15 border border-amber-500/30 text-amber-400 hover:bg-amber-500/25'
+                      ? 'bg-amber-900/200/15 border border-amber-500/30 text-amber-400 hover:bg-amber-900/200/25'
                       : 'bg-white/6 border border-white/10 text-white/50 hover:text-white hover:bg-white/10'
                   }`}>
                   {plan.cta}

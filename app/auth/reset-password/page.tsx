@@ -15,7 +15,7 @@ function StrengthBar({ password }: { password: string }) {
     /[^A-Za-z0-9]/.test(password),
   ];
   const score = checks.filter(Boolean).length;
-  const colors = ['bg-gray-200', 'bg-red-400', 'bg-amber-400', 'bg-blue-400', 'bg-emerald-400'];
+  const colors = ['bg-white/20', 'bg-red-400', 'bg-amber-400', 'bg-blue-400', 'bg-emerald-400'];
   const labels = ['', 'Faible', 'Moyen', 'Bon', 'Excellent'];
 
   if (!password) return null;
@@ -24,7 +24,7 @@ function StrengthBar({ password }: { password: string }) {
     <div className="mt-2">
       <div className="flex gap-1 mb-1">
         {[1, 2, 3, 4].map(i => (
-          <div key={i} className={`h-1 flex-1 rounded-full transition-all duration-300 ${i <= score ? colors[score] : 'bg-gray-100'}`} />
+          <div key={i} className={`h-1 flex-1 rounded-full transition-all duration-300 ${i <= score ? colors[score] : 'bg-white/10'}`} />
         ))}
       </div>
       <p className={`text-xs font-medium ${score <= 1 ? 'text-red-500' : score === 2 ? 'text-amber-500' : score === 3 ? 'text-blue-500' : 'text-emerald-500'}`}>
@@ -93,24 +93,24 @@ export default function ResetPasswordPage() {
         {state === 'validating' && (
           <div className="card p-12 text-center">
             <Loader size={32} className="text-brand-400 animate-spin mx-auto mb-4" />
-            <p className="text-gray-500 text-sm">Vérification du lien…</p>
+            <p className="text-white/50 text-sm">Vérification du lien…</p>
           </div>
         )}
 
         {/* INVALID */}
         {state === 'invalid' && (
           <div className="card p-10 text-center">
-            <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-5">
+            <div className="w-16 h-16 bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-5">
               <XCircle size={30} className="text-red-400" />
             </div>
-            <h1 className="font-display text-2xl font-bold text-gray-900 mb-2">Lien invalide</h1>
-            <p className="text-gray-500 text-sm mb-6">
+            <h1 className="font-display text-2xl font-bold text-white mb-2">Lien invalide</h1>
+            <p className="text-white/50 text-sm mb-6">
               Ce lien est invalide ou a expiré (validité 1h). Faites une nouvelle demande.
             </p>
             <Link href="/auth/forgot-password" className="btn-primary inline-block">
               Nouvelle demande
             </Link>
-            <p className="mt-4 text-sm text-gray-400">
+            <p className="mt-4 text-sm text-white/40">
               <Link href="/auth/login" className="text-brand-400 hover:underline">← Connexion</Link>
             </p>
           </div>
@@ -122,22 +122,22 @@ export default function ResetPasswordPage() {
             <div className="w-12 h-12 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-5">
               <ShieldCheck size={22} className="text-brand-400" />
             </div>
-            <h1 className="font-display text-2xl font-bold text-gray-900 text-center mb-1">
+            <h1 className="font-display text-2xl font-bold text-white text-center mb-1">
               Nouveau mot de passe
             </h1>
             {email && (
-              <p className="text-center text-xs text-gray-400 mb-6">
-                Pour le compte <span className="font-medium text-gray-600">{email}</span>
+              <p className="text-center text-xs text-white/40 mb-6">
+                Pour le compte <span className="font-medium text-white/60">{email}</span>
               </p>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">
+                <label className="block text-xs font-medium text-white/50 mb-1.5">
                   Nouveau mot de passe
                 </label>
                 <div className="relative">
-                  <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
                   <input
                     type={showPwd ? 'text' : 'password'}
                     className="input pl-10 pr-10"
@@ -149,7 +149,7 @@ export default function ResetPasswordPage() {
                   <button
                     type="button"
                     onClick={() => setShowPwd(v => !v)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/60"
                   >
                     {showPwd ? <EyeOff size={15} /> : <Eye size={15} />}
                   </button>
@@ -158,11 +158,11 @@ export default function ResetPasswordPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">
+                <label className="block text-xs font-medium text-white/50 mb-1.5">
                   Confirmer le mot de passe
                 </label>
                 <div className="relative">
-                  <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
                   <input
                     type={showConfirm ? 'text' : 'password'}
                     className={`input pl-10 pr-10 ${confirm && password !== confirm ? 'border-red-300 focus:border-red-400 focus:ring-red-400/30' : confirm && password === confirm ? 'border-emerald-300 focus:border-emerald-400 focus:ring-emerald-400/30' : ''}`}
@@ -173,7 +173,7 @@ export default function ResetPasswordPage() {
                   <button
                     type="button"
                     onClick={() => setShowConfirm(v => !v)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/60"
                   >
                     {showConfirm ? <EyeOff size={15} /> : <Eye size={15} />}
                   </button>
@@ -189,7 +189,7 @@ export default function ResetPasswordPage() {
               </div>
 
               {error && (
-                <div className="bg-red-50 border border-red-100 rounded-xl p-3 text-sm text-red-600">
+                <div className="bg-red-900/20 border border-red-500/20 rounded-xl p-3 text-sm text-red-600">
                   {error}
                 </div>
               )}
@@ -211,13 +211,13 @@ export default function ResetPasswordPage() {
         {/* SUCCESS */}
         {state === 'success' && (
           <div className="card p-10 text-center">
-            <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-5 animate-bounce">
+            <div className="w-16 h-16 bg-emerald-900/20 rounded-full flex items-center justify-center mx-auto mb-5 animate-bounce">
               <CheckCircle size={30} className="text-emerald-500" />
             </div>
-            <h1 className="font-display text-2xl font-bold text-gray-900 mb-2">
+            <h1 className="font-display text-2xl font-bold text-white mb-2">
               Mot de passe mis à jour !
             </h1>
-            <p className="text-gray-500 text-sm mb-6">
+            <p className="text-white/50 text-sm mb-6">
               Votre mot de passe a été modifié avec succès. Vous allez être redirigé vers la page de connexion…
             </p>
             <Link href="/auth/login" className="btn-primary inline-block">

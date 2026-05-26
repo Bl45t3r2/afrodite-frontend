@@ -49,9 +49,9 @@ export default function ReferralTab() {
 
   if (loading) return (
     <div className="space-y-4 animate-pulse">
-      <div className="h-40 bg-gray-100 rounded-2xl" />
-      <div className="h-32 bg-gray-100 rounded-2xl" />
-      <div className="h-48 bg-gray-100 rounded-2xl" />
+      <div className="h-40 bg-white/10 rounded-2xl" />
+      <div className="h-32 bg-white/10 rounded-2xl" />
+      <div className="h-48 bg-white/10 rounded-2xl" />
     </div>
   );
 
@@ -132,9 +132,9 @@ export default function ReferralTab() {
           </h3>
           <p className="text-sm mb-4" style={{color:"var(--text-muted)"}}>Entrez le code d'un ami pour bénéficier d'avantages mutuels.</p>
           {codeApplied ? (
-            <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
+            <div className="flex items-center gap-2 bg-emerald-900/20 border border-emerald-200 rounded-xl px-4 py-3">
               <Check size={16} className="text-emerald-500" />
-              <span className="text-emerald-700 text-sm font-medium">Code appliqué avec succès !</span>
+              <span className="text-emerald-400 text-sm font-medium">Code appliqué avec succès !</span>
             </div>
           ) : (
             <div className="flex gap-2">
@@ -143,7 +143,7 @@ export default function ReferralTab() {
                 placeholder="Ex: SAF123"
                 value={inputCode}
                 onChange={e => setInputCode(e.target.value.toUpperCase())}
-                className="flex-1 border border-gray-200 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30 text-white bg-white"
+                className="flex-1 border border-white/10 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30 text-white bg-white"
               />
               <button
                 onClick={async () => {
@@ -172,9 +172,9 @@ export default function ReferralTab() {
       {/* Statistiques */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: 'Filleuls', value: stats.totalReferrals, icon: Users, color: 'text-blue-500 bg-blue-50' },
-          { label: 'Convertis', value: stats.convertedReferrals, icon: TrendingUp, color: 'text-emerald-500 bg-emerald-50' },
-          { label: 'Taux', value: `${stats.conversionRate}%`, icon: TrendingUp, color: 'text-purple-500 bg-purple-50' },
+          { label: 'Filleuls', value: stats.totalReferrals, icon: Users, color: 'text-blue-500 bg-blue-900/20' },
+          { label: 'Convertis', value: stats.convertedReferrals, icon: TrendingUp, color: 'text-emerald-500 bg-emerald-900/20' },
+          { label: 'Taux', value: `${stats.conversionRate}%`, icon: TrendingUp, color: 'text-purple-500 bg-purple-900/20' },
           { label: 'Récompenses', value: stats.appliedRewards, icon: Gift, color: 'text-brand-500 bg-brand-50' },
         ].map(s => (
           <div key={s.label} className="card p-4 flex items-center gap-3">
@@ -197,8 +197,8 @@ export default function ReferralTab() {
         <div className="space-y-3">
           {[
             { step: '1', text: 'Partagez votre code ou lien avec vos amis', color: 'bg-brand-400' },
-            { step: '2', text: 'Ils s\'inscrivent sur Afrodite avec votre code', color: 'bg-purple-500' },
-            { step: '3', text: 'Dès leur premier abonnement, vous recevez 1 jour de boost gratuit', color: 'bg-emerald-500' },
+            { step: '2', text: 'Ils s\'inscrivent sur Afrodite avec votre code', color: 'bg-purple-900/200' },
+            { step: '3', text: 'Dès leur premier abonnement, vous recevez 1 jour de boost gratuit', color: 'bg-emerald-900/200' },
           ].map(item => (
             <div key={item.step} className="flex items-start gap-3">
               <div className={`w-7 h-7 ${item.color} text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>
@@ -223,7 +223,7 @@ export default function ReferralTab() {
               return (
                 <div key={r.id} className="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0">
                   {avatar
-                    ? <img src={avatar} alt="" className="w-9 h-9 rounded-full object-cover border border-gray-100" />
+                    ? <img src={avatar} alt="" className="w-9 h-9 rounded-full object-cover border border-white/5" />
                     : <div className="w-9 h-9 rounded-full bg-brand-50 flex items-center justify-center border border-brand-100">
                         <span className="text-brand-400 font-bold text-sm">{r.profile?.displayName?.[0] || '?'}</span>
                       </div>
@@ -233,7 +233,7 @@ export default function ReferralTab() {
                     <p className="text-xs text-white/40">{r.profile?.city} · Inscrit le {new Date(r.createdAt).toLocaleDateString('fr-FR')}</p>
                   </div>
                   <span className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${
-                    hasSubscription ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
+                    hasSubscription ? 'bg-emerald-900/20 text-emerald-600' : 'bg-amber-900/20 text-amber-600'
                   }`}>
                     {hasSubscription ? '✓ Abonné' : '⏳ Inscrit'}
                   </span>
@@ -254,7 +254,7 @@ export default function ReferralTab() {
             {stats.rewards.map((r: any) => (
               <div key={r.id} className="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0">
                 <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
-                  r.status === 'APPLIED' ? 'bg-emerald-50' : 'bg-amber-50'
+                  r.status === 'APPLIED' ? 'bg-emerald-900/20' : 'bg-amber-900/20'
                 }`}>
                   {r.status === 'APPLIED' ? <Check size={16} className="text-emerald-500" /> : <Clock size={16} className="text-amber-500" />}
                 </div>
@@ -263,7 +263,7 @@ export default function ReferralTab() {
                   <p className="text-xs text-white/40">{r.description}</p>
                 </div>
                 <span className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${
-                  r.status === 'APPLIED' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
+                  r.status === 'APPLIED' ? 'bg-emerald-900/20 text-emerald-600' : 'bg-amber-900/20 text-amber-600'
                 }`}>
                   {r.status === 'APPLIED' ? 'Activée' : 'En attente'}
                 </span>

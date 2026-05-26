@@ -79,25 +79,25 @@ export default function RegisterPage() {
           <div className="w-20 h-20 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
             <Mail size={36} className="text-brand-400" />
           </div>
-          <h1 className="font-display text-2xl font-bold text-gray-900 mb-3">Vérifiez votre email !</h1>
-          <p className="text-gray-500 leading-relaxed mb-2">
+          <h1 className="font-display text-2xl font-bold text-white mb-3">Vérifiez votre email !</h1>
+          <p className="text-white/50 leading-relaxed mb-2">
             Un email de confirmation a été envoyé à<br />
-            <span className="font-semibold text-gray-700">{form.email}</span>
+            <span className="font-semibold text-white/70">{form.email}</span>
           </p>
-          <p className="text-sm text-gray-400 mb-8">
+          <p className="text-sm text-white/40 mb-8">
             Cliquez sur le lien dans l'email pour activer votre compte. Le lien est valable 24 heures.
           </p>
           <div className="space-y-3">
-            <div className="flex items-start gap-3 bg-amber-50 border border-amber-100 rounded-xl p-4 text-left">
+            <div className="flex items-start gap-3 bg-amber-900/20 border border-amber-500/20 rounded-xl p-4 text-left">
               <span className="text-amber-500 mt-0.5">💡</span>
-              <p className="text-sm text-amber-700">
+              <p className="text-sm text-amber-400">
                 Vous ne trouvez pas l'email ? Vérifiez vos <strong>spams</strong> ou demandez un nouveau lien.
               </p>
             </div>
             <button onClick={() => router.push('/auth/verify-email')} className="btn-outline w-full text-sm">
               Renvoyer le lien de confirmation
             </button>
-            <Link href="/auth/login" className="block text-center text-sm text-gray-400 hover:text-gray-600">
+            <Link href="/auth/login" className="block text-center text-sm text-white/40 hover:text-white/60">
               ← Retour à la connexion
             </Link>
           </div>
@@ -111,7 +111,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="font-display text-3xl font-bold text-brand-400">Afrodite</Link>
-          <p className="text-gray-500 text-sm mt-2">Créez votre compte gratuitement</p>
+          <p className="text-white/50 text-sm mt-2">Créez votre compte gratuitement</p>
         </div>
 
         <div className="card p-8">
@@ -119,9 +119,9 @@ export default function RegisterPage() {
 
             {/* Nom affiché */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Nom affiché *</label>
+              <label className="block text-xs font-medium text-white/50 mb-1.5">Nom affiché *</label>
               <div className="relative">
-                <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
                 <input className="input pl-10" placeholder="Votre prénom ou pseudo" value={form.displayName}
                   onChange={e => setForm(f => ({ ...f, displayName: e.target.value }))} />
               </div>
@@ -129,7 +129,7 @@ export default function RegisterPage() {
 
             {/* Genre */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-2">Je suis *</label>
+              <label className="block text-xs font-medium text-white/50 mb-2">Je suis *</label>
               <div className="grid grid-cols-3 gap-2">
                 {GENDERS.map(({ value, label }) => (
                   <button
@@ -139,7 +139,7 @@ export default function RegisterPage() {
                     className={`py-2.5 px-3 rounded-xl border-2 text-sm font-medium transition-all ${
                       form.gender === value
                         ? 'border-brand-400 bg-brand-50 text-brand-600'
-                        : 'border-gray-200 text-gray-500 hover:border-brand-300'
+                        : 'border-white/10 text-white/50 hover:border-brand-300'
                     }`}
                   >
                     {label}
@@ -151,18 +151,18 @@ export default function RegisterPage() {
             {/* Âge + Ville */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">Âge *</label>
+                <label className="block text-xs font-medium text-white/50 mb-1.5">Âge *</label>
                 <div className="relative">
-                  <Calendar size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Calendar size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
                   <input className="input pl-10" type="number" min="18" max="99" placeholder="18" value={form.age}
                     onChange={e => setForm(f => ({ ...f, age: e.target.value }))} />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">Ville *</label>
+                <label className="block text-xs font-medium text-white/50 mb-1.5">Ville *</label>
                 {!customCity ? (
                   <div className="relative">
-                    <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 z-10" />
+                    <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 z-10" />
                     <select className="input pl-10 appearance-none" value={form.city}
                       onChange={e => {
                         if (e.target.value === '__other__') { setCustomCity(true); setForm(f => ({ ...f, city: '' })); }
@@ -175,7 +175,7 @@ export default function RegisterPage() {
                   </div>
                 ) : (
                   <div className="relative">
-                    <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
                     <input className="input pl-10 pr-20" placeholder="Saisissez votre ville" value={form.city}
                       onChange={e => setForm(f => ({ ...f, city: e.target.value }))} autoFocus />
                     <button type="button" onClick={() => { setCustomCity(false); setForm(f => ({ ...f, city: '' })); }}
@@ -189,11 +189,11 @@ export default function RegisterPage() {
 
             {/* Téléphone */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">
-                Téléphone <span className="text-gray-300">(optionnel)</span>
+              <label className="block text-xs font-medium text-white/50 mb-1.5">
+                Téléphone <span className="text-white/30">(optionnel)</span>
               </label>
               <div className="relative">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm">📱</span>
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-sm">📱</span>
                 <input className="input pl-10" type="tel" placeholder="+229 01 23 45 67" value={form.phone}
                   onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
               </div>
@@ -201,9 +201,9 @@ export default function RegisterPage() {
 
             {/* Email */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Adresse email *</label>
+              <label className="block text-xs font-medium text-white/50 mb-1.5">Adresse email *</label>
               <div className="relative">
-                <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
                 <input className="input pl-10" type="email" placeholder="votre@email.com" value={form.email}
                   onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
               </div>
@@ -211,19 +211,19 @@ export default function RegisterPage() {
 
             {/* Mot de passe */}
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1.5">Mot de passe *</label>
+              <label className="block text-xs font-medium text-white/50 mb-1.5">Mot de passe *</label>
               <div className="relative">
-                <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
                 <input className="input pl-10" type="password" placeholder="8 caractères minimum" value={form.password}
                   onChange={e => setForm(f => ({ ...f, password: e.target.value }))} />
               </div>
-              <p className="text-xs text-gray-400 mt-1">Minimum 8 caractères</p>
+              <p className="text-xs text-white/40 mt-1">Minimum 8 caractères</p>
             </div>
 
             {/* Code parrainage */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Code de parrainage <span className="text-gray-400 font-normal">(optionnel)</span>
+              <label className="block text-sm font-medium text-white/70 mb-1.5">
+                Code de parrainage <span className="text-white/40 font-normal">(optionnel)</span>
               </label>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-lg">🎁</span>
@@ -243,7 +243,7 @@ export default function RegisterPage() {
 
             {/* Erreur détaillée (debug) */}
             {errorDetail && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-700 font-mono break-all">
+              <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-3 text-xs text-red-400 font-mono break-all">
                 <strong>Détail erreur :</strong><br />{errorDetail}
               </div>
             )}
@@ -278,7 +278,7 @@ export default function RegisterPage() {
             </button>
           </form>
 
-          <p className="text-center text-sm text-gray-400 mt-6">
+          <p className="text-center text-sm text-white/40 mt-6">
             Déjà un compte ?{' '}
             <Link href="/auth/login" className="text-brand-400 font-medium hover:underline">Se connecter</Link>
           </p>

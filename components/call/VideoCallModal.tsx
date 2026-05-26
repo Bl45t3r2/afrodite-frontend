@@ -57,13 +57,13 @@ export default function VideoCallModal({
             <h2 className="text-white text-xl font-bold mb-6">{displayName}</h2>
             <div className="flex items-center justify-center gap-8">
               <div className="flex flex-col items-center gap-2">
-                <button onClick={onReject} className="w-16 h-16 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-lg shadow-red-500/40">
+                <button onClick={onReject} className="w-16 h-16 bg-red-900/200 hover:bg-red-600 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-lg shadow-red-500/40">
                   <PhoneMissed size={26} className="text-white" />
                 </button>
                 <span className="text-white/50 text-xs">Refuser</span>
               </div>
               <div className="flex flex-col items-center gap-2">
-                <button onClick={onAccept} className="w-16 h-16 bg-emerald-500 hover:bg-emerald-600 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-lg shadow-emerald-500/40 animate-bounce">
+                <button onClick={onAccept} className="w-16 h-16 bg-emerald-900/200 hover:bg-emerald-600 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-lg shadow-emerald-500/40 animate-bounce">
                   <Phone size={26} className="text-white" />
                 </button>
                 <span className="text-white/50 text-xs">Accepter</span>
@@ -97,7 +97,7 @@ export default function VideoCallModal({
             <span className="w-2 h-2 bg-brand-400 rounded-full animate-pulse" />
             {callType === 'video' ? 'Appel vidéo…' : 'Appel audio…'}
           </p>
-          <button onClick={onCancel} className="w-16 h-16 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center mx-auto transition-all hover:scale-110 shadow-lg shadow-red-500/40">
+          <button onClick={onCancel} className="w-16 h-16 bg-red-900/200 hover:bg-red-600 rounded-full flex items-center justify-center mx-auto transition-all hover:scale-110 shadow-lg shadow-red-500/40">
             <PhoneOff size={26} className="text-white" />
           </button>
           <p className="text-white/30 text-xs mt-3">Annuler</p>
@@ -176,7 +176,7 @@ export default function VideoCallModal({
 
         <div className="flex flex-col items-center gap-1.5">
           <button onClick={onEnd}
-            className="w-16 h-16 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-lg shadow-red-500/40">
+            className="w-16 h-16 bg-red-900/200 hover:bg-red-600 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-lg shadow-red-500/40">
             <PhoneOff size={26} className="text-white" />
           </button>
           <span className="text-white/40 text-[10px]">Raccrocher</span>

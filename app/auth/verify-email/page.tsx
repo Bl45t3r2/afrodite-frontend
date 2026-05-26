@@ -60,18 +60,18 @@ export default function VerifyEmailPage() {
             <div className="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-5">
               <Loader size={28} className="text-brand-400 animate-spin" />
             </div>
-            <h1 className="font-display text-2xl font-bold text-gray-900 mb-2">Vérification en cours…</h1>
-            <p className="text-gray-400 text-sm">Patientez quelques secondes.</p>
+            <h1 className="font-display text-2xl font-bold text-white mb-2">Vérification en cours…</h1>
+            <p className="text-white/40 text-sm">Patientez quelques secondes.</p>
           </div>
         )}
 
         {state === 'success' && (
           <div className="card p-12 text-center">
-            <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-5 animate-bounce">
+            <div className="w-16 h-16 bg-emerald-900/20 rounded-full flex items-center justify-center mx-auto mb-5 animate-bounce">
               <CheckCircle size={32} className="text-emerald-500" />
             </div>
-            <h1 className="font-display text-2xl font-bold text-gray-900 mb-2">Email confirmé ! 🎉</h1>
-            <p className="text-gray-500 text-sm mb-6">
+            <h1 className="font-display text-2xl font-bold text-white mb-2">Email confirmé ! 🎉</h1>
+            <p className="text-white/50 text-sm mb-6">
               Votre compte est activé. Vous allez être redirigé vers votre tableau de bord…
             </p>
             <Link href="/dashboard" className="btn-primary inline-block">
@@ -82,13 +82,13 @@ export default function VerifyEmailPage() {
 
         {(state === 'error' || state === 'expired') && (
           <div className="card p-10 text-center">
-            <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-5">
+            <div className="w-16 h-16 bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-5">
               <XCircle size={32} className="text-red-400" />
             </div>
-            <h1 className="font-display text-2xl font-bold text-gray-900 mb-2">
+            <h1 className="font-display text-2xl font-bold text-white mb-2">
               {state === 'expired' ? 'Lien expiré' : 'Lien invalide'}
             </h1>
-            <p className="text-gray-500 text-sm mb-6">
+            <p className="text-white/50 text-sm mb-6">
               {state === 'expired'
                 ? 'Ce lien a expiré (24h). Demandez-en un nouveau ci-dessous.'
                 : 'Ce lien est invalide ou a déjà été utilisé.'}
@@ -106,22 +106,22 @@ export default function VerifyEmailPage() {
             </div>
             {resent ? (
               <div className="text-center">
-                <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-emerald-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle size={24} className="text-emerald-500" />
                 </div>
-                <h2 className="font-display text-xl font-bold text-gray-900 mb-2">Email envoyé !</h2>
-                <p className="text-gray-500 text-sm mb-6">Vérifiez votre boîte mail et cliquez sur le lien de confirmation.</p>
+                <h2 className="font-display text-xl font-bold text-white mb-2">Email envoyé !</h2>
+                <p className="text-white/50 text-sm mb-6">Vérifiez votre boîte mail et cliquez sur le lien de confirmation.</p>
                 <Link href="/auth/login" className="text-sm text-brand-400 hover:underline">← Retour à la connexion</Link>
               </div>
             ) : (
               <>
-                <h1 className="font-display text-2xl font-bold text-gray-900 text-center mb-2">Confirmer votre email</h1>
-                <p className="text-gray-500 text-sm text-center mb-6">
+                <h1 className="font-display text-2xl font-bold text-white text-center mb-2">Confirmer votre email</h1>
+                <p className="text-white/50 text-sm text-center mb-6">
                   Entrez votre adresse email pour recevoir un nouveau lien de confirmation.
                 </p>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-medium text-gray-500 mb-1.5">Adresse email</label>
+                    <label className="block text-xs font-medium text-white/50 mb-1.5">Adresse email</label>
                     <input
                       type="email"
                       className="input"
@@ -139,7 +139,7 @@ export default function VerifyEmailPage() {
                   >
                     {resending ? <><Loader size={15} className="animate-spin" /> Envoi…</> : 'Renvoyer le lien'}
                   </button>
-                  <p className="text-center text-sm text-gray-400">
+                  <p className="text-center text-sm text-white/40">
                     <Link href="/auth/login" className="text-brand-400 hover:underline">← Retour à la connexion</Link>
                   </p>
                 </div>
