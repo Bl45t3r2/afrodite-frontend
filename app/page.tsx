@@ -185,7 +185,7 @@ export default function HomePage() {
                 className="w-full bg-white/10 border border-white/15 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-brand-500/60 transition-all" />
             </div>
             <div className="relative hidden sm:block">
-              <select value={city} onChange={e = style={{colorScheme:"dark"}}> setCity(e.target.value)}
+              <select value={city} onChange={e => setCity(e.target.value)}
                 className="appearance-none bg-white/10 border border-white/15 rounded-xl px-4 py-3.5 pr-8 text-sm text-white focus:outline-none focus:border-brand-500/60 transition-all"
                 style={{colorScheme:"dark", backgroundColor:"#1a1a1a"}}>
                 <option value="" style={{background:"#1a1a1a", color:"white"}}>Toutes les villes</option>
@@ -430,7 +430,7 @@ export default function HomePage() {
             {(city || category || onlineOnly || verifiedOnly) && <span className="text-white/25 ml-1">· filtrés</span>}
           </p>
           <div className="flex items-center gap-2">
-            <select value={sortBy} onChange={e = style={{colorScheme:"dark"}}> setSortBy(e.target.value as any)}
+            <select value={sortBy} onChange={e => setSortBy(e.target.value as any)}
               className="bg-white/5 border border-white/10 text-white/50 text-xs px-3 py-1.5 rounded-lg focus:outline-none focus:border-brand-500/50 transition-all">
               <option value="default">Par défaut</option>
               <option value="online">En ligne d'abord</option>

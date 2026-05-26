@@ -120,40 +120,6 @@ body {
   }
 }
 /* updated */
-/* Force dark colorScheme on all selects */
-select {
-  color-scheme: dark;
-  background-color: #1a1a1a;
-  color: #ffffff;
-}
-.light select {
-  color-scheme: light;
-  background-color: #ffffff !important;
-  color: #1a1a1a !important;
-}
-option {
-  background-color: #1a1a1a;
-  color: #ffffff;
-}
-.light option {
-  background-color: #ffffff !important;
-  color: #1a1a1a !important;
-}
-/* Sections sombres gardent leurs couleurs en mode clair */
-.light .hero-dark { background: #0a0a0a !important; }
-.light .hero-dark .text-white,
-.light .hero-dark h1,
-.light .hero-dark h2, 
-.light .hero-dark p,
-.light .hero-dark span,
-.light .hero-dark div { color: rgba(255,255,255,0.9) !important; }
-.light .hero-dark .text-white\/40 { color: rgba(255,255,255,0.4) !important; }
-.light .hero-dark .text-white\/35 { color: rgba(255,255,255,0.35) !important; }
-.light .hero-dark .text-white\/30 { color: rgba(255,255,255,0.3) !important; }
-.light .hero-dark .text-emerald-400 { color: #34d399 !important; }
-.light .hero-dark .text-brand-400, .light .hero-dark .text-brand-300 { color: #D4537E !important; }
-.light .hero-dark .border-white\/10 { border-color: rgba(255,255,255,0.1) !important; }
-.light .hero-dark .bg-white\/6, .light .hero-dark .bg-white\/10 { background: rgba(255,255,255,0.1) !important; }
 /* Dashboard text toujours visible */
 .t-text-primary { color: var(--text-primary) !important; }
 [class*="card"] .font-display,

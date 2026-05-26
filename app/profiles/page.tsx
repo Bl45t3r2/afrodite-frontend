@@ -149,7 +149,7 @@ export default function ProfilesPage() {
         </div>
         <div className="relative">
           <MapPin size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
-          <select className="input pl-9 pr-8 w-full md:w-48 appearance-none" style={{colorScheme:"dark"}} value={filters.city}
+          <select className="input pl-9 pr-8 w-full md:w-48 appearance-none" value={filters.city}
             onChange={e => updateFilter('city', e.target.value)}>
             <option value="">Toutes les villes</option>
             {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
@@ -191,14 +191,14 @@ export default function ProfilesPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <label className="text-xs font-medium text-white/50 mb-2 block">Catégorie</label>
-              <select className="input" style={{colorScheme:"dark"}} value={filters.category} onChange={e => updateFilter('category', e.target.value)}>
+              <select className="input" value={filters.category} onChange={e => updateFilter('category', e.target.value)}>
                 <option value="">Toutes</option>
                 {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div>
               <label className="text-xs font-medium text-white/50 mb-2 block">Genre</label>
-              <select className="input" style={{colorScheme:"dark"}} value={filters.gender} onChange={e => updateFilter('gender', e.target.value)}>
+              <select className="input" value={filters.gender} onChange={e => updateFilter('gender', e.target.value)}>
                 {GENDERS.map(({ value, label }) => (
                   <option key={value} value={value}>{label}</option>
                 ))}
@@ -216,7 +216,7 @@ export default function ProfilesPage() {
             </div>
             <div>
               <label className="text-xs font-medium text-white/50 mb-2 block">Note minimum ⭐</label>
-              <select className="input" style={{colorScheme:"dark"}} value={filters.minRating} onChange={e => updateFilter('minRating', e.target.value)}>
+              <select className="input" value={filters.minRating} onChange={e => updateFilter('minRating', e.target.value)}>
                 <option value="">Toutes les notes</option>
                 <option value="3">⭐⭐⭐ 3+</option>
                 <option value="4">⭐⭐⭐⭐ 4+</option>
