@@ -507,7 +507,7 @@ export default function DashboardPage() {
 
               {/* Upload zone vidéo */}
               {videos.length < 5 && (
-                <label className={`aspect-video rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-3 cursor-pointer transition-colors ${uploadingVideo ? 'border-brand-300 bg-brand-50/30' : 'border-gray-200 hover:border-brand-300 bg-gray-50 hover:bg-brand-50/20'}`}>
+                <label className={`aspect-video rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-3 cursor-pointer transition-colors ${uploadingVideo ? 'border-brand-300 bg-brand-500/10' : 'border-white/10 hover:border-brand-300 bg-white/5 hover:bg-brand-50/10'}`}>
                   {uploadingVideo ? (
                     <>
                       <div className="w-full px-8">
