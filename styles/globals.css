@@ -123,11 +123,21 @@ body {
 /* Force dark colorScheme on all selects */
 select {
   color-scheme: dark;
+  background-color: #1a1a1a;
+  color: #ffffff;
 }
 .light select {
   color-scheme: light;
-  background: #ffffff;
-  color: #1a1a1a;
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+}
+option {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+.light option {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
 }
 /* Sections sombres gardent leurs couleurs en mode clair */
 .light .hero-dark { background: #0a0a0a !important; }
