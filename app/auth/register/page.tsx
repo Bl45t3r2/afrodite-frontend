@@ -6,7 +6,7 @@ import { Mail, Lock, User, MapPin, Calendar, Loader } from 'lucide-react';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
 
-const CITIES = ['Cotonou', 'Porto-Novo', 'Lomé', 'Abidjan', 'Dakar', 'Accra', 'Lagos', 'Douala'];
+import { getCities, addCity } from '@/lib/cities';
 
 const GENDERS = [
   { value: 'FEMME', label: '👩 Femme' },
@@ -20,6 +20,7 @@ export default function RegisterPage() {
   const [referralCode, setReferralCode] = useState(searchParams.get('ref') || '');
   const [form, setForm] = useState({ email: '', password: '', displayName: '', age: '', city: '', phone: '', gender: '', isPrivate: false });
   const [customCity, setCustomCity] = useState(false);
+  const [cities, setCities] = useState(getCities());
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [errorDetail, setErrorDetail] = useState('');
@@ -37,6 +38,10 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       const payload: any = { ...form, age: parseInt(form.age) };
+    if (customCity && form.city) {
+      addCity(form.city);
+      setCities(getCities());
+    }
       if (referralCode.trim()) payload.referralCode = referralCode.trim();
       if (!payload.phone) delete payload.phone;
 
@@ -169,7 +174,7 @@ export default function RegisterPage() {
                         else setForm(f => ({ ...f, city: e.target.value }));
                       }}>
                       <option value="">Choisir une ville</option>
-                      {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
+                      {cities.map(c => <option key={c} value={c}>{c}</option>)}
                       <option value="__other__">Autre ville…</option>
                     </select>
                   </div>
