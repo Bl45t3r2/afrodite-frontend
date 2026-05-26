@@ -143,7 +143,7 @@ export default function ReferralTab() {
                 placeholder="Ex: SAF123"
                 value={inputCode}
                 onChange={e => setInputCode(e.target.value.toUpperCase())}
-                className="flex-1 border border-white/10 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30 text-white bg-white"
+                className="flex-1 border border-white/10 rounded-xl px-3 py-2 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-brand-400/30 text-white bg-white/10"
               />
               <button
                 onClick={async () => {
