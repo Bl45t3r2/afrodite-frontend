@@ -119,7 +119,7 @@ export default function SecurityTab() {
         </p>
         <div className="grid grid-cols-2 gap-3">
           <button onClick={() => toggleVisibility(false)} disabled={savingVisibility}
-            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (!isPrivate ? "border-brand-400 bg-brand-50 text-brand-600" : "border-gray-200 text-white/40 hover:border-gray-300")}>
+            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (!isPrivate ? "border-brand-400 bg-brand-500/20 text-white" : "border-white/10 text-white/40 hover:border-white/30")}>
             <span className="text-2xl">🌍</span>
             <div className="text-center">
               <p className="text-sm font-semibold">Public</p>
@@ -127,7 +127,7 @@ export default function SecurityTab() {
             </div>
           </button>
           <button onClick={() => toggleVisibility(true)} disabled={savingVisibility}
-            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (isPrivate ? "border-brand-400 bg-brand-50 text-brand-600" : "border-gray-200 text-white/40 hover:border-gray-300")}>
+            className={"flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all " + (isPrivate ? "border-brand-400 bg-brand-500/20 text-white" : "border-white/10 text-white/40 hover:border-white/30")}>
             <span className="text-2xl">🔒</span>
             <div className="text-center">
               <p className="text-sm font-semibold">Privé</p>
