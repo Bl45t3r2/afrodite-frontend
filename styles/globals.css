@@ -12,7 +12,6 @@
   --bg-elevated: #111111;
   --bg-input: rgba(255,255,255,0.06);
   --border: rgba(255,255,255,0.08);
-  --border-hover: rgba(255,255,255,0.18);
   --text-primary: #ffffff;
   --text-secondary: rgba(255,255,255,0.6);
   --text-muted: rgba(255,255,255,0.35);
@@ -20,23 +19,6 @@
   --nav-bg: rgba(13,13,13,0.95);
   --nav-border: rgba(255,255,255,0.06);
   --scrollbar: rgba(255,255,255,0.1);
-}
-
-.light {
-  --bg-primary: #f5f0f7;
-  --bg-secondary: #ede8f0;
-  --bg-card: #ffffff;
-  --bg-elevated: #f0eaf4;
-  --bg-input: rgba(0,0,0,0.04);
-  --border: rgba(0,0,0,0.08);
-  --border-hover: rgba(0,0,0,0.18);
-  --text-primary: #0f0f0f;
-  --text-secondary: rgba(0,0,0,0.6);
-  --text-muted: rgba(0,0,0,0.4);
-  --text-faint: rgba(0,0,0,0.15);
-  --nav-bg: rgba(255,255,255,0.97);
-  --nav-border: rgba(0,0,0,0.08);
-  --scrollbar: rgba(0,0,0,0.15);
 }
 
 * { box-sizing: border-box; }
@@ -47,7 +29,6 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background 0.3s ease, color 0.3s ease;
 }
 
 ::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -58,36 +39,8 @@ body {
 .font-display { font-family: var(--font-display); }
 ::selection { background: rgba(212,83,126,0.25); }
 
-/* Light mode overrides */
-/* Footer garde toujours son thème sombre */
-.light footer { background: #0d0810 !important; }
-.light body footer, .light body footer p, .light body footer span, 
-.light body footer a, .light body footer h4, .light body footer div,
-.light body footer .text-white, .light body footer .text-white\/70,
-.light body footer .text-white\/50, .light body footer .text-white\/45,
-.light body footer .text-white\/30 { 
-  color: rgba(255,255,255,0.7) !important; 
-}
-.light body footer a:hover { color: #ffffff !important; }
-.light input, .light textarea, .light select {
-  color: #1a1a1a !important;
-  background: #ffffff !important;
-}
-.light body { background: var(--bg-primary); color: var(--text-primary); }
-.light nav { background: var(--nav-bg) !important; border-color: var(--nav-border) !important; }
-.light footer { background: #1a0f1e !important; }
-.light .card { background: var(--bg-card) !important; border-color: var(--border) !important; }
-.light .sticky { background: var(--bg-elevated) !important; border-color: var(--border) !important; }
-
-.light .text-white { color: var(--text-primary) !important; }
-.light .text-white\/60, .light .text-white\/50 { color: var(--text-secondary) !important; }
-.light .text-white\/40, .light .text-white\/35, .light .text-white\/30 { color: var(--text-muted) !important; }
-.light .text-white\/25, .light .text-white\/20, .light .text-white\/15, .light .text-white\/10 { color: var(--text-faint) !important; }
-.light .border-white\/8, .light .border-white\/10, .light .border-white\/5 { border-color: var(--border) !important; }
-.light .bg-white\/5, .light .bg-white\/6, .light .bg-white\/3, .light .bg-white\/8 { background: var(--bg-input) !important; }
-
-/* Dark bg overrides en mode clair */
-.light [style*="background:#0f0f0f"], .light [style*="background: #0f0f0f"] { background: var(--bg-primary) !important; }
+select { color-scheme: dark; }
+option { background-color: #1a1a1a; color: #ffffff; }
 
 @layer components {
   .btn-primary {
@@ -118,18 +71,4 @@ body {
     @apply text-brand-300 text-xs font-medium px-2 py-0.5 rounded-full border border-brand-500;
     background: rgba(212,83,126,0.1);
   }
-}
-/* updated */
-/* Dashboard text toujours visible */
-.t-text-primary { color: var(--text-primary) !important; }
-[class*="card"] .font-display,
-[class*="card"] h1, [class*="card"] h2, [class*="card"] h3, [class*="card"] h4,
-[class*="card"] p, [class*="card"] span.font-semibold {
-  color: var(--text-primary);
-}
-/* Fix textes invisibles sur fonds sombres en mode clair */
-.light [class*="bg-\[#0"] .text-gray-900,
-.light [class*="bg-\[#1"] .text-gray-900,
-.light [class*="bg-\[#2"] .text-gray-900 {
-  color: #ffffff !important;
 }

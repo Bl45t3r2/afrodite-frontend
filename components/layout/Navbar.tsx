@@ -10,8 +10,6 @@ import useAuthStore from '@/lib/store';
 import useNotificationStore from '@/lib/notificationStore';
 import { useSocketNotifications } from '@/lib/useSocketNotifications';
 import clsx from 'clsx';
-import { useTheme } from '@/lib/theme';
-import { Sun, Moon } from 'lucide-react';
 
 function NotificationPanel({ onClose }: { onClose: () => void }) {
   const { notifications, unreadCount, markAllRead, markRead } = useNotificationStore();
@@ -79,7 +77,6 @@ export default function Navbar() {
   const notifRef = useRef<HTMLDivElement>(null);
 
   useSocketNotifications();
-  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
