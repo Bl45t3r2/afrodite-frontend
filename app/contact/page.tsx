@@ -55,14 +55,14 @@ export default function ContactPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
-      <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-700 mb-8 transition-colors">
+      <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-white/40 hover:text-white/70 mb-8 transition-colors">
         <ChevronLeft size={15} /> Retour à l'accueil
       </Link>
 
       <div className="text-center mb-12">
         <span className="text-brand-400 text-sm font-semibold tracking-widest uppercase mb-3 block">Support</span>
-        <h1 className="font-display text-4xl font-bold text-gray-900 mb-4">Comment pouvons-nous vous aider ?</h1>
-        <p className="text-gray-500 max-w-xl mx-auto">Notre équipe répond sous 24h en semaine. Pour les urgences, utilisez WhatsApp.</p>
+        <h1 className="font-display text-4xl font-bold text-white mb-4">Comment pouvons-nous vous aider ?</h1>
+        <p className="text-white/50 max-w-xl mx-auto">Notre équipe répond sous 24h en semaine. Pour les urgences, utilisez WhatsApp.</p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-8 mb-16">
@@ -78,24 +78,24 @@ export default function ContactPage() {
                 <Icon size={18} className="text-brand-400" />
               </div>
               <div>
-                <p className="font-semibold text-gray-900 text-sm">{title}</p>
+                <p className="font-semibold text-white text-sm">{title}</p>
                 {href ? (
                   <a href={href} target="_blank" className="text-brand-400 hover:underline text-sm">{value}</a>
                 ) : (
-                  <p className="text-gray-600 text-sm">{value}</p>
+                  <p className="text-white/60 text-sm">{value}</p>
                 )}
-                <p className="text-gray-400 text-xs mt-0.5">{sub}</p>
+                <p className="text-white/40 text-xs mt-0.5">{sub}</p>
               </div>
             </div>
           ))}
 
           {/* Temps de réponse */}
-          <div className="card p-5 bg-emerald-50 border-emerald-100">
+          <div className="card p-5 bg-emerald-900/30 border-emerald-500/20">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-              <p className="font-semibold text-emerald-800 text-sm">Support actif</p>
+              <p className="font-semibold text-emerald-300 text-sm">Support actif</p>
             </div>
-            <p className="text-emerald-700 text-xs leading-relaxed">Temps de réponse moyen : <strong>3 heures</strong> en semaine</p>
+            <p className="text-emerald-400 text-xs leading-relaxed">Temps de réponse moyen : <strong>3 heures</strong> en semaine</p>
           </div>
         </div>
 
@@ -103,37 +103,37 @@ export default function ContactPage() {
         <div className="lg:col-span-2">
           {sent ? (
             <div className="card p-12 text-center">
-              <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-5">
+              <div className="w-16 h-16 bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-5">
                 <CheckCircle size={30} className="text-emerald-500" />
               </div>
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-2">Message envoyé !</h2>
-              <p className="text-gray-500 mb-6">Nous avons bien reçu votre message et vous répondrons dans les plus brefs délais à <strong>{form.email}</strong>.</p>
+              <h2 className="font-display text-2xl font-bold text-white mb-2">Message envoyé !</h2>
+              <p className="text-white/50 mb-6">Nous avons bien reçu votre message et vous répondrons dans les plus brefs délais à <strong>{form.email}</strong>.</p>
               <button onClick={() => { setSent(false); setForm({ name: '', email: '', topic: '', message: '' }); }}
                 className="btn-outline text-sm">Envoyer un autre message</button>
             </div>
           ) : (
             <div className="card p-8">
-              <h2 className="font-semibold text-gray-900 text-lg mb-6">Envoyer un message</h2>
+              <h2 className="font-semibold text-white text-lg mb-6">Envoyer un message</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-gray-500 mb-1.5">Nom complet</label>
+                    <label className="block text-xs font-medium text-white/50 mb-1.5">Nom complet</label>
                     <input className="input" placeholder="Votre prénom et nom" value={form.name}
                       onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-500 mb-1.5">Email</label>
+                    <label className="block text-xs font-medium text-white/50 mb-1.5">Email</label>
                     <input className="input" type="email" placeholder="votre@email.com" value={form.email}
                       onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-2">Sujet</label>
+                  <label className="block text-xs font-medium text-white/50 mb-2">Sujet</label>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                     {TOPICS.map(t => (
                       <button key={t.value} type="button" onClick={() => setForm(f => ({ ...f, topic: t.value }))}
-                        className={`text-left px-3 py-2.5 rounded-xl border text-xs font-medium transition-all ${form.topic === t.value ? 'border-brand-400 bg-brand-50 text-brand-700' : 'border-gray-200 text-gray-600 hover:border-brand-200'}`}>
+                        className={`text-left px-3 py-2.5 rounded-xl border text-xs font-medium transition-all ${form.topic === t.value ? 'border-brand-400 bg-brand-50 text-brand-300' : 'border-white/10 text-white/60 hover:border-brand-200'}`}>
                         {t.label}
                       </button>
                     ))}
@@ -141,11 +141,11 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1.5">Message</label>
+                  <label className="block text-xs font-medium text-white/50 mb-1.5">Message</label>
                   <textarea className="input resize-none" rows={5}
                     placeholder="Décrivez votre problème ou question en détail..."
                     value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
-                  <p className="text-xs text-gray-400 mt-1">{form.message.length}/1000 caractères</p>
+                  <p className="text-xs text-white/40 mt-1">{form.message.length}/1000 caractères</p>
                 </div>
 
                 <button type="submit" disabled={loading}
@@ -160,18 +160,18 @@ export default function ContactPage() {
 
       {/* FAQ */}
       <div>
-        <h2 className="font-display text-2xl font-bold text-gray-900 text-center mb-8">Questions fréquentes</h2>
+        <h2 className="font-display text-2xl font-bold text-white text-center mb-8">Questions fréquentes</h2>
         <div className="max-w-2xl mx-auto space-y-3">
           {FAQ.map((item, i) => (
             <div key={i} className="card overflow-hidden">
               <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors">
-                <span className="font-medium text-gray-900 text-sm">{item.q}</span>
+                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-white/5 transition-colors">
+                <span className="font-medium text-white text-sm">{item.q}</span>
                 <span className={`text-brand-400 text-lg font-light transition-transform ${openFaq === i ? 'rotate-45' : ''}`}>+</span>
               </button>
               {openFaq === i && (
                 <div className="px-6 pb-4">
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.a}</p>
+                  <p className="text-sm text-white/60 leading-relaxed">{item.a}</p>
                 </div>
               )}
             </div>
