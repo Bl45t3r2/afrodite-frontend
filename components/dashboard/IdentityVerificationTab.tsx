@@ -20,7 +20,7 @@ function FileDropzone({ label, icon: Icon, file, onChange, accept = 'image/*' }:
       <p className="text-xs font-medium text-white/50 mb-2">{label}</p>
       <label
         className={`relative flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed cursor-pointer transition-all p-5 text-center
-          ${file ? 'border-brand-400 bg-brand-50' : 'border-white/10 hover:border-brand-300 bg-white/5 hover:bg-brand-50/30'}`}
+          ${file ? 'border-brand-400 bg-brand-500/20' : 'border-white/10 hover:border-brand-300 bg-white/10 hover:bg-brand-50/30'}`}
       >
         {file ? (
           <>
@@ -33,7 +33,7 @@ function FileDropzone({ label, icon: Icon, file, onChange, accept = 'image/*' }:
           </>
         ) : (
           <>
-            <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
               <Icon size={22} className="text-white/40" />
             </div>
             <p className="text-sm text-white/50">Cliquez pour sélectionner</p>
