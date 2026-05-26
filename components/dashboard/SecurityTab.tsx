@@ -179,50 +179,50 @@ export default function SecurityTab() {
           <h3 className="font-semibold text-white">Sécurité du compte</h3>
         </div>
         <div className="space-y-3">
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+          <div className="flex items-center justify-between p-3 bg-white/5 rounded-xl">
             <div>
               <p className="text-sm font-medium text-white">Session actuelle</p>
               <p className="text-xs text-white/40">Connecté depuis ce navigateur</p>
             </div>
-            <span className="text-xs bg-emerald-50 text-emerald-600 font-medium px-2.5 py-1 rounded-full">Active</span>
+            <span className="text-xs bg-emerald-900/20 text-emerald-600 font-medium px-2.5 py-1 rounded-full">Active</span>
           </div>
           <button onClick={() => { logout(); router.push('/auth/login'); }}
-            className="w-full flex items-center justify-center gap-2 text-sm text-white/60 border border-gray-200 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+            className="w-full flex items-center justify-center gap-2 text-sm text-white/60 border border-white/10 py-2.5 rounded-xl hover:bg-white/5 transition-colors">
             <LogOut size={15} /> Se déconnecter
           </button>
         </div>
       </div>
 
       {/* Zone dangereuse */}
-      <div className="card p-6 border-red-100">
+      <div className="card p-6 border-red-500/20">
         <div className="flex items-center gap-2 mb-4">
           <Trash2 size={18} className="text-red-400" />
-          <h3 className="font-semibold text-red-600">Zone dangereuse</h3>
+          <h3 className="font-semibold text-red-400">Zone dangereuse</h3>
         </div>
 
         {!deleteConfirm ? (
-          <div className="bg-red-50 rounded-xl p-4">
-            <p className="text-sm text-red-700 font-medium mb-1">Supprimer mon compte</p>
+          <div className="bg-red-900/20 rounded-xl p-4">
+            <p className="text-sm text-red-400 font-medium mb-1">Supprimer mon compte</p>
             <p className="text-xs text-red-500 mb-3">
               Cette action est irréversible. Toutes vos données seront définitivement supprimées : profil, photos, messages, avis.
             </p>
             <button onClick={() => setDeleteConfirm(true)}
-              className="text-sm text-red-600 border border-red-200 hover:bg-red-100 px-4 py-2 rounded-xl transition-colors font-medium">
+              className="text-sm text-red-400 border border-red-200 hover:bg-red-100 px-4 py-2 rounded-xl transition-colors font-medium">
               Supprimer mon compte
             </button>
           </div>
         ) : (
-          <div className="bg-red-50 rounded-xl p-4 space-y-3">
-            <p className="text-sm font-semibold text-red-700">⚠️ Confirmation requise</p>
-            <p className="text-xs text-red-600">Entrez votre mot de passe pour confirmer la suppression définitive :</p>
+          <div className="bg-red-900/20 rounded-xl p-4 space-y-3">
+            <p className="text-sm font-semibold text-red-400">⚠️ Confirmation requise</p>
+            <p className="text-xs text-red-400">Entrez votre mot de passe pour confirmer la suppression définitive :</p>
             <PasswordInput label="" value={deletePassword} onChange={setDeletePassword} placeholder="Votre mot de passe" />
             <div className="flex gap-2">
               <button onClick={() => setDeleteConfirm(false)}
-                className="flex-1 text-sm border border-gray-200 py-2 rounded-xl hover:bg-gray-50 transition-colors">
+                className="flex-1 text-sm border border-white/10 py-2 rounded-xl hover:bg-white/5 transition-colors">
                 Annuler
               </button>
               <button onClick={handleDelete} disabled={deleting || !deletePassword}
-                className="flex-1 text-sm bg-red-500 hover:bg-red-600 text-white font-medium py-2 rounded-xl transition-colors disabled:opacity-50">
+                className="flex-1 text-sm bg-red-900/200 hover:bg-red-600 text-white font-medium py-2 rounded-xl transition-colors disabled:opacity-50">
                 {deleting ? 'Suppression…' : 'Confirmer la suppression'}
               </button>
             </div>

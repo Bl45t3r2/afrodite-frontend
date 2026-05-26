@@ -95,7 +95,7 @@ export default function ReferralTab() {
         {/* Lien de parrainage */}
         <div className="p-4 border-b border-gray-50">
           <p className="text-xs font-medium text-white/50 mb-2">Lien de parrainage</p>
-          <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2">
+          <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2">
             <p className="text-xs text-white/60 flex-1 truncate font-mono">{stats.referralLink}</p>
             <button
               onClick={() => copy('link')}
