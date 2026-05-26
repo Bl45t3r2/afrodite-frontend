@@ -147,7 +147,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#0f0f0f]">
 
       {/* ══════════ HERO LANDING ══════════ */}
-      <div className="relative overflow-hidden bg-[#0a0a0a]">
+      <div className="hero-dark relative overflow-hidden bg-[#0a0a0a]">
         {/* Glow effects */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-brand-500/6 blur-[140px] rounded-full" />

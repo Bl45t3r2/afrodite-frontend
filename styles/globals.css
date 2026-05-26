@@ -120,6 +120,10 @@ body {
   }
 }
 /* updated */
+/* Hero section garde toujours son thème sombre */
+.light .hero-dark, .light .hero-dark * {
+  color: inherit !important;
+}
 /* Dashboard text toujours visible */
 .t-text-primary { color: var(--text-primary) !important; }
 [class*="card"] .font-display,
