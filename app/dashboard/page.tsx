@@ -243,7 +243,7 @@ export default function DashboardPage() {
             </div>
             <div className="flex-1">
               <p className="text-sm font-semibold text-white mb-1">Complétez votre profil — {pct}%</p>
-              <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <div className="h-full bg-brand-400 rounded-full transition-all duration-700" style={{ width: `${pct}%` }} />
               </div>
               <p className="text-xs text-white/40 mt-1">
@@ -335,7 +335,7 @@ export default function DashboardPage() {
             <div className="flex flex-wrap gap-2">
               {CATEGORIES.map(cat => (
                 <button key={cat} onClick={() => toggleCategory(cat)}
-                  className={`px-3 py-1.5 rounded-xl text-sm font-medium border transition-all ${form.categories?.includes(cat) ? 'bg-brand-400 text-white border-brand-400' : 'bg-white text-white/60 border-gray-200 hover:border-brand-300'}`}>
+                  className={`px-3 py-1.5 rounded-xl text-sm font-medium border transition-all ${form.categories?.includes(cat) ? 'bg-brand-400 text-white border-brand-400' : 'bg-white/5 text-white/60 border-white/10 hover:border-brand-300'}`}>
                   {cat}
                 </button>
               ))}
@@ -379,7 +379,7 @@ export default function DashboardPage() {
               <span className="text-xs text-white/40 self-center mr-1">Suggestions :</span>
               {SUGGESTED_TAGS.filter(t => !form.tags?.includes(t)).slice(0, 8).map(tag => (
                 <button key={tag} onClick={() => addTag(tag)}
-                  className="text-xs text-white/50 bg-gray-50 hover:bg-brand-50 hover:text-brand-600 border border-gray-200 hover:border-brand-200 px-2.5 py-1 rounded-full transition-all">
+                  className="text-xs text-white/50 bg-white/5 hover:bg-brand-500/20 hover:text-brand-300 border border-white/10 hover:border-brand-400 px-2.5 py-1 rounded-full transition-all">
                   +{tag}
                 </button>
               ))}
@@ -592,7 +592,7 @@ export default function DashboardPage() {
                   return (
                     <div key={i} className="flex-1 flex flex-col items-center gap-1">
                       <span className="text-xs text-white/40">{d.views}</span>
-                      <div className="w-full bg-gray-100 rounded-lg relative" style={{ height: '80px' }}>
+                      <div className="w-full bg-white/10 rounded-lg relative" style={{ height: '80px' }}>
                         <div
                           className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-600 to-brand-400 rounded-lg transition-all duration-500"
                           style={{ height: `${Math.max(pct, 5)}%` }}
