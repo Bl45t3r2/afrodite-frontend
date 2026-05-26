@@ -182,7 +182,7 @@ export default function HomePage() {
               <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none" />
               <input type="text" value={search} onChange={e => setSearch(e.target.value)}
                 placeholder="Rechercher un profil, une ville…"
-                className="w-full bg-white/6 border border-white/12 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-brand-500/60 focus:bg-white/8 transition-all" />
+                className="w-full bg-white/10 border border-white/15 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-brand-500/60 transition-all" />
             </div>
             <select value={city} onChange={e => setCity(e.target.value)}
               className="bg-white/6 border border-white/12 rounded-xl px-4 py-3.5 text-sm text-white/60 focus:outline-none focus:border-brand-500/60 transition-all hidden sm:block">
