@@ -6,6 +6,10 @@ import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/layout/CookieBanner';
 
 export const metadata: Metadata = {
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/icon-192.png',
+  },
   title: 'Afrodite — Profils vérifiés près de chez vous',
   description: 'La plateforme de référence en Afrique de l\'Ouest pour trouver des profils vérifiés, échanger en privé et découvrir des talents près de chez vous.',
   keywords: 'profils, vérifiés, Cotonou, Lomé, Abidjan, Dakar, Afrique',
