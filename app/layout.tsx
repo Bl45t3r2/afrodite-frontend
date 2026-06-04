@@ -7,7 +7,7 @@ import CookieBanner from '@/components/layout/CookieBanner';
 
 export const metadata: Metadata = {
   icons: {
-    icon: '/favicon.svg',
+    icon: '/favicon.ico',
     apple: '/icon-192.png',
   },
   title: 'Afrodite — Profils vérifiés près de chez vous',
