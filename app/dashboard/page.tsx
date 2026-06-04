@@ -57,6 +57,7 @@ export default function DashboardPage() {
         displayName: res.data.profile?.displayName || '',
         age: res.data.profile?.age || '',
         city: res.data.profile?.city || '',
+        gender: res.data.profile?.gender || '',
         bio: res.data.profile?.bio || '',
         pricePerHour: res.data.profile?.pricePerHour || '',
         categories: res.data.profile?.categories || [],
@@ -710,3 +711,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+
